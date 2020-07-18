@@ -49,6 +49,13 @@ public final static String DATA_FINE_NOLEGGIO = "dataFineNoleggio";
 public static final String NUMERO_CARTA = "numeroCarta";
 public static final String CVV_CARTA = "cvvCarta";
 public static final String NUMERO_PATENTE = "numeroPatente";
+public static final String TIPOLOGIA_AUTO_SCELTA = "tipologiaAuto";
+public static final String LISTA_UTENTI_NON_VERIFICATI = "listaUtentiNonVerificati";
+
+public static final String LISTA_UTENTI = "listaUtenti";
+
+
+
 
 
 

@@ -98,11 +98,11 @@ public class BusinessLogicUtente {
 			boolean checkLista = listaUtente==null || listaUtente.isEmpty() || listaUtente.size()>1;
 			if (!checkLista) {
 				utente = listaUtente.get(0);
-				String usernameDb = utente.getUsername();
-				String passwordDb = utente.getPassword();
-				boolean checkUserPass = usernameDb.equalsIgnoreCase(username) && passwordDb.equals(password);
-				if (!checkUserPass) {
-					utente = null;
+					String usernameDb = utente.getUsername();
+					String passwordDb = utente.getPassword();
+					boolean checkUserPass = usernameDb.equalsIgnoreCase(username) && passwordDb.equals(password);
+					if (!checkUserPass) {
+						utente = null;
 				}
 			}
 			em.getTransaction().commit();
@@ -144,6 +144,7 @@ public class BusinessLogicUtente {
 	}
 
 	public boolean verificaUtente(Utente utente, boolean isAccettato) {
+		System.out.println("verifica utente");
 		if (utente!=null) {
 			Integer idUtente = utente.getIdUtente();
 			if (!isVerificato(idUtente) && isAccettato) {
@@ -197,8 +198,8 @@ public class BusinessLogicUtente {
 		}
 		return false;
 	}
-	
-	
+
+
 	public Integer registrazione (Utente utente) throws Exception {
 		String username = utente.getUsername();
 		Date dataNascita = utente.getDataNascita();
@@ -215,8 +216,8 @@ public class BusinessLogicUtente {
 			}
 		}
 	}
-	
-	
+
+
 	public boolean isEmailValid (String email) {
 		boolean isValid = false;
 		String chiocciola = "@";
@@ -226,18 +227,23 @@ public class BusinessLogicUtente {
 		}
 		return isValid;
 	}
-	
+
 	public List<Utente> listaUtenteNonVerificato(){
 		List<Utente> utenti = utenteDao.findByIsVerificato();
 		return utenti;
 	}
-	
+
 	public Utente getUtenteById(Integer idUtente) {
 		Utente utente = utenteDao.findUtenteByIdUtente(idUtente);
 		return utente;
 	}
-
 	
+	public List<Utente> getListaUtenti(){
+		List<Utente> utenti = utenteDao.retrieve();
+		return utenti;
+	}
+
+
 
 
 }

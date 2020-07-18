@@ -23,12 +23,12 @@ public class BusinessLogicAutoNoleggioUtils {
 		List <Integer> idAutoNonDisponibili = businessLogicNoleggio.getIdAutoNonDisponibili(dataInizioNoleggio, dataFineNoleggio);
 		List <Auto> autoDisponibili = businessLogicAuto.getAutoDisponibili(idAutoNonDisponibili);
 		List <Auto> risultati = new ArrayList<Auto>();
-		
-		if (tipologiaAuto.isEmpty() || tipologiaAuto.equals("")) {
+		boolean checkTipologiaAuto = tipologiaAuto==null && tipologiaAuto.isEmpty() || tipologiaAuto.equals("");
+		if (checkTipologiaAuto) {
 			return autoDisponibili;
 		}else {
 			for (Auto auto: autoDisponibili) {
-				if (auto.getTipologiaAuto() == tipologiaAuto) {
+				if (auto.getTipologiaAuto().equals(tipologiaAuto)) {
 					risultati.add(auto);
 				}
 			}

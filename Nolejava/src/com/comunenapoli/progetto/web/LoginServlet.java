@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 		response.setHeader("Cache-control", "no-store");
 		doPost(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		response.setHeader("Last-modified", LocalDateTime.now().toString());
@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		boolean isUsernameValid = username!=null && !username.equals("");
 		boolean isPasswordValid = password!=null && !password.equals("") && password.length()>=8;
-		
+
 		if (!(isUsernameValid && isPasswordValid)) { 
 			//TODO rimanda a utente o password errate
 		}
@@ -43,23 +43,32 @@ public class LoginServlet extends HttpServlet {
 			Utente utente = businessLogicUtente.login(username, password);
 			if (utente!=null) {
 				Integer ruolo = businessLogicUtente.checkRuolo(utente.getIdUtente());
-				request.getSession().setAttribute(Costanti.USER_IN_SESSION, utente);
 				System.out.println("Ok, ho fatto il login");
-				if (ruolo == Costanti.ID_RUOLO_ADMIN) {
-					//TODO reindirizza ad admin
+				String html = "";
+				if (utente.getIsVerificato()) {
+					request.getSession().setAttribute(Costanti.USER_IN_SESSION, utente);
+					if (ruolo == Costanti.ID_RUOLO_ADMIN) {
+						//TODO reindirizza ad admin
+						html = "/jsp/dashboard.jsp";
+					}
+					else if (ruolo == Costanti.ID_RUOLO_STAFF) {
+						//TODO reindirizza a staff
+						html = "/jsp/dashboard.jsp";
+
+					} else if (ruolo == Costanti.ID_RUOLO_CLIENTE) {
+
+					}				
+				} else {
+					response.getWriter().println("<h1>Login non verificato</h1>");
 				}
-				else if (ruolo == Costanti.ID_RUOLO_STAFF) {
-					//TODO reindirizza a staff
-				} else if (ruolo == Costanti.ID_RUOLO_CLIENTE) {
-					//TODO rendirizza a cliente
-				}
+
+
 			} else {
-				//TODO controlla campi e riprova
+				response.getWriter().println("<h1>Username o password non validi</h1>");
 			}
-
 		}
-		
-	}
-
+	} 
 }
+
+
 

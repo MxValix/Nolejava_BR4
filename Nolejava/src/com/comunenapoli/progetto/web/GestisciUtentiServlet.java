@@ -34,17 +34,31 @@ public class GestisciUtentiServlet extends HttpServlet {
 		response.setHeader("Last-modified", LocalDateTime.now().toString());
 		response.setHeader("Cache-control", "no-store");
 		BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
-		String idUtenteString = request.getParameter("idUtente");
-		String eliminaUtente = request.getParameter("eliminaUtente");
-		String promuoviUtente = request.getParameter("promuoviUtente");
+		String idUtenteString = request.getParameter("idutente");
+		String action = request.getParameter("action").toLowerCase();
+		System.out.println("action: " + action);
+		String eliminaUtente = "";
+		String promuoviUtente = "";
+		String verificaUtente = "";
+		if (action.contains("elimina")) {
+			eliminaUtente = action;
+		} else if (action.contains("promuovi")){
+			promuoviUtente = action;
+		}
+		else {
+			verificaUtente = action;
+		}
 		Integer idUtente = Integer.parseInt(idUtenteString);
 		Utente utente = businessLogicUtente.getUtenteById(idUtente);
 		Integer ruoloIdUtente = utente.getRuolo().getId();
 		boolean isPromosso = false;
 		boolean isRimosso = false;
+		boolean isVerificato = false;
 
 		boolean checkPromuoviUtente = promuoviUtente!=null && !promuoviUtente.isEmpty();
-		boolean checkEliminaUtente = eliminaUtente!=null && eliminaUtente.isEmpty();
+		boolean checkEliminaUtente = eliminaUtente!=null && !eliminaUtente.isEmpty();
+		boolean checkVerificaUtente = verificaUtente!=null && !verificaUtente.isEmpty();
+
 		if (checkPromuoviUtente && ruoloIdUtente == Costanti.ID_RUOLO_CLIENTE) {
 			isPromosso = businessLogicUtente.updateRuolo(utente, Costanti.ID_RUOLO_STAFF);
 		}
@@ -52,15 +66,26 @@ public class GestisciUtentiServlet extends HttpServlet {
 			businessLogicUtente.delete(idUtente);
 			isRimosso = true;
 		}
+		else if (checkVerificaUtente) {
+			isVerificato = true;
+			businessLogicUtente.verificaUtente(utente, isVerificato);
+		}
 		
 		if (isPromosso) {
 			//TODO hai promosso l'utente a staff
+			System.out.println("Utente promosso a staff");
 		}
 		else if (isRimosso) {
 			//TODO hai rimosso l'utente
+			System.out.println("Utente rimosso");
+		}
+		else if (isVerificato) {
+			//TODO hai verificato l'utente
+			System.out.println("Utente verificato");
 		}
 		else {
 			//TODO operazione non avvenuta, ritenta
+			System.out.println("Errore generico");
 		}
 	
 	}

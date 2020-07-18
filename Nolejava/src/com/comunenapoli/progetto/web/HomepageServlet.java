@@ -55,10 +55,6 @@ public class HomepageServlet extends HttpServlet {
 		}
 		
 			
-			if (utente!=null) {
-			
-		}
-			
 			System.out.println("Lista auto " + request.getSession().getAttribute(Costanti.LISTA_COMPLETA_AUTO));
 			RequestDispatcher requestDispatcher; 
 			requestDispatcher = request.getRequestDispatcher("/jsp/homepage.jsp");
@@ -79,19 +75,22 @@ public class HomepageServlet extends HttpServlet {
 			
 			request.getSession().setAttribute(Costanti.DATA_INIZIO_NOLEGGIO, dataInizio);
 			request.getSession().setAttribute(Costanti.DATA_FINE_NOLEGGIO, dataFine);
+
 			
 			String tipologiaAuto = request.getParameter("tipologia");
+			request.getSession().setAttribute(Costanti.TIPOLOGIA_AUTO_SCELTA, tipologiaAuto);
+
 			String marcaAuto = request.getParameter("marca");
 			String cambio = request.getParameter("cambio");
 			Integer numeroPosti = null;
-			boolean checkNumeroPostiNull = numeroPostiString.equals("") || numeroPostiString.isEmpty();
+			//boolean checkNumeroPostiNull = numeroPostiString.equals("") || numeroPostiString.isEmpty();
 			//boolean checkPrezzoPerGiornoNull = prezzoAutoPerGiornoString.equals("") || prezzoAutoPerGiornoString.isEmpty();
-			if (!checkNumeroPostiNull) {
-				numeroPosti = Integer.valueOf(numeroPostiString);
-			}
+			//if (!checkNumeroPostiNull) {
+				//numeroPosti = Integer.valueOf(numeroPostiString);
+			//}
 			//if (!checkPrezzoPerGiornoNull) {
 			//}
-			Double prezzoAutoPerGiorno = Double.valueOf(prezzoAutoPerGiornoString);
+			//Double prezzoAutoPerGiorno = Double.valueOf(prezzoAutoPerGiornoString);
 			List<Auto> risultati = BusinessLogicAutoNoleggioUtils.filtroRicerca(dataInizio, dataFine, tipologiaAuto, businessLogicAuto, businessLogicNoleggio);
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, risultati);
 			//TODO reindirizza alla jsp passandogli la request e response
