@@ -21,7 +21,7 @@
 %>
 
 
-<form action="/Nolejava/LogoutServlet" method="post">
+<form action="/Nolejava/logoutServlet" method="post">
        	<input type="submit" value="Logout">
 	 </form>
 	 <br><br><br>
@@ -29,7 +29,7 @@
 		<input type="hidden" name="idUtente" value="<%=idUtente%>"> <br>
 		<input type="text" placeholder="nome" name="nome" value="<%=nome%>"> <br>
 		 <input type="text" placeholder="cognome" name="cognome" value="<%=cognome%>"><br>
-		<input type="date" placeholder="data di nascita" name="dataNascita" value="<%=dataNascita%>"><br>
+		<input type="date" placeholder="data di nascita" name="dataNascita" value="<%=dataNascita%>" readonly><br>
 		<input type="text" placeholder="email" name="email" value="<%=email%>"> <br>
 		<input type="password" placeholder="password" name="password" value="<%=password%>"><br>
 		<input type="submit" value="Modifica profilo"><br>

@@ -38,7 +38,6 @@ public class BusinessLogicUtente {
 		this.em = em;
 	}
 
-
 	public Integer getRuolo(String user,String passw) {
 		Utente utente = login(user,passw);
 		Integer idRuolo = 0;
@@ -98,11 +97,11 @@ public class BusinessLogicUtente {
 			boolean checkLista = listaUtente==null || listaUtente.isEmpty() || listaUtente.size()>1;
 			if (!checkLista) {
 				utente = listaUtente.get(0);
-					String usernameDb = utente.getUsername();
-					String passwordDb = utente.getPassword();
-					boolean checkUserPass = usernameDb.equalsIgnoreCase(username) && passwordDb.equals(password);
-					if (!checkUserPass) {
-						utente = null;
+				String usernameDb = utente.getUsername();
+				String passwordDb = utente.getPassword();
+				boolean checkUserPass = usernameDb.equalsIgnoreCase(username) && passwordDb.equals(password);
+				if (!checkUserPass) {
+					utente = null;
 				}
 			}
 			em.getTransaction().commit();
@@ -204,11 +203,11 @@ public class BusinessLogicUtente {
 		String username = utente.getUsername();
 		Date dataNascita = utente.getDataNascita();
 		boolean checkUsername = utenteDao.checkUsername(username);
-		if (!checkUsername && DataUtils.dataDiNascita(dataNascita)) {
+		if (!checkUsername && DataUtils.dataNascita(dataNascita)) {
 			create(utente);
 			return Costanti.REGISTRAZIONE_VALIDA;
 		} else {
-			if (checkUsername && !DataUtils.dataDiNascita(dataNascita)) {
+			if (checkUsername && !DataUtils.dataNascita(dataNascita)) {
 				return Costanti.REGISTRAZIONE_FALLITA_UTENTE_ESISTENTE;
 			}
 			else {
@@ -228,7 +227,7 @@ public class BusinessLogicUtente {
 		return isValid;
 	}
 
-	public List<Utente> listaUtenteNonVerificato(){
+	public List<Utente> listaUtentiNonVerificato(){
 		List<Utente> utenti = utenteDao.findByIsVerificato();
 		return utenti;
 	}
@@ -237,7 +236,7 @@ public class BusinessLogicUtente {
 		Utente utente = utenteDao.findUtenteByIdUtente(idUtente);
 		return utente;
 	}
-	
+
 	public List<Utente> getListaUtenti(){
 		List<Utente> utenti = utenteDao.retrieve();
 		return utenti;

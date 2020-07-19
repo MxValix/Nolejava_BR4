@@ -1,7 +1,6 @@
 package com.comunenapoli.progetto.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;

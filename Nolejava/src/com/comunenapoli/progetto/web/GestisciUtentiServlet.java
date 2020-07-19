@@ -82,6 +82,8 @@ public class GestisciUtentiServlet extends HttpServlet {
 		else if (isVerificato) {
 			//TODO hai verificato l'utente
 			System.out.println("Utente verificato");
+			String html = "/emailSendingServlet";
+			request.getRequestDispatcher(html).include(request,response);
 		}
 		else {
 			//TODO operazione non avvenuta, ritenta

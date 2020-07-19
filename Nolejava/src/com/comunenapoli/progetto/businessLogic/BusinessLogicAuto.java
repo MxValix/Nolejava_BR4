@@ -113,7 +113,7 @@ public class BusinessLogicAuto {
 		String sql = "";
 		HashMap<String,String> parametriAuto = new HashMap<String,String>();
 		int count = 0;
-		if (marca!=null) {
+		if (marca!=null && !marca.isEmpty()) {
 			if (count == 0) {
 				sql = " where ";
 			}
@@ -124,7 +124,7 @@ public class BusinessLogicAuto {
 			sql += " a.marca = :marca ";
 			parametriAuto.put("marca", marca);
 		}
-		if (modello!=null) {
+		if (modello!=null && !modello.isEmpty()) {
 			if (count == 0) {
 				sql = " where ";
 			}
@@ -135,7 +135,7 @@ public class BusinessLogicAuto {
 			sql += " a.modello = :modello ";
 			parametriAuto.put("modello", modello);
 		}
-		if (tipologia!=null) {
+		if (tipologia!=null && !tipologia.isEmpty()) {
 			if (count == 0) {
 				sql = " where ";
 			}
@@ -143,8 +143,8 @@ public class BusinessLogicAuto {
 				sql += " and ";
 			}
 			count++;
-			sql += " a.tipologia = :tipologia ";
-			parametriAuto.put("tipologia", tipologia);
+			sql += " a.tipologiaAuto = :tipologiaAuto ";
+			parametriAuto.put("tipologiaAuto", tipologia);
 		}
 		List<Auto> listaAuto = autoDao.findAutoByFilters(sql, parametriAuto);			
 		return listaAuto;

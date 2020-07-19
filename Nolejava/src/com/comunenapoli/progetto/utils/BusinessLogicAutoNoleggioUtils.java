@@ -15,15 +15,15 @@ public class BusinessLogicAutoNoleggioUtils {
 			String cambio, Integer numeroPosti, Double prezzoAutoPerGiorno, BusinessLogicNoleggio businessLogicNoleggio, BusinessLogicAuto businessLogicAuto) {
 		List<Integer> idAutoNonDisponibili = businessLogicNoleggio.getIdAutoNonDisponibili(dataInizioNoleggio, dataFineNoleggio);
 		List<Auto> autoDisponibili = businessLogicAuto.getAutoDisponibili(idAutoNonDisponibiliList)
-		
+
 	}
-	*/
-	
+	 */
+
 	public static List<Auto> filtroRicerca(Date dataInizioNoleggio, Date dataFineNoleggio, String tipologiaAuto, BusinessLogicAuto businessLogicAuto, BusinessLogicNoleggio businessLogicNoleggio) {
 		List <Integer> idAutoNonDisponibili = businessLogicNoleggio.getIdAutoNonDisponibili(dataInizioNoleggio, dataFineNoleggio);
 		List <Auto> autoDisponibili = businessLogicAuto.getAutoDisponibili(idAutoNonDisponibili);
 		List <Auto> risultati = new ArrayList<Auto>();
-		boolean checkTipologiaAuto = tipologiaAuto==null && tipologiaAuto.isEmpty() || tipologiaAuto.equals("");
+		boolean checkTipologiaAuto = tipologiaAuto ==null || tipologiaAuto.isEmpty() || tipologiaAuto.equals("");
 		if (checkTipologiaAuto) {
 			return autoDisponibili;
 		}else {
@@ -33,9 +33,33 @@ public class BusinessLogicAutoNoleggioUtils {
 				}
 			}
 		}
-		
+
 		return risultati;
 	}
-	
+
+	public static List<Auto> filtroRicerca(Date dataInizioNoleggio, Date dataFineNoleggio, String marca, String modello, String tipologiaAuto, BusinessLogicAuto businessLogicAuto, BusinessLogicNoleggio businessLogicNoleggio) {
+		List <Auto> autoConFiltri = businessLogicAuto.getListaAutoConFiltri(marca, modello, tipologiaAuto);
+		List<Integer> idAutoNonDisponibili = businessLogicNoleggio.getIdAutoNonDisponibili(dataInizioNoleggio, dataFineNoleggio);
+		int autoConFiltriSize = autoConFiltri.size();
+		System.out.println("autoConFiltriSize: " + autoConFiltriSize);
+		int idAutoNonDisponibiliSize = idAutoNonDisponibili.size();
+		if (idAutoNonDisponibiliSize>0 && autoConFiltriSize>0) {
+			List<Auto> autoNoleggioFiltri = new ArrayList<>();
+			for (int i=0; i<autoConFiltriSize; i++) {
+				Auto autoCorrente = autoConFiltri.get(i);
+				for (int j=0; j<idAutoNonDisponibiliSize; j++) {
+					int idAutoNonDisponibile = idAutoNonDisponibili.get(j);
+					boolean checkIdAuto = autoCorrente.getIdAuto() != idAutoNonDisponibile;
+					if (checkIdAuto && !autoNoleggioFiltri.contains(autoCorrente)) {
+						autoNoleggioFiltri.add(autoCorrente);
+					}
+				}
+
+			}
+			return autoNoleggioFiltri;
+		}
+		return autoConFiltri;
+	}
+
 
 }

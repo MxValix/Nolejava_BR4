@@ -40,7 +40,7 @@ public class DashboardServlet extends HttpServlet {
 		//TODO filtro area solo admin e staff
 		Utente utente = (Utente) request.getSession().getAttribute(Costanti.USER_IN_SESSION);
 		BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
-		List<Utente> utentiNonVerificati = businessLogicUtente.listaUtenteNonVerificato();
+		List<Utente> utentiNonVerificati = businessLogicUtente.listaUtentiNonVerificato();
 		request.setAttribute(Costanti.LISTA_UTENTI_NON_VERIFICATI, utentiNonVerificati);
 		List<Utente> listaUtenti = businessLogicUtente.getListaUtenti();
 		request.setAttribute(Costanti.LISTA_UTENTI, listaUtenti);

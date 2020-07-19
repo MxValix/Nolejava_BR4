@@ -19,9 +19,14 @@
 		Date dataInizioNoleggio = (Date) request.getSession().getAttribute(Costanti.DATA_INIZIO_NOLEGGIO);
 		Date dataFineNoleggio = (Date) request.getSession().getAttribute(Costanti.DATA_FINE_NOLEGGIO);
 		String tipologiaAuto = (String) request.getSession().getAttribute(Costanti.TIPOLOGIA_AUTO_SCELTA);
+		String marcaAuto = (String) request.getSession().getAttribute(Costanti.MARCA_AUTO_SCELTA);
+		String modelloAuto = (String) request.getSession().getAttribute(Costanti.MODELLO_AUTO_SCELTA);
+
 		if (tipologiaAuto==null || tipologiaAuto.isEmpty()) {
 			tipologiaAuto = "Scegli tipologia auto";
 		}
+		if (marcaAuto==null) marcaAuto = "";
+		if (modelloAuto == null) modelloAuto = "";
 		String bottoneNoleggio = "Noleggio";
 			Utente utente = (Utente)request.getSession().getAttribute(Costanti.USER_IN_SESSION);
 		if(utente == null){
@@ -58,15 +63,23 @@
 	<br>
 
 	<form action="/Nolejava/homepageServlet" method="post">
-		<input type="hidden" name="formcompliato" value="1"> <input
-			type="date" placeholder="Data inizio noleggio" name="datainizio" value="<%=dataInizioNoleggio%>" required>
+		<input type="hidden" name="formcompliato" value="1"> 
+		<input type="date" placeholder="Data inizio noleggio" name="datainizio" value="<%=dataInizioNoleggio%>" required>
+		<br>
 		<input type="date" placeholder="Data fine noleggio" name="datafine" value="<%=dataFineNoleggio%>" required>
+		<br>
 		<select name="tipologia" id="tipologia">
 			<option disabled selected><%=tipologiaAuto%></option>
 			<option value="berlina">Berlina</option>
 			<option value="utilitaria">Utilitaria</option>
 			<option value="suv">Suv</option>
-		</select> <input type="submit" value="<%=bottoneNoleggio%>">
+		</select> 
+		<br>
+		<input type="text" name="marca" value="<%=marcaAuto%>">
+		<br>
+		<input type="text" name="modello" value="<%=modelloAuto%>">
+		<br>
+		<input type="submit" value="<%=bottoneNoleggio%>">
 	</form>
 
 	<%List<Auto> automobili =  
