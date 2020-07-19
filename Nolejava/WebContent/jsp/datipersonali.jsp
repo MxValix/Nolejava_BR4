@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Profilo Cliente</title>
+<title>Dati personali</title>
 </head>
 <body>
 <% 
@@ -20,15 +20,16 @@
 	String password = utente.getPassword();	
 %>
 
-
-	<form action="/Nolejava/logoutServlet" method="post">
-       	<input type="submit" value="Logout">
-	 </form>
 	 <br><br><br>
-	<form action="/Nolejava/profiloClienteServlet" method="post">
-	    <input type="submit" name="action" value="Aggiorna dati personali">    
-     	<input type="submit" name="action" value="Gestisci prenotazioni">    	    		      	
- 	</form>
- 	
+	<form action="/Nolejava/datiPersonaliServlet" method="POST">
+		<input type="hidden" name="idUtente" value="<%=idUtente%>"> <br>
+		<input type="text" placeholder="nome" name="nome" value="<%=nome%>"> <br>
+		 <input type="text" placeholder="cognome" name="cognome" value="<%=cognome%>"><br>
+		<input type="date" placeholder="data di nascita" name="dataNascita" value="<%=dataNascita%>" readonly><br>
+		<input type="text" placeholder="email" name="email" value="<%=email%>"> <br>
+		<input type="password" placeholder="password" name="password" value="<%=password%>"><br>
+		<input type="submit" value="Modifica profilo"><br>
+	
+	</form>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package com.comunenapoli.progetto.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,11 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.comunenapoli.progetto.businessLogic.BusinessLogicCarta;
-import com.comunenapoli.progetto.businessLogic.BusinessLogicPatente;
 import com.comunenapoli.progetto.businessLogic.BusinessLogicUtente;
-import com.comunenapoli.progetto.model.CartaDiCredito;
-import com.comunenapoli.progetto.model.Patente;
 import com.comunenapoli.progetto.model.Utente;
 import com.comunenapoli.progetto.utils.Costanti;
 
@@ -46,9 +41,12 @@ public class DashboardServlet extends HttpServlet {
 		request.setAttribute(Costanti.LISTA_UTENTI, listaUtenti);
 	
 		String html = "/jsp/";
-		String action = request.getParameter("action");
-		if (action.contains("utente")) {
+		String action = request.getParameter("action").toLowerCase();
+		if (action.contains("utenti")) {
 			html += "gestisciutenti.jsp";
+		}
+		else if (action.contains("utente")) {
+			html += "verificautenti.jsp";
 		}
 		else if (action.contains("auto")) {
 			

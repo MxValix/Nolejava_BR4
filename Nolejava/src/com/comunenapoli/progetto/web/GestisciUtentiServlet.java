@@ -36,6 +36,7 @@ public class GestisciUtentiServlet extends HttpServlet {
 		BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
 		String idUtenteString = request.getParameter("idutente");
 		String action = request.getParameter("action").toLowerCase();
+        String recipient = request.getParameter("recipient");
 		System.out.println("action: " + action);
 		String eliminaUtente = "";
 		String promuoviUtente = "";
@@ -73,15 +74,19 @@ public class GestisciUtentiServlet extends HttpServlet {
 		
 		if (isPromosso) {
 			//TODO hai promosso l'utente a staff
-			System.out.println("Utente promosso a staff");
+			request.setAttribute(Costanti.UTENTE_PROMOSSO, isPromosso);
+			String html = "/emailSendingServlet";
+			request.getRequestDispatcher(html).include(request,response);
 		}
 		else if (isRimosso) {
 			//TODO hai rimosso l'utente
-			System.out.println("Utente rimosso");
+			request.setAttribute(Costanti.UTENTE_RIMOSSO, isRimosso);
+			String html = "/emailSendingServlet";
+			request.getRequestDispatcher(html).include(request,response);
 		}
 		else if (isVerificato) {
 			//TODO hai verificato l'utente
-			System.out.println("Utente verificato");
+			request.setAttribute(Costanti.UTENTE_VERIFICATO, isRimosso);
 			String html = "/emailSendingServlet";
 			request.getRequestDispatcher(html).include(request,response);
 		}

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.comunenapoli.progetto.utils.Costanti;
 import com.comunenapoli.progetto.utils.EmailUtility;
  
 
@@ -34,11 +35,32 @@ public class EmailSendingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         // reads form fields
-        String recipient = request.getParameter("recipient");
-        String subject = "NoleJava - Account verificato con successo";
-        String content = "Il tuo account è stato verificato, ora puoi effetuare il login. www.nolejava.com/login";
+    	String recipient = request.getParameter("recipient");
+    	Boolean isPromosso = (Boolean) request.getAttribute(Costanti.UTENTE_PROMOSSO);
+    	Boolean isRimosso = (Boolean) request.getAttribute(Costanti.UTENTE_RIMOSSO);
+    	Boolean isVerificato = (Boolean) request.getAttribute(Costanti.UTENTE_VERIFICATO);
+    	
+        String subject = "";
+        String content = "";
  
         String resultMessage = "";
+        if (isPromosso!=null && isPromosso) {
+        	subject = "NoleJava - Account promosso";
+        	content = "Sei stato promosso a membro dello staff. Congratulazioni";
+            content += ", ora puoi effetuare il login. www.nolejava.com/login";
+
+        }
+        else if (isRimosso!=null && isRimosso) {
+        	subject = "NoleJava - Account cancellato";
+        	content = "Il tuo account è stato cancellato dai nostri sistemi.";
+        }
+        else if (isVerificato!=null && isVerificato) {
+        	subject = "NoleJava - Account verificato con successo";
+            content = "Il tuo account è stato verificato";
+            content += ", ora puoi effetuare il login. www.nolejava.com/login";
+
+        }
+        
  
         try {
             EmailUtility.sendEmail(host, port, user, pass, recipient, subject,

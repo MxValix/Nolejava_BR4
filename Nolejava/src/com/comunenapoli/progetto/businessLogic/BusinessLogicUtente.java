@@ -186,11 +186,13 @@ public class BusinessLogicUtente {
 
 	//TODO aggiustare quando utente già è staff
 	public boolean updateRuolo(Utente utente, Integer idRuolo) {
-		Integer ruoloStaff = Costanti.ID_RUOLO_STAFF;
-		boolean checkPromozione = idRuolo == ruoloStaff;
+		Integer idRuoloStaff = Costanti.ID_RUOLO_STAFF;
+		String ruoloStaff = Costanti.RUOLO_STAFF;
+		boolean checkPromozione = idRuolo == idRuoloStaff;
 		if (checkPromozione) {
 			Ruolo ruolo = new Ruolo();
 			ruolo.setId(idRuolo);
+			ruolo.setNomeRuolo(ruoloStaff);
 			utente.setRuolo(ruolo);
 			update(utente);
 			return true;

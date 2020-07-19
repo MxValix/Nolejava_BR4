@@ -57,6 +57,10 @@ public static final String LISTA_UTENTI_NON_VERIFICATI = "listaUtentiNonVerifica
 
 public static final String LISTA_UTENTI = "listaUtenti";
 
+public static final String UTENTE_PROMOSSO = "utentePromosso";
+public static final String UTENTE_VERIFICATO = "utenteVerificato";
+public static final String UTENTE_RIMOSSO = "utenteRimosso";
+
 
 
 

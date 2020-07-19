@@ -7,62 +7,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Verifica utenti</title>
+<title>Gestisci utenti</title>
 </head>
 <body>
+	<h1> Gestisci utenti</h1>
 <%
 	Utente utente = (Utente) request.getSession().getAttribute(Costanti.USER_IN_SESSION);
 	Integer ruoloUtente = utente.getRuolo().getId();
 	List<Utente> listaUtenti = (List<Utente>) request.getAttribute(Costanti.LISTA_UTENTI);
-	List<Utente> utentiNonVerificati = (List<Utente>) request.getAttribute(Costanti.LISTA_UTENTI_NON_VERIFICATI);
-	if (utentiNonVerificati!=null && !utentiNonVerificati.isEmpty()){
-		if (ruoloUtente==Costanti.ID_RUOLO_ADMIN){	
-%>
-		<h1> Gestisci verifica utenti</h1>
-		<table>
-			<tr>
-				<th>id</th>
-				<th>email</th>
-				<th>tipologia</th>	
-				<th>operazione</th>		
-					
-			</tr>
-			
-<% 		
-		for (int i=0; i<utentiNonVerificati.size();i++){
-			
-			Utente utenteCorrente = utentiNonVerificati.get(i);
-			Integer idUtente = utenteCorrente.getIdUtente();
-			String email = utenteCorrente.getUsername();
-			String tipologia = utenteCorrente.getRuolo().getNomeRuolo();
-%>	
-			<tr>
 
-				<td><%=idUtente%></td>	
-				<td><%=email%></td>		
-				<td><%=tipologia%></td>	
-				<td>
-				<form action="/Nolejava/gestisciUtenti" method="POST">
-					<input type="hidden" name="idutente" value="<%=idUtente%>"> 		     	
-			     	<input type="submit" name="action" value="Verifica utente">
-<% 
-				}
-%>				
-				</form>
-				</td>	
-			</tr>
-					
-<% 			
-		}
-%>
-		</table>
-<%
-	}
-%>
-<%
 	if (listaUtenti!=null && !listaUtenti.isEmpty()){
 %>
-		<h1> Gestisci utenti</h1>
 		<table>
 			<tr>
 				<th>id</th>
@@ -96,11 +51,21 @@
 				<td>
 				<form action="/Nolejava/gestisciUtenti" method="POST">
 					<input type="hidden" name="idutente" value="<%=idUtente%>"> 
+				    <input type="hidden" value= "<%=email%>" name="recipient"/> 	 		     					
+					
 <% 
 				Integer idRuoloUtente = utenteCorrente.getRuolo().getId();
-				if (idRuoloUtente==Costanti.ID_RUOLO_CLIENTE) {
+%>
+<% 
+				if (idRuoloUtente==Costanti.ID_RUOLO_CLIENTE && isVerificato) {
 %>
 			     	<input type="submit" name="action" value="Promuovi utente">
+<% 
+				}
+				else if (idRuoloUtente!=Costanti.ID_RUOLO_ADMIN && !isVerificato) {
+%>
+				    <input type="submit" name="action" value="Verifica utente">
+	
 <% 
 				}
 				if (ruoloUtente==Costanti.ID_RUOLO_ADMIN && idRuoloUtente!=Costanti.ID_RUOLO_ADMIN){	
