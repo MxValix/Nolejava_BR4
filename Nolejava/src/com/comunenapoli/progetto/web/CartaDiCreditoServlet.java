@@ -38,12 +38,22 @@ public class CartaDiCreditoServlet extends HttpServlet {
 		String dataDiScadenza = request.getParameter("datascadenza");
 		String numeroCarta = request.getParameter("numerocarta");
 		String cvvString = request.getParameter("cvv");
+		String idCartaString = request.getParameter("idCarta");
 		Integer cvv = 0;
-		if (!cvvString.isEmpty()) cvv = Integer.valueOf(cvvString);
-		
+		Integer idCarta = 0;
+		if (cvvString!=null && !cvvString.isEmpty()) cvv = Integer.parseInt(cvvString);
 		try {
-			businessLogicCarta.operazioniCarta(dataDiScadenza, numeroCarta, cvv, utente);
-			String html = "/noleggioServlet";
+			businessLogicCarta.operazioniCarta(idCarta, dataDiScadenza, numeroCarta, cvv, utente);
+			String html = "";
+			Boolean isProfiloCliente = (Boolean)request.getSession().getAttribute(Costanti.PROFILO_CLIENTE);
+			System.out.println("isProfiloCliente: " + isProfiloCliente);
+			if (isProfiloCliente!=null && isProfiloCliente) {
+				request.getSession().removeAttribute(Costanti.PROFILO_CLIENTE);
+				html = "/jsp/profilocliente.jsp";
+			}
+			else {
+				html = "/noleggioServlet";
+			}
 			RequestDispatcher requestDispatcher; 
 			requestDispatcher = request.getRequestDispatcher(html);
 			requestDispatcher.forward(request, response);

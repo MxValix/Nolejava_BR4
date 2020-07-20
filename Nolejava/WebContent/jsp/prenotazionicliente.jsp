@@ -18,7 +18,7 @@
 	List<Noleggio> listaPrenotazioni = (List<Noleggio>) utente.getNoleggi();
 	
 %>
-	<table>
+		<table>
 			<tr>
 				<th>id Noleggio</th>
 				<th>Data prenotazione</th>		

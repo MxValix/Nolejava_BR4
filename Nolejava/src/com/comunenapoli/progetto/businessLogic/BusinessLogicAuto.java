@@ -111,6 +111,9 @@ public class BusinessLogicAuto {
 	//lista di tutte le auto con filtri, senza controllo sulle date di noleggio
 	public List<Auto> getListaAutoConFiltri(String marca, String modello, String tipologia){
 		String sql = "";
+		marca = marca.toLowerCase();
+		modello = modello.toLowerCase();
+		tipologia = modello.toLowerCase();
 		HashMap<String,String> parametriAuto = new HashMap<String,String>();
 		int count = 0;
 		if (marca!=null && !marca.isEmpty()) {
@@ -148,6 +151,69 @@ public class BusinessLogicAuto {
 		}
 		List<Auto> listaAuto = autoDao.findAutoByFilters(sql, parametriAuto);			
 		return listaAuto;
+	}
+
+
+	public void updateAuto(Auto auto, Auto autoCorrente) {
+		String marca = auto.getMarca();
+		String modello = auto.getModello();
+		String tipoCarburante = auto.getTipoCarburante();
+		String tipologiaAuto = auto.getTipologiaAuto();
+		String cambio = auto.getCambio();
+		String colore = auto.getColore();
+		String targa = auto.getTarga();
+		String urlImg = auto.getUrlImg();
+		Double cilindrata = auto.getCilindrata();
+		Integer numeroPosti = auto.getNumeroPosti();
+		Double prezzoPerGiorno = auto.getPrezzoPerGiorno();
+		String marcaCorrente = autoCorrente.getMarca();
+		String modelloCorrente = autoCorrente.getModello();
+		String tipoCarburanteCorrente = autoCorrente.getTipoCarburante();
+		String tipologiaAutoCorrente = autoCorrente.getTipologiaAuto();
+		String cambioCorrente = autoCorrente.getCambio();
+		String coloreCorrente = autoCorrente.getColore();
+		String targaCorrente = autoCorrente.getTarga();
+		String urlImgCorrente = autoCorrente.getUrlImg();
+		Double cilindrataCorrente = autoCorrente.getCilindrata();
+		Integer numeroPostiCorrente = autoCorrente.getNumeroPosti();
+		Double prezzoPerGiornoCorrente = autoCorrente.getPrezzoPerGiorno();
+
+		if (marca!=marcaCorrente) {
+			auto.setMarca(marcaCorrente);
+		}
+		if (modello!=modelloCorrente) {
+			auto.setModello(modelloCorrente);
+		}
+		if (cambio!=cambioCorrente) {
+			auto.setCambio(cambioCorrente);
+		}
+		if (cilindrata!=cilindrataCorrente) {
+			auto.setCilindrata(cilindrataCorrente);
+		}
+		if (colore!=coloreCorrente) {
+			auto.setColore(coloreCorrente);
+		}
+		if (numeroPosti!=numeroPostiCorrente) {
+			auto.setNumeroPosti(numeroPostiCorrente);
+		}
+		if (prezzoPerGiorno!=prezzoPerGiornoCorrente) {
+			auto.setPrezzoPerGiorno(prezzoPerGiornoCorrente);
+		}
+		if (tipoCarburante!=tipoCarburanteCorrente) {
+			auto.setTipoCarburante(tipoCarburanteCorrente);
+
+		}
+		if (tipologiaAuto!=tipologiaAutoCorrente) {
+			auto.setTipologiaAuto(tipologiaAutoCorrente);
+		}
+		if (targa!=targaCorrente) {
+			auto.setTarga(targaCorrente);
+		}
+		if (urlImg!=urlImgCorrente) {
+			auto.setUrlImg(urlImgCorrente);		
+		}
+
+		update(auto);
 	}
 
 }

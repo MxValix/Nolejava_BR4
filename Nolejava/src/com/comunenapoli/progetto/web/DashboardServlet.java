@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.comunenapoli.progetto.businessLogic.BusinessLogicAuto;
 import com.comunenapoli.progetto.businessLogic.BusinessLogicUtente;
+import com.comunenapoli.progetto.model.Auto;
 import com.comunenapoli.progetto.model.Utente;
 import com.comunenapoli.progetto.utils.Costanti;
 
@@ -33,8 +35,9 @@ public class DashboardServlet extends HttpServlet {
 		response.setHeader("Last-modified", LocalDateTime.now().toString());
 		response.setHeader("Cache-control", "no-store");
 		//TODO filtro area solo admin e staff
-		Utente utente = (Utente) request.getSession().getAttribute(Costanti.USER_IN_SESSION);
+		//Utente utente = (Utente) request.getSession().getAttribute(Costanti.USER_IN_SESSION);
 		BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
+
 		List<Utente> utentiNonVerificati = businessLogicUtente.listaUtentiNonVerificato();
 		request.setAttribute(Costanti.LISTA_UTENTI_NON_VERIFICATI, utentiNonVerificati);
 		List<Utente> listaUtenti = businessLogicUtente.getListaUtenti();
@@ -49,6 +52,10 @@ public class DashboardServlet extends HttpServlet {
 			html += "verificautenti.jsp";
 		}
 		else if (action.contains("auto")) {
+			BusinessLogicAuto businessLogicAuto = (BusinessLogicAuto)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_AUTO);
+			List<Auto> listaAuto = businessLogicAuto.getListaCompletaAuto();
+			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, listaAuto);
+			html += "gestisciauto.jsp";
 			
 		}
 		RequestDispatcher requestDispatcher; 

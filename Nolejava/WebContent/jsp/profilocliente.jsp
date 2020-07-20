@@ -26,7 +26,8 @@
 	 </form>
 	 <br><br><br>
 	<form action="/Nolejava/profiloClienteServlet" method="post">
-	    <input type="submit" name="action" value="Aggiorna dati personali">    
+	    <input type="submit" name="action" value="Aggiorna dati personali">   
+	    <input type="submit" name="action" value="Aggiorna dati carta">     
      	<input type="submit" name="action" value="Gestisci prenotazioni">    	    		      	
  	</form>
  	

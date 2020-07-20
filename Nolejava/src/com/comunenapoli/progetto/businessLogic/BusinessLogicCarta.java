@@ -114,17 +114,17 @@ public class BusinessLogicCarta {
 		return 0;	
 	}
 	
-	public void operazioniCarta (String dataDiScadenzaString, String numeroCarta, Integer cvv, Utente utente) throws ParseException {
-		
-		CartaDiCredito cartaDiCredito = cartaDao.findCartaByNumeroCarta(numeroCarta);
+	public void operazioniCarta (Integer idCarta, String dataDiScadenzaString, String numeroCarta, Integer cvv, Utente utente) throws ParseException {
+		CartaDiCredito cartaDiCredito = cartaDao.findCartaByIdCarta(idCarta);
 		boolean isNuovaCarta = cartaDiCredito == null;
 		Date dataDiScadenza = DataUtils.convertiDataFromString(dataDiScadenzaString);
-		
 		if (isNuovaCarta) {
 			cartaDiCredito = new CartaDiCredito(numeroCarta, cvv, dataDiScadenza, utente);
 			create(cartaDiCredito);
 		}else {
 			cartaDiCredito.setDataDiScadenza(dataDiScadenza);
+			cartaDiCredito.setCvv(cvv);
+			cartaDiCredito.setNumeroCarta(numeroCarta);
 			update(cartaDiCredito);
 		}
 		

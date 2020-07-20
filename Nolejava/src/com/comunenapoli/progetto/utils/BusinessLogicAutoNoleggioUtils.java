@@ -60,6 +60,5 @@ public class BusinessLogicAutoNoleggioUtils {
 		}
 		return autoConFiltri;
 	}
-
-
+	
 }

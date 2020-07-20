@@ -68,12 +68,14 @@
 		<br>
 		<input type="date" placeholder="Data fine noleggio" name="datafine" value="<%=dataFineNoleggio%>" required>
 		<br>
-		<select name="tipologia" id="tipologia">
-			<option disabled selected><%=tipologiaAuto%></option>
-			<option value="berlina">Berlina</option>
-			<option value="utilitaria">Utilitaria</option>
-			<option value="suv">Suv</option>
-		</select> 
+	   <datalist id="tipologia" name="tipologia">
+			<option value="Berlina"></option>
+			<option value="Utilitaria"></option>
+			<option value="Suv"></option>		
+			<option value="Station Wagon"></option>
+			<option value="Sportiva"></option>
+			<option value="Minivan"></option>		
+	  </datalist><br><br>
 		<br>
 		<input type="text" name="marca" value="<%=marcaAuto%>">
 		<br>
