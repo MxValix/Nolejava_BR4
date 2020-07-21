@@ -260,7 +260,8 @@ public class BusinessLogicNoleggio {
 				Auto auto = autoList.get(i);
 				idAutoNonDisponibili.add(auto.getIdAuto());
 			}
-		} else if (noleggi!=null){
+		}
+		if (noleggi!=null){
 
 			for (int i=0;i <noleggi.size(); i++) {
 				Noleggio noleggio = noleggi.get(i);

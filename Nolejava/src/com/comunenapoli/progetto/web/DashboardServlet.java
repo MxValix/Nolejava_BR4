@@ -71,7 +71,7 @@ public class DashboardServlet extends HttpServlet {
 		else if (action.contains("calendario")) {
 			List<CalendarioChiusure> calendarioChiusure = businessLogicNoleggio.getListaCalendarioChiusure();
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_CHIUSURE, calendarioChiusure);
-			html += "gestiscinoleggi.jsp";
+			html += "calendario.jsp";
 			
 		}
 		RequestDispatcher requestDispatcher; 

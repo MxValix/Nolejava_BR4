@@ -54,6 +54,7 @@ public class CartaDiCreditoServlet extends HttpServlet {
 				html = "/jsp/profilocliente.jsp";
 			}
 			else {
+				request.getSession().removeAttribute(Costanti.PROFILO_CLIENTE);
 				html = "/noleggioServlet";
 			}
 			RequestDispatcher requestDispatcher; 
