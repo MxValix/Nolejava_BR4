@@ -30,7 +30,9 @@
 <% 
 		if (ruoloUtente==Costanti.ID_RUOLO_ADMIN) {
 %>		     
-   	    <input type="submit" name="action" value="Gestisci noleggi">     
+   	    <input type="submit" name="action" value="Gestisci noleggi">  
+   	    <input type="submit" name="action" value="Calendario ferie">     
+   	       
 <% 
 		}
 %>	   	    		      	

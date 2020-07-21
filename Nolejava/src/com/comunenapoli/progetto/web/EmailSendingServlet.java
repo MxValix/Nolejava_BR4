@@ -39,6 +39,7 @@ public class EmailSendingServlet extends HttpServlet {
     	Boolean isPromosso = (Boolean) request.getAttribute(Costanti.UTENTE_PROMOSSO);
     	Boolean isRimosso = (Boolean) request.getAttribute(Costanti.UTENTE_RIMOSSO);
     	Boolean isVerificato = (Boolean) request.getAttribute(Costanti.UTENTE_VERIFICATO);
+    	Boolean isCancellato = (Boolean) request.getAttribute(Costanti.CANCELLAZIONE_AVVENUTA);
     	
         String subject = "";
         String content = "";
@@ -59,6 +60,10 @@ public class EmailSendingServlet extends HttpServlet {
             content = "Il tuo account è stato verificato";
             content += ", ora puoi effetuare il login. www.nolejava.com/login";
 
+        }
+        else if (isCancellato!=null && isCancellato) {
+        	subject = "NoleJava - Noleggio eliminato con successo";
+            content = "Il tuo noleggio è stato cancellato";
         }
         
  

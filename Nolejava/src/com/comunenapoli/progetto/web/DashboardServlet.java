@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.comunenapoli.progetto.businessLogic.BusinessLogicAuto;
+import com.comunenapoli.progetto.businessLogic.BusinessLogicNoleggio;
 import com.comunenapoli.progetto.businessLogic.BusinessLogicUtente;
 import com.comunenapoli.progetto.model.Auto;
+import com.comunenapoli.progetto.model.CalendarioChiusure;
+import com.comunenapoli.progetto.model.Noleggio;
 import com.comunenapoli.progetto.model.Utente;
 import com.comunenapoli.progetto.utils.Costanti;
 
@@ -37,6 +40,7 @@ public class DashboardServlet extends HttpServlet {
 		//TODO filtro area solo admin e staff
 		//Utente utente = (Utente) request.getSession().getAttribute(Costanti.USER_IN_SESSION);
 		BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
+		BusinessLogicNoleggio businessLogicNoleggio = (BusinessLogicNoleggio)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_NOLEGGIO);
 
 		List<Utente> utentiNonVerificati = businessLogicUtente.listaUtentiNonVerificato();
 		request.setAttribute(Costanti.LISTA_UTENTI_NON_VERIFICATI, utentiNonVerificati);
@@ -56,6 +60,18 @@ public class DashboardServlet extends HttpServlet {
 			List<Auto> listaAuto = businessLogicAuto.getListaCompletaAuto();
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, listaAuto);
 			html += "gestisciauto.jsp";
+			
+		}
+		else if (action.contains("noleggi")) {
+			List<Noleggio> listaNoleggi = businessLogicNoleggio.getListaCompletaNoleggi();
+			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_NOLEGGI, listaNoleggi);
+			html += "gestiscinoleggi.jsp";
+			
+		}
+		else if (action.contains("calendario")) {
+			List<CalendarioChiusure> calendarioChiusure = businessLogicNoleggio.getListaCalendarioChiusure();
+			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_CHIUSURE, calendarioChiusure);
+			html += "gestiscinoleggi.jsp";
 			
 		}
 		RequestDispatcher requestDispatcher; 

@@ -244,6 +244,11 @@ public class BusinessLogicUtente {
 		return utenti;
 	}
 
+	public Utente getUtenteByEmail(String username) {
+		Utente utente = utenteDao.findUtenteByUsername(username);
+		return null;
+	}
+
 
 
 

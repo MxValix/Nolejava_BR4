@@ -78,12 +78,9 @@ public class GestisciAutoServlet extends HttpServlet {
 				html = "/jsp/gestisciauto.jsp";
 			}
 		}
-		
-			
 			RequestDispatcher requestDispatcher; 
 			requestDispatcher = request.getRequestDispatcher(html);
 			requestDispatcher.forward(request, response);
-
 	}
 
 	private List<Auto> effettuaRicerca(HttpServletRequest request, BusinessLogicAuto businessLogicAuto, BusinessLogicNoleggio businessLogicNoleggio) {

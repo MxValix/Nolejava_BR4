@@ -269,6 +269,40 @@ public class BusinessLogicNoleggio {
 		}
 		return idAutoNonDisponibili;
 	}
-		
 	
+	public List<Noleggio> getNoleggiByUtente(Utente utente){
+		List<Noleggio> noleggiUtente = noleggioDao.findNoleggiByUtente(utente);
+		return noleggiUtente;
+		
+	}
+
+	public Noleggio getNoleggiByIdNoleggio(Integer idNoleggio) {
+		Noleggio noleggio = noleggioDao.findNoleggioByIdNoleggio(idNoleggio);
+		return noleggio;
+	}
+
+	public List<Noleggio> getListaCompletaNoleggi() {
+		List<Noleggio> noleggi = noleggioDao.retrieve();
+		return noleggi;
+	}
+
+	public List<Noleggio> getNoleggiByListaAuto(List<Auto> autoByMarca) {
+		List<Noleggio> noleggi = new ArrayList<Noleggio>();
+		for (int i=0; i<autoByMarca.size(); i++) {
+			Auto auto = autoByMarca.get(i);
+			noleggi.addAll(noleggioDao.findNoleggiByAuto(auto));
+		}
+		return noleggi;
+	}
+	
+	public List<Noleggio> getNoleggiByDataInizioDataFine(Date dataInizio, Date dataFine) {
+		List<Noleggio> noleggi = noleggioDao.findNoleggiByDataInizioDataFine(dataInizio, dataFine);
+		return noleggi;
+	}
+
+	public List<CalendarioChiusure> getListaCalendarioChiusure() {
+		List<CalendarioChiusure> chiusure = calendarioChiusureDao.retrieve();
+		return chiusure;
+	}
+
 }
