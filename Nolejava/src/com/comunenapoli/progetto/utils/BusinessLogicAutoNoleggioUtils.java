@@ -46,9 +46,7 @@ public class BusinessLogicAutoNoleggioUtils {
 		List <Auto> autoConFiltri = businessLogicAuto.getListaAutoConFiltri(marca, modello, tipologiaAuto);
 		List<Integer> idAutoNonDisponibili = businessLogicNoleggio.getIdAutoNonDisponibili(dataInizioNoleggio, dataFineNoleggio);
 		int autoConFiltriSize = autoConFiltri.size();
-		System.out.println("autoConFiltriSize: " + autoConFiltriSize);
 		int idAutoNonDisponibiliSize = idAutoNonDisponibili.size();
-		System.out.println("idAutoNonDisponibili: " + idAutoNonDisponibiliSize);
 
 		if (idAutoNonDisponibiliSize>0 && autoConFiltriSize>0) {
 			List<Auto> autoNoleggioFiltri = new ArrayList<>();
@@ -63,7 +61,6 @@ public class BusinessLogicAutoNoleggioUtils {
 				}
 
 			}
-			System.out.println("autoNoleggioConFiltri: " + autoConFiltri);
 
 			return autoNoleggioFiltri;
 		}
