@@ -42,6 +42,8 @@ public class CartaDiCreditoServlet extends HttpServlet {
 		Integer cvv = 0;
 		Integer idCarta = 0;
 		if (cvvString!=null && !cvvString.isEmpty()) cvv = Integer.parseInt(cvvString);
+		if (idCartaString!=null && !idCartaString.isEmpty()) idCarta = Integer.parseInt(idCartaString);
+
 		try {
 			businessLogicCarta.operazioniCarta(idCarta, dataDiScadenza, numeroCarta, cvv, utente);
 			String html = "";

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import javax.persistence.EntityManager;
 
+import com.comunenapoli.progetto.businessLogic.AutoDao;
 import com.comunenapoli.progetto.businessLogic.BusinessLogicNoleggio;
 import com.comunenapoli.progetto.businessLogic.BusinessLogicUtente;
 import com.comunenapoli.progetto.businessLogic.CalendarioChiusureDao;
@@ -19,8 +20,10 @@ public class Main {
 		EntityManager entityManager = EntityManagerUtils.apriConnessione();
 		CalendarioChiusureDao calendarioChiusureDao = new CalendarioChiusureDao(entityManager);
 		NoleggioDao noleggioDao = new NoleggioDao(entityManager);
+		AutoDao autoDao = new AutoDao(entityManager);
+
 		BusinessLogicRuoloUtils.generaRuoli(entityManager);
-		BusinessLogicNoleggio businessLogicNoleggio = new BusinessLogicNoleggio(entityManager,noleggioDao,calendarioChiusureDao);
+		BusinessLogicNoleggio businessLogicNoleggio = new BusinessLogicNoleggio(entityManager,noleggioDao,calendarioChiusureDao, autoDao);
 		UtenteDao utenteDao = new UtenteDao(entityManager);
 	    LocalDate dataNascitaLD = LocalDate.of(1993, 05, 19);
 	    Date dataNascita = DataUtils.convertiDataFromLocalDate(dataNascitaLD);

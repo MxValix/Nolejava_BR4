@@ -20,7 +20,7 @@ public class BusinessLogicCarta {
 		this.em = em;
 	}
 
-	
+
 	public CartaDiCreditoDao getCartaDao() {
 		return cartaDao;
 	}
@@ -86,18 +86,18 @@ public class BusinessLogicCarta {
 		}
 		return false;
 	}
-	
-	
+
+
 	public CartaDiCredito getCartaByUtente(Utente utente) {
 		CartaDiCredito carta = cartaDao.findCartaByIdUtente(utente);
 		return carta;
 	}
-	
+
 	public boolean isCartaValid(Date dataScadenza) throws Exception {
 		boolean isDataValida = DataUtils.dataScadenza(dataScadenza);
 		return isDataValida;
 	}
-	
+
 	public Integer responsoCarta(Utente utente) throws Exception {
 		CartaDiCredito carta = getCartaByUtente(utente);
 		boolean isCartaValid = false;
@@ -109,11 +109,12 @@ public class BusinessLogicCarta {
 			isCartaValid = isCartaValid(dataScadenza);
 			if (isCartaValid) {
 				return 1;
+			}else {
+				return 0;
 			}
 		}
-		return 0;	
 	}
-	
+
 	public void operazioniCarta (Integer idCarta, String dataDiScadenzaString, String numeroCarta, Integer cvv, Utente utente) throws ParseException {
 		CartaDiCredito cartaDiCredito = cartaDao.findCartaByIdCarta(idCarta);
 		boolean isNuovaCarta = cartaDiCredito == null;
@@ -127,7 +128,7 @@ public class BusinessLogicCarta {
 			cartaDiCredito.setNumeroCarta(numeroCarta);
 			update(cartaDiCredito);
 		}
-		
+
 	}
 
 }

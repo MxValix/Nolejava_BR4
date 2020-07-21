@@ -17,12 +17,22 @@ public class BusinessLogicNoleggio {
 
 	private NoleggioDao noleggioDao = null;
 	private CalendarioChiusureDao  calendarioChiusureDao = null;
+	private AutoDao autoDao = null;
 	private EntityManager em = null;
 
-	public BusinessLogicNoleggio (EntityManager em ,NoleggioDao noleggioDao, CalendarioChiusureDao  calendarioChiusureDao) {
+	public BusinessLogicNoleggio (EntityManager em ,NoleggioDao noleggioDao, CalendarioChiusureDao  calendarioChiusureDao, AutoDao autoDao) {
 		setEm(em);
 		setNoleggioDao(noleggioDao);
 		setCalendarioChiusureDao(calendarioChiusureDao);
+		setAutoDao(autoDao);
+	}
+
+	public AutoDao getAutoDao() {
+		return autoDao; 
+	}
+	private void setAutoDao(AutoDao autoDao) {
+		this.autoDao = autoDao;
+		
 	}
 
 	public NoleggioDao getNoleggioDao() {
@@ -41,6 +51,8 @@ public class BusinessLogicNoleggio {
 	public void setCalendarioChiusureDao(CalendarioChiusureDao calendarioChiusureDao) {
 		this.calendarioChiusureDao = calendarioChiusureDao;
 	}
+	
+	
 
 	public EntityManager getEm() {
 		return em;
@@ -226,7 +238,8 @@ public class BusinessLogicNoleggio {
 	    createCalendario(calendarioChiusure);
 	    return checkEliminato;
 	}
-	
+
+/*	
 	public List<Integer> getIdAutoNonDisponibili(Date dataInizioNoleggio, Date dataFineNoleggio){
 		List<Noleggio> noleggi = noleggioDao.findNoleggiByDataInizioDataFine(dataInizioNoleggio, dataFineNoleggio);
 		List<Integer> idAutoNonDisponibili = new ArrayList<Integer>();
@@ -236,6 +249,26 @@ public class BusinessLogicNoleggio {
 		}
 		return idAutoNonDisponibili;
 	}
-	
+*/
+	public List<Integer> getIdAutoNonDisponibili(Date dataInizioNoleggio, Date dataFineNoleggio){
+		List<Noleggio> noleggi = noleggioDao.findNoleggiByDataInizioDataFine(dataInizioNoleggio, dataFineNoleggio);
+		CalendarioChiusure calendarioChiusure = calendarioChiusureDao.findByDataInizioDataFine(dataInizioNoleggio, dataFineNoleggio);
+		List<Integer> idAutoNonDisponibili = new ArrayList<Integer>();
+		List<Auto> autoList = autoDao.retrieve();
+		if (calendarioChiusure!=null) {		
+			for (int i=0; i<autoList.size(); i++) {
+				Auto auto = autoList.get(i);
+				idAutoNonDisponibili.add(auto.getIdAuto());
+			}
+		} else if (noleggi!=null){
+
+			for (int i=0;i <noleggi.size(); i++) {
+				Noleggio noleggio = noleggi.get(i);
+				idAutoNonDisponibili.add(noleggio.getAuto().getIdAuto());
+			}
+		}
+		return idAutoNonDisponibili;
+	}
+		
 	
 }

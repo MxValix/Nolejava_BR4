@@ -4,9 +4,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comunenapoli.progetto.businessLogic.AutoDao;
 import com.comunenapoli.progetto.businessLogic.BusinessLogicAuto;
 import com.comunenapoli.progetto.businessLogic.BusinessLogicNoleggio;
+import com.comunenapoli.progetto.businessLogic.CalendarioChiusureDao;
+import com.comunenapoli.progetto.businessLogic.NoleggioDao;
 import com.comunenapoli.progetto.model.Auto;
+import com.comunenapoli.progetto.model.CalendarioChiusure;
+import com.comunenapoli.progetto.model.Noleggio;
 
 public class BusinessLogicAutoNoleggioUtils {
 
@@ -43,6 +48,8 @@ public class BusinessLogicAutoNoleggioUtils {
 		int autoConFiltriSize = autoConFiltri.size();
 		System.out.println("autoConFiltriSize: " + autoConFiltriSize);
 		int idAutoNonDisponibiliSize = idAutoNonDisponibili.size();
+		System.out.println("idAutoNonDisponibili: " + idAutoNonDisponibiliSize);
+
 		if (idAutoNonDisponibiliSize>0 && autoConFiltriSize>0) {
 			List<Auto> autoNoleggioFiltri = new ArrayList<>();
 			for (int i=0; i<autoConFiltriSize; i++) {
@@ -50,15 +57,19 @@ public class BusinessLogicAutoNoleggioUtils {
 				for (int j=0; j<idAutoNonDisponibiliSize; j++) {
 					int idAutoNonDisponibile = idAutoNonDisponibili.get(j);
 					boolean checkIdAuto = autoCorrente.getIdAuto() != idAutoNonDisponibile;
-					if (checkIdAuto && !autoNoleggioFiltri.contains(autoCorrente)) {
+					if (checkIdAuto) {
 						autoNoleggioFiltri.add(autoCorrente);
 					}
 				}
 
 			}
+			System.out.println("autoNoleggioConFiltri: " + autoConFiltri);
+
 			return autoNoleggioFiltri;
 		}
+		System.out.println("autoConFiltri: " + autoConFiltri);
 		return autoConFiltri;
 	}
 	
+		
 }

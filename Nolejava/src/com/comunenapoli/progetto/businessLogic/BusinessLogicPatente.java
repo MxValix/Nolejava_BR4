@@ -87,18 +87,18 @@ public class BusinessLogicPatente {
 		}
 		return false;
 	}
-	
-	
+
+
 	public Patente getPatenteByUtente(Utente utente) {
 		Patente patente = patenteDao.findPatenteByUtente(utente);
 		return patente;
 	}
-	
+
 	public boolean isPatenteValid(Date dataScadenza) throws Exception {
 		boolean isDataValida = DataUtils.dataScadenza(dataScadenza);
 		return isDataValida;
 	}
-	
+
 	public Integer responsoPatente(Utente utente) throws Exception {
 		Patente patente = patenteDao.findPatenteByUtente(utente);
 		boolean isPatenteValida = false;
@@ -110,11 +110,13 @@ public class BusinessLogicPatente {
 			isPatenteValida = isPatenteValid(dataScadenza);
 			if (isPatenteValida) {
 				return 1;
+			}else {
+				return 0;
 			}
+
 		}
-		return 0;	
 	}
-	
+
 	public void operazionePatente(Utente utente, String dataScadenzaString, String numeroPatente) throws ParseException {
 		Patente patente = patenteDao.findPatenteByNumeroPatente(numeroPatente);
 		boolean isNuovaPatente = patente == null;
@@ -128,6 +130,6 @@ public class BusinessLogicPatente {
 			update(patente);
 		}
 	}
-	
+
 
 }

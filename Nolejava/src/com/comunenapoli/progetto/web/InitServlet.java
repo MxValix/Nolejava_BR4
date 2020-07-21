@@ -46,7 +46,7 @@ public class InitServlet extends HttpServlet {
 	    BusinessLogicPatente businessLogicPatente = new BusinessLogicPatente(entityManager,patenteDao);
 	    BusinessLogicCarta businessLogicCarta = new BusinessLogicCarta(entityManager,cartaDao);
 	    BusinessLogicAuto businessLogicAuto = new BusinessLogicAuto(entityManager,autoDao);
-	    BusinessLogicNoleggio businessLogicNoleggio = new BusinessLogicNoleggio(entityManager,noleggioDao,calendarioChiusureDao);
+	    BusinessLogicNoleggio businessLogicNoleggio = new BusinessLogicNoleggio(entityManager,noleggioDao,calendarioChiusureDao, autoDao);
 
 
 	    

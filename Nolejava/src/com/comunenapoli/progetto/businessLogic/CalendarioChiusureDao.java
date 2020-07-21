@@ -37,7 +37,7 @@ public class CalendarioChiusureDao implements DaoInterface<CalendarioChiusure> {
 
 	@Override
 	public List<CalendarioChiusure> retrieve() {
-		TypedQuery<CalendarioChiusure> query = manager.createQuery("from CalendarioChisure",CalendarioChiusure.class);
+		TypedQuery<CalendarioChiusure> query = manager.createQuery("from CalendarioChiusure",CalendarioChiusure.class);
 		List<CalendarioChiusure> listaChiusure = query.getResultList();
 		return listaChiusure;
 	}
@@ -54,9 +54,11 @@ public class CalendarioChiusureDao implements DaoInterface<CalendarioChiusure> {
 	
 	public CalendarioChiusure findByDataInizioDataFine(Date dataInizio, Date dataFine) {
 		TypedQuery<CalendarioChiusure> query;
-		query = manager.createQuery("select c from CalendarioChisure c where c.dataInizio = :x and c.dataFine = :y",CalendarioChiusure.class);
+		query = manager.createQuery("select c from CalendarioChiusure c where c.dataInizio between :x and :y",CalendarioChiusure.class);
 		query = query.setParameter("x",dataInizio).setParameter("y", dataFine);
 		CalendarioChiusure chiusura = query.getResultList().stream().findFirst().orElse(null);
+		System.out.println("chiusura: ");
+		System.out.println(chiusura);
 		return chiusura;
 	}
 	
@@ -64,7 +66,7 @@ public class CalendarioChiusureDao implements DaoInterface<CalendarioChiusure> {
 	//ritorna true se è aperto e quindi si può aggiungere il noleggio
 	public boolean findByDataInizioUtente(Date dataInizio) {
 		TypedQuery<CalendarioChiusure> query;
-		query = manager.createQuery("select c from CalendarioChisure c where c.dataInizio < :x or c.dataFine > :y",CalendarioChiusure.class);
+		query = manager.createQuery("select c from CalendarioChiusure c where c.dataInizio b :x or c.dataFine > :y",CalendarioChiusure.class);
 		query = query.setParameter("x",dataInizio).setParameter("y", dataInizio);
 		CalendarioChiusure calendarioChiusure = query.getResultList().stream().findFirst().orElse(null);
 		boolean isAperto = calendarioChiusure==null;

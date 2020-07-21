@@ -56,13 +56,14 @@ public class NoleggioServlet extends HttpServlet {
 					requestDispatcher.forward(request, response);
 
 				}
-				else if (responsoCarta == 0) {
+				else if (responsoCarta == 0) { //carta c'è e non è valida
 					CartaDiCredito carta = businessLogicCarta.getCartaByUtente(utente);
 						numeroCarta = carta.getNumeroCarta();
 						cvv = carta.getCvv().toString();
 					html = "/jsp/carta.jsp";
-					request.setAttribute(Costanti.NUMERO_CARTA,numeroCarta);
-					request.setAttribute(Costanti.CVV_CARTA,cvv);
+//					request.setAttribute(Costanti.NUMERO_CARTA,numeroCarta);
+//					request.setAttribute(Costanti.CVV_CARTA,cvv);
+					request.setAttribute(Costanti.CARTA_IN_SESSION, carta);
 
 					RequestDispatcher requestDispatcher; 
 					requestDispatcher = request.getRequestDispatcher(html);
@@ -71,8 +72,10 @@ public class NoleggioServlet extends HttpServlet {
 				else if (responsoCarta == -1) {
 					//TODO carta mai inserita, vai al form di inserimento dati carta
 					html = "/jsp/carta.jsp";
-					request.setAttribute(Costanti.NUMERO_CARTA,numeroCarta);
-					request.setAttribute(Costanti.CVV_CARTA,cvv);
+					CartaDiCredito carta = businessLogicCarta.getCartaByUtente(utente);
+					request.setAttribute(Costanti.CARTA_IN_SESSION, carta);
+//					request.setAttribute(Costanti.NUMERO_CARTA,numeroCarta);
+//					request.setAttribute(Costanti.CVV_CARTA,cvv);
 					RequestDispatcher requestDispatcher; 
 					requestDispatcher = request.getRequestDispatcher(html);
 					requestDispatcher.forward(request, response);
@@ -106,4 +109,3 @@ public class NoleggioServlet extends HttpServlet {
 	}
 
 }
-
