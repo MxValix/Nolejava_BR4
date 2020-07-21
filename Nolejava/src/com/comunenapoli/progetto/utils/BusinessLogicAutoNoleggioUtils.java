@@ -45,7 +45,6 @@ public class BusinessLogicAutoNoleggioUtils {
 	public static List<Auto> filtroRicerca(Date dataInizioNoleggio, Date dataFineNoleggio, String marca, String modello, String tipologiaAuto, BusinessLogicAuto businessLogicAuto, BusinessLogicNoleggio businessLogicNoleggio) {
 		List <Auto> autoConFiltri = businessLogicAuto.getListaAutoConFiltri(marca, modello, tipologiaAuto);
 		List<Integer> idAutoNonDisponibili = businessLogicNoleggio.getIdAutoNonDisponibili(dataInizioNoleggio, dataFineNoleggio);
-		System.out.println("idAutoNonDisponibili: " + idAutoNonDisponibili);
 		int autoConFiltriSize = autoConFiltri.size();
 		int idAutoNonDisponibiliSize = idAutoNonDisponibili.size();
 		List<Auto> autoNoleggioFiltri = new ArrayList<>();
@@ -58,11 +57,9 @@ public class BusinessLogicAutoNoleggioUtils {
 					if (idAutoCorrente==idAutoNonDisponibili.get(j)) {
 						check=true;
 				    }
-
 				}
 				if (!check) autoNoleggioFiltri.add(autoCorrente);
 			}
-			System.out.println("auto disponibili: ");
 			return autoNoleggioFiltri;
 		}
 		return autoConFiltri;
