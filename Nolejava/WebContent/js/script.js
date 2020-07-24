@@ -32,3 +32,4 @@ $('.toggle-password').on('click', function() {
 $("input.datascadenza").datepicker({
     minDate: 0 
 });
+

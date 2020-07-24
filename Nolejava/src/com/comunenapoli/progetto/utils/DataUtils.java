@@ -74,5 +74,15 @@ public class DataUtils {
 	    differenzaGiorni = (int) differenzaGiorniLong;
 	    return differenzaGiorni;
 	}
+
+	public static Date getDataCompletaFromMeseEdAnno(Integer mese, Integer anno) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(Calendar.MONTH, mese);
+        calendar.set(Calendar.YEAR, anno);
+        java.util.Date date = calendar.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return sqlDate;
+	}
 	
 }

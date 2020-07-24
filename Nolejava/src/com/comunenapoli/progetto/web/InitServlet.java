@@ -1,5 +1,7 @@
 package com.comunenapoli.progetto.web;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,6 +70,8 @@ public class InitServlet extends HttpServlet {
 	    Auto auto2 = new Auto("asadw","dwff","efewe","A",32.00, "nero", 2, "BP854RT", "benzina", 2.100, "dewdf.png");
 	    businessLogicAuto.create(auto);
 	    businessLogicAuto.create(auto2);
+	    List<Auto> autoList = businessLogicAuto.getListaCompletaAuto();
+	    getServletContext().setAttribute(Costanti.LISTA_COMPLETA_AUTO, autoList);
 	}
 	
 	

@@ -3,6 +3,7 @@ package com.comunenapoli.progetto.web;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,10 +42,10 @@ public class LoginServlet extends HttpServlet {
 		else {
 			BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
 			Utente utente = businessLogicUtente.login(username, password);
+			String html = "";
 			if (utente!=null) {
 				Integer ruolo = businessLogicUtente.checkRuolo(utente.getIdUtente());
 				System.out.println("Ok, ho fatto il login");
-				String html = "";
 				if (utente.getIsVerificato()) {
 					request.getSession().setAttribute(Costanti.USER_IN_SESSION, utente);
 					if (ruolo == Costanti.ID_RUOLO_ADMIN) {
@@ -56,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 						html = "/jsp/dashboard.jsp";
 
 					} else if (ruolo == Costanti.ID_RUOLO_CLIENTE) {
-
+						html = "/jsp/homepage.jsp";
 					}				
 				} else {
 					response.getWriter().println("<h1>Login non verificato</h1>");
@@ -66,6 +67,10 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				response.getWriter().println("<h1>Username o password non validi</h1>");
 			}
+			RequestDispatcher requestDispatcher; 
+			requestDispatcher = request.getRequestDispatcher(html);
+			requestDispatcher.forward(request, response);
+
 		}
 	} 
 }

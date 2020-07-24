@@ -33,7 +33,6 @@ public class PatenteServlet extends HttpServlet {
 		response.setHeader("Cache-control", "no-store");
 		Utente utente = (Utente) request.getSession().getAttribute(Costanti.USER_IN_SESSION);
 		String username = utente.getUsername();
-		System.out.println(username + " username");
 		BusinessLogicPatente businessLogicPatente = (BusinessLogicPatente) getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_PATENTE);
 		String dataScadenza = request.getParameter("datascadenza");
 		String numeroPatente = request.getParameter("numeropatente");

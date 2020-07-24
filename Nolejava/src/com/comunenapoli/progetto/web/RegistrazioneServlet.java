@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,10 +35,12 @@ public class RegistrazioneServlet extends HttpServlet {
 		response.setHeader("Last-modified", LocalDateTime.now().toString());
 		response.setHeader("Cache-control", "no-store");
 		Integer effettuaRegistrazione = effettuaRegistrazione(request);
-		System.out.println("Effettua registrazione: " + effettuaRegistrazione);
+		String html = "";
 		if (effettuaRegistrazione == Costanti.REGISTRAZIONE_VALIDA) {
 			//TODO registrazione avvenuta con successo, attendi conferma
+			
 			response.getWriter().println("<h1>Registrazione effettuata. Attendi la conferma.</h1>");
+			//TODO pagina che rimanda
 		}
 		else if (effettuaRegistrazione == Costanti.REGISTRAZIONE_FALLITA_ETA) {
 			//TODO registrazione non avvenuta, sei minorenne, rimanda in homepage
@@ -54,6 +57,9 @@ public class RegistrazioneServlet extends HttpServlet {
 			response.getWriter().println("<h1>Non ho la minima idea di cosa sia successo.</h1>");
 
 		}
+		RequestDispatcher requestDispatcher; 
+		requestDispatcher = request.getRequestDispatcher(html);
+		requestDispatcher.forward(request, response);
 	
 	}
 	
@@ -62,7 +68,7 @@ public class RegistrazioneServlet extends HttpServlet {
 		BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
-		String dataNascitaString = request.getParameter("dataNascita");
+		String dataNascitaString = request.getParameter("datanascita");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String staff = request.getParameter("staff");

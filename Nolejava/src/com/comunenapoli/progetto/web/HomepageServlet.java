@@ -46,18 +46,20 @@ public class HomepageServlet extends HttpServlet {
 		
 		//TODO campo nascosto obbligatorio con value form
 		String hidden = request.getParameter("formcompliato");
+		String html = "/jsp/homepage.jsp";
 		boolean isHiddenEmpty = hidden==null || hidden.isEmpty() || hidden.equals("");
 		if (isHiddenEmpty) {
 			listaAuto = businessLogicAuto.getListaCompletaAuto();
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, listaAuto);
 		} else {
 			listaAuto = effettuaRicerca(request, businessLogicAuto,businessLogicNoleggio);
+			html += "#lista-auto";
 		}
 		
 			
 			System.out.println("Lista auto " + request.getSession().getAttribute(Costanti.LISTA_COMPLETA_AUTO));
 			RequestDispatcher requestDispatcher; 
-			requestDispatcher = request.getRequestDispatcher("/jsp/homepage.jsp");
+			requestDispatcher = request.getRequestDispatcher(html);
 			requestDispatcher.forward(request, response);
 
 	}
@@ -67,7 +69,7 @@ public class HomepageServlet extends HttpServlet {
 		
 			String dataInizioNoleggioString = request.getParameter("datainizio");
 			String dataFineNoleggioString = request.getParameter("datafine");
-			String numeroPostiString = request.getParameter("numeroposti");
+			String numeroPostiString = request.getParameter("numeroPosti");
 			String prezzoAutoPerGiornoString = request.getParameter("prezzopergiorno");
 			
 			Date dataInizio = DataUtils.convertiDataFromString(dataInizioNoleggioString);
@@ -83,11 +85,23 @@ public class HomepageServlet extends HttpServlet {
 			String cambioAuto = request.getParameter("cambio");			
 			String tipologiaCarburante = request.getParameter("carburante");
 			Integer numeroPosti = null;
+			
+
+
 
 			if (numeroPostiString!=null && numeroPostiString.isEmpty()) {
 				request.getSession().setAttribute(Costanti.NUMERO_POSTI_AUTO_SCELTA,cambioAuto);
 				numeroPosti = Integer.parseInt(numeroPostiString);
 			}
+			
+			System.out.println("dataInizio: " + dataInizio);
+			System.out.println("dataFine: " + dataFine);
+			System.out.println("marcaAuto: " + marcaAuto);
+			System.out.println("modelloAuto: " + modelloAuto);
+			System.out.println("cambioAuto: " + cambioAuto);
+			System.out.println("tipologiaCarburante: " + tipologiaCarburante);
+			System.out.println("numeroPosti: " + numeroPosti);
+			System.out.println("tipologiaAuto: " + tipologiaAuto);
 			
 			request.getSession().setAttribute(Costanti.TIPOLOGIA_AUTO_SCELTA, tipologiaAuto);
 			request.getSession().setAttribute(Costanti.MARCA_AUTO_SCELTA, marcaAuto);

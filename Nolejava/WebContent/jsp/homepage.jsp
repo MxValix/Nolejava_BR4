@@ -7,14 +7,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-  Date dataInizioNoleggio = (Date) request.getSession().getAttribute(Costanti.DATA_INIZIO_NOLEGGIO);
-  Date dataFineNoleggio = (Date) request.getSession().getAttribute(Costanti.DATA_FINE_NOLEGGIO);
-  String tipologiaAuto = (String) request.getSession().getAttribute(Costanti.TIPOLOGIA_AUTO_SCELTA);
-  String marcaAuto = (String) request.getSession().getAttribute(Costanti.MARCA_AUTO_SCELTA);
-  String modelloAuto = (String) request.getSession().getAttribute(Costanti.MODELLO_AUTO_SCELTA);
-  String cambioAuto =  (String) request.getSession().getAttribute(Costanti.CAMBIO_AUTO_SCELTA);
-  String carburanteAuto = (String) request.getSession().getAttribute(Costanti.CARBURANTE_AUTO_SCELTA);
-  String numeroPosti = (String) request.getSession().getAttribute(Costanti.NUMERO_POSTI_AUTO_SCELTA);
+  Date dataInizioNoleggio = (Date) request.getAttribute(Costanti.DATA_INIZIO_NOLEGGIO);
+  Date dataFineNoleggio = (Date) request.getAttribute(Costanti.DATA_FINE_NOLEGGIO);
+  String tipologiaAuto = (String) request.getAttribute(Costanti.TIPOLOGIA_AUTO_SCELTA);
+  String marcaAuto = (String) request.getAttribute(Costanti.MARCA_AUTO_SCELTA);
+  String modelloAuto = (String) request.getAttribute(Costanti.MODELLO_AUTO_SCELTA);
+  String cambioAuto =  (String) request.getAttribute(Costanti.CAMBIO_AUTO_SCELTA);
+  String carburanteAuto = (String) request.getAttribute(Costanti.CARBURANTE_AUTO_SCELTA);
+  String numeroPosti = (String) request.getAttribute(Costanti.NUMERO_POSTI_AUTO_SCELTA);
   String voce1 = "";
   String voce2 = "";
   String link1 = "/Nolejava/jsp/";
@@ -39,13 +39,13 @@
    else{
       voce1 = "Profilo";
       voce2 = "Logout";
-      link2 = "logout.jsp";
+      link2 = "/Nolejava/logoutServlet";
       if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
-         link1 += "profilocliente.jsp";           
+         link1 += "profilocliente.jsp";   
+         operazione = "Noleggia";
 
       } else {
          link1 += "dashboard.jsp";
-         operazione = "Noleggia";
       }
    }
 %>
@@ -128,6 +128,7 @@
 					<div class="search-wrap-1 ftco-animate mb-5">
 						<form action="/Nolejava/homepageServlet" method="post"
 							class="search-property-1">
+							<input type="hidden" value="formcompliato" name="hidden">
 							<div class="row" id="prima-riga-filtri">
 								<div class="col-lg align-items-end">
 									<div class="form-group">
@@ -217,9 +218,18 @@
 										<label for="numeroPosti">Numero posti</label>
 										<div class="form-field">
 											<div class="select-wrap">
-												<input type="number" max="10" name="numeroPosti"
-													id="numeroPosti" value="<%=numeroPosti%>"
-													class="form-control">
+												<input list="numeroPosti" name="numeroPosti"
+													class="form-control" value="5">
+												<datalist id="numeroPosti" name="numeroPosti">
+													<option value="2"></option>
+													<option value="3"></option>
+													<option value="4"></option>
+													<option value="5"></option>
+													<option value="6"></option>
+													<option value="7"></option>
+													<option value="8"></option>
+													<option value="9"></option>
+												</datalist>
 											</div>
 										</div>
 									</div>
@@ -266,7 +276,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-12 heading-section text-center ftco-animate mb-5">
 					<span class="subheading">Cosa offriamo</span>
-					<h2 class="mb-2">Scegli la tua auto</h2>
+					<h2 class="mb-2" id="lista-auto">Scegli la tua auto</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -557,8 +567,9 @@
 	<script src="/Nolejava/js/bootstrap-datepicker.js"></script>
 	<script src="/Nolejava/js/jquery.timepicker.min.js"></script>
 	<script src="/Nolejava/js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script type="text/javascript" src="/Nolejava/js/datanoleggio.js"></script>
+	
+	<script	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="/Nolejava/js/google-map.js"></script>
 	<script src="/Nolejava/js/main.js"></script>
 	<script src="/Nolejava/js/script.js"></script>
