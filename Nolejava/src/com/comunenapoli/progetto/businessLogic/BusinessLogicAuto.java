@@ -3,6 +3,7 @@ package com.comunenapoli.progetto.businessLogic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -107,7 +108,7 @@ public class BusinessLogicAuto {
 		List<Auto> listaAuto = autoDao.retrieve();
 		return listaAuto;	
 	}
-
+/*
 	//lista di tutte le auto con filtri, senza controllo sulle date di noleggio
 	public List<Auto> getListaAutoConFiltri(String marca, String modello, String tipologia){
 		String sql = "";
@@ -152,6 +153,76 @@ public class BusinessLogicAuto {
 		List<Auto> listaAuto = autoDao.findAutoByFilters(sql, parametriAuto);			
 		return listaAuto;
 	}
+	*/
+	//lista di tutte le auto con filtri, senza controllo sulle date di noleggio
+		public List<Auto> getListaAutoConFiltri(String marca, String modello, String tipologia, 
+				String carburante, String cambio, Integer numeroPosti){
+			String sql = "";
+			HashMap<String,String> parametriAuto = new HashMap<String,String>();
+			int count = 0;
+			if (marca!=null && !marca.isEmpty()) {
+				marca = marca.toLowerCase();
+				if (count == 0) {
+					sql = " where ";
+				}
+				else {
+					sql += " and ";
+				}
+				count++;
+				sql += " a.marca = :marca ";
+				parametriAuto.put("marca", marca);
+			}
+			if (modello!=null && !modello.isEmpty()) {
+				modello = modello.toLowerCase();
+				if (count == 0) {
+					sql = " where ";
+				}
+				else {
+					sql += " and ";
+				}
+				count++;
+				sql += " a.modello = :modello ";
+				parametriAuto.put("modello", modello);
+			}
+			if (tipologia!=null && !tipologia.isEmpty()) {
+				tipologia = tipologia.toLowerCase();
+				if (count == 0) {
+					sql = " where ";
+				}
+				else {
+					sql += " and ";
+				}
+				count++;
+				sql += " a.tipologiaAuto = :tipologiaAuto ";
+				parametriAuto.put("tipologiaAuto", tipologia);
+			}
+			if (carburante!=null && !carburante.isEmpty()) {
+				carburante = carburante.toLowerCase();
+				if (count == 0) {
+					sql = " where ";
+				}
+				else {
+					sql += " and ";
+				}
+				count++;
+				sql += " a.tipoCarburante = :tipoCarburante ";
+				parametriAuto.put("tipoCarburante", carburante);
+			}
+			if (cambio!=null && !cambio.isEmpty()) {
+				cambio = cambio.toLowerCase();
+				if (count == 0) {
+					sql = " where ";
+				}
+				else {
+					sql += " and ";
+				}
+				count++;
+				sql += " a.cambio = :cambio ";
+				parametriAuto.put("cambio", cambio);
+			}
+			List<Auto> listaAuto = autoDao.findAutoByFilters(sql, parametriAuto, numeroPosti);			
+			return listaAuto;
+		}
 
 
 	public void updateAuto(Auto auto, Auto autoCorrente) {

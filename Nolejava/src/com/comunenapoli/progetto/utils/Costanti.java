@@ -53,10 +53,14 @@ public interface Costanti {
 	public static final String NUMERO_CARTA = "numeroCarta";
 	public static final String CVV_CARTA = "cvvCarta";
 	public static final String NUMERO_PATENTE = "numeroPatente";
+	
+	
 	public static final String TIPOLOGIA_AUTO_SCELTA = "tipologiaAuto";
 	public static final String MARCA_AUTO_SCELTA = "marcaAuto";
 	public static final String MODELLO_AUTO_SCELTA = "modelloAuto";
-
+	public static final String CAMBIO_AUTO_SCELTA = "cambioAutoScelta";
+	public static final String CARBURANTE_AUTO_SCELTA = "carburanteAutoScelta";
+	public static final String NUMERO_POSTI_AUTO_SCELTA = "numeroPostiAutoScelta";
 
 
 	public static final String UTENTE_PROMOSSO = "utentePromosso";
@@ -66,6 +70,8 @@ public interface Costanti {
 	public static final String CARTA_IN_SESSION = "cartaInSession";
 	public static final String NOLEGGI_UTENTE = "noleggiUtente";
 	public static final String CANCELLAZIONE_AVVENUTA = "cancellazioneAvvenuta";
+	
+	
 
 
 

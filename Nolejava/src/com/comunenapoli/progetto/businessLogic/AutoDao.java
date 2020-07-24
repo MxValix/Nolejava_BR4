@@ -2,6 +2,7 @@ package com.comunenapoli.progetto.businessLogic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -79,13 +80,75 @@ public class AutoDao implements DaoInterface<Auto> {
 		return auto;
 	}
 
-
-	public List<Auto> findAutoByFilters(String sql, HashMap<String, String> parametriAuto){
+	/*
+	public List<Auto> findAutoByFilters(String sql, LinkedHashMap<String, String> parametriAuto, Integer numeroPosti){
 		String query = "select a from Auto a " + sql;
 		System.out.println(query);
 		TypedQuery<Auto> typedQuery = manager.createQuery(query,Auto.class);
 		List<String> parametriKey = new ArrayList<String>();
+		int filterSize = parametriAuto.size()-1;
+		for (String nomeParametro : parametriAuto.keySet()){
+			parametriKey.add(nomeParametro);
+			System.out.println(nomeParametro);
+		}
+		for (int i=0;i<=filterSize;i++) {
+			String key1 = parametriKey.get(i);
+
+			if(filterSize>=1) {
+				if (numeroPosti!=null) {
+					typedQuery = typedQuery.setParameter(key1, numeroPosti);
+				} else {
+					String value1 = parametriAuto.get(key1);
+					typedQuery = typedQuery.setParameter(key1, value1);
+				}
+			}
+			if (filterSize>=2) {
+				i++;
+				String key2 = parametriKey.get(i);
+				String value2 = parametriAuto.get(key2);
+				typedQuery = typedQuery.setParameter(key2, value2);
+				if (filterSize>=3) {
+					i++;
+					String key3 = parametriKey.get(i);
+					String value3 = parametriAuto.get(key3);
+					typedQuery = typedQuery.setParameter(key3, value3);
+					if (filterSize>=4) {
+						i++;
+						String key4 = parametriKey.get(i);
+						String value4 = parametriAuto.get(key4);
+						typedQuery = typedQuery.setParameter(key4, value4);	
+						if (filterSize>=5) {
+							i++;
+							String key5 = parametriKey.get(i);
+							String value5 = parametriAuto.get(key5);
+							typedQuery = typedQuery.setParameter(key5, value5);	
+							if (filterSize==6) {
+								i++;
+								String key6 = parametriKey.get(i);
+								String value6 = parametriAuto.get(key5);
+								typedQuery = typedQuery.setParameter(key6, value6);									
+							}
+						}
+					}
+				}
+			}
+		} 
+		List<Auto> automobili = typedQuery.getResultList();
+		return automobili;
+	}
+	 */
+
+	public List<Auto> findAutoByFilters(String sql, HashMap<String, String> parametriAuto, Integer numeroPosti){
 		int filterSize = parametriAuto.size();
+		if (numeroPosti!=null){
+			if (filterSize>0) sql += " and ";
+			else sql += " where ";
+			sql += " a.numeroPosti = :numeroPosti ";
+		}
+		String query = "select a from Auto a " + sql;
+		System.out.println(query);
+		TypedQuery<Auto> typedQuery = manager.createQuery(query,Auto.class);
+		List<String> parametriKey = new ArrayList<String>();
 		for (String nomeParametro : parametriAuto.keySet()){
 			parametriKey.add(nomeParametro);
 		}
@@ -93,26 +156,40 @@ public class AutoDao implements DaoInterface<Auto> {
 			String key1 = parametriKey.get(i);
 			String value1 = parametriAuto.get(key1);
 
-			if(filterSize==1) {
+			if(filterSize>=1) {
 				typedQuery = typedQuery.setParameter(key1, value1);
 			}
-			else {
+			if (filterSize>=2) {
 				i++;
 				String key2 = parametriKey.get(i);
 				String value2 = parametriAuto.get(key2);
-				if (filterSize==2) {
-					typedQuery = typedQuery.setParameter(key1, value1).setParameter(key2, value2);
-				}
-				else {
+				typedQuery = typedQuery.setParameter(key2, value2);
+				if (filterSize>=3) {
 					i++;
 					String key3 = parametriKey.get(i);
 					String value3 = parametriAuto.get(key3);
-					if (filterSize==3) {
-						typedQuery = typedQuery.setParameter(key1, value1).setParameter(key2, value2).setParameter(key3, value3);
+					typedQuery = typedQuery.setParameter(key3, value3);
+					if (filterSize>=4) {
+						i++;
+						String key4 = parametriKey.get(i);
+						String value4 = parametriAuto.get(key4);
+						typedQuery = typedQuery.setParameter(key4, value4);	
+						if (filterSize>=5) {
+							i++;
+							String key5 = parametriKey.get(i);
+							String value5 = parametriAuto.get(key5);
+							typedQuery = typedQuery.setParameter(key5, value5);	
+						}
 					}
 				}
 			}
-		} 
+		}
+		if (numeroPosti!=null) {
+			System.out.println(numeroPosti + " numeroPosti");
+			String key6 = "numeroPosti";
+			typedQuery = typedQuery.setParameter(key6, numeroPosti);									
+
+		}
 		List<Auto> automobili = typedQuery.getResultList();
 		return automobili;
 	}

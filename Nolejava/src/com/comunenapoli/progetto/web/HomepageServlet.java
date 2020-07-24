@@ -80,13 +80,25 @@ public class HomepageServlet extends HttpServlet {
 			String tipologiaAuto = request.getParameter("tipologia");
 			String marcaAuto = request.getParameter("marca");
 			String modelloAuto = request.getParameter("modello");
-						
+			String cambioAuto = request.getParameter("cambio");			
+			String tipologiaCarburante = request.getParameter("carburante");
+			Integer numeroPosti = null;
+
+			if (numeroPostiString!=null && numeroPostiString.isEmpty()) {
+				request.getSession().setAttribute(Costanti.NUMERO_POSTI_AUTO_SCELTA,cambioAuto);
+				numeroPosti = Integer.parseInt(numeroPostiString);
+			}
+			
 			request.getSession().setAttribute(Costanti.TIPOLOGIA_AUTO_SCELTA, tipologiaAuto);
 			request.getSession().setAttribute(Costanti.MARCA_AUTO_SCELTA, marcaAuto);
 			request.getSession().setAttribute(Costanti.MODELLO_AUTO_SCELTA,modelloAuto);
+			request.getSession().setAttribute(Costanti.CAMBIO_AUTO_SCELTA,cambioAuto);
+			request.getSession().setAttribute(Costanti.CARBURANTE_AUTO_SCELTA,tipologiaCarburante);
+			request.getSession().setAttribute(Costanti.NUMERO_POSTI_AUTO_SCELTA, numeroPosti);
+
 			
 			//List<Auto> risultati = BusinessLogicAutoNoleggioUtils.filtroRicerca(dataInizio, dataFine, tipologiaAuto, businessLogicAuto, businessLogicNoleggio);
-			List<Auto> risultati = BusinessLogicAutoNoleggioUtils.filtroRicerca(dataInizio, dataFine, marcaAuto, modelloAuto, tipologiaAuto, businessLogicAuto, businessLogicNoleggio);
+			List<Auto> risultati = BusinessLogicAutoNoleggioUtils.filtroRicerca(dataInizio, dataFine, marcaAuto, modelloAuto, cambioAuto, numeroPosti, tipologiaCarburante, tipologiaAuto, businessLogicAuto, businessLogicNoleggio);
 
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, risultati);
 			//TODO reindirizza alla jsp passandogli la request e response

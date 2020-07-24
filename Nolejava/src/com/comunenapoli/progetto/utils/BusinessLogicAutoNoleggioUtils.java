@@ -41,9 +41,35 @@ public class BusinessLogicAutoNoleggioUtils {
 
 		return risultati;
 	}
-
+/*
 	public static List<Auto> filtroRicerca(Date dataInizioNoleggio, Date dataFineNoleggio, String marca, String modello, String tipologiaAuto, BusinessLogicAuto businessLogicAuto, BusinessLogicNoleggio businessLogicNoleggio) {
 		List <Auto> autoConFiltri = businessLogicAuto.getListaAutoConFiltri(marca, modello, tipologiaAuto);
+		List<Integer> idAutoNonDisponibili = businessLogicNoleggio.getIdAutoNonDisponibili(dataInizioNoleggio, dataFineNoleggio);
+		int autoConFiltriSize = autoConFiltri.size();
+		int idAutoNonDisponibiliSize = idAutoNonDisponibili.size();
+		List<Auto> autoNoleggioFiltri = new ArrayList<>();
+		if (idAutoNonDisponibiliSize>0 && autoConFiltriSize>0) {
+			for (int i=0; i<autoConFiltriSize; i++) {
+				boolean check = false;
+				Auto autoCorrente = autoConFiltri.get(i);
+				Integer idAutoCorrente = autoCorrente.getIdAuto();
+				for (int j=0; j<idAutoNonDisponibiliSize;j++) {
+					if (idAutoCorrente==idAutoNonDisponibili.get(j)) {
+						check=true;
+				    }
+				}
+				if (!check) autoNoleggioFiltri.add(autoCorrente);
+			}
+			return autoNoleggioFiltri;
+		}
+		return autoConFiltri;
+	}
+	*/
+
+	public static List<Auto> filtroRicerca(Date dataInizioNoleggio, Date dataFineNoleggio, String marcaAuto, String modelloAuto,
+			String cambioAuto, Integer numeroPosti, String tipologiaCarburante, String tipologiaAuto,
+			BusinessLogicAuto businessLogicAuto, BusinessLogicNoleggio businessLogicNoleggio) {
+		List <Auto> autoConFiltri = businessLogicAuto.getListaAutoConFiltri(marcaAuto, modelloAuto, tipologiaAuto, tipologiaCarburante, cambioAuto, numeroPosti);
 		List<Integer> idAutoNonDisponibili = businessLogicNoleggio.getIdAutoNonDisponibili(dataInizioNoleggio, dataFineNoleggio);
 		int autoConFiltriSize = autoConFiltri.size();
 		int idAutoNonDisponibiliSize = idAutoNonDisponibili.size();
