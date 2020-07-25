@@ -1,3 +1,4 @@
+<%@page import="com.comunenapoli.progetto.model.Utente"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.comunenapoli.progetto.utils.DataUtils"%>
 <%@page import="java.text.DateFormat"%>
@@ -7,6 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
+	Utente utente = (Utente) request.getSession().getAttribute(Costanti.USER_IN_SESSION);
 	Auto auto = (Auto)request.getSession().getAttribute(Costanti.AUTO_IN_SESSION); 
 	Date dataInizioNoleggio = (Date) request.getSession().getAttribute(Costanti.DATA_INIZIO_NOLEGGIO);
 	Date dataFineNoleggio = (Date) request.getSession().getAttribute(Costanti.DATA_FINE_NOLEGGIO);
@@ -221,7 +223,7 @@
 						<img class="img-fluid mx-auto d-block foto-auto" src="/Nolejava/images/polo.jpg" style="width: 50%; height:50% ;">
 						<div class="text text-center">
 							<span class="subheading"><%=marcaAuto%></span>
-							<h2>Polo</h2>
+							<h2><%=modelloAuto%></h2>
 						</div>
 					</div>
 				</div>
@@ -253,7 +255,7 @@
 										<use xlink:href="#euro" /></svg>
 									<h3 class="heading mb-0 pl-3;" style="text-align: center;">
 										Prezzo per giorno
-										<span>€<%=prezzoPerGiorno%></span>
+										<span>&#8364; <%=prezzoPerGiorno%></span>
 									</h3>
 								</div>
 							</div>
@@ -269,7 +271,7 @@
 										<use xlink:href="#bill" /></svg>
 									<h3 class="heading mb-0 pl-3;" style="text-align: center;">
 										Costo noleggio
-										<span>€<%=prezzo%></span>
+										<span>&#8364; <%=prezzo%></span>
 									</h3>
 								</div>
 							</div>
@@ -361,12 +363,25 @@
 				</div>
 			</div>
 	<!-- FiNE dettagli-auto -->
+<%
+	if (utente!=null) {
+%>	
 	<form action="/Nolejava/noleggioServlet" method="POST" class="p-5 contact-form" style="text-align: center;">
 		<div class="form-group">
 		  <input type="submit" value="Continua Prenotazione" class="btn btn-primary py-3 px-5">
 		</div>
 	</form>
+<% 
+	}
+	else {
+%>
+		<div class="text-center justify-content-center">
+		  <a href="/Nolejava/jsp/login.jsp" class="btn btn-primary py-3 px-5">Accedi per prenotarti</a>
+		</div>
 
+<%
+	}
+%>
 
 	<!-- INIZIO optional-->
 			<div class="row">

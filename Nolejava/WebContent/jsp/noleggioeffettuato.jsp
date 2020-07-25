@@ -1,8 +1,11 @@
+<%@page import="java.sql.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>NoleJava - Registrazione</title>
+    <title>NoleJava - Noleggio effettuato</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -27,6 +30,15 @@
     <link rel="stylesheet" href="/Nolejava/css/flaticon.css">
     <link rel="stylesheet" href="/Nolejava/css/icomoon.css">
     <link rel="stylesheet" href="/Nolejava/css/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+
 </head>
 
 <body>
@@ -46,8 +58,8 @@
                     <li class="nav-item"><a href="about.html" class="nav-link">Chi siamo</a></li>
                     <li class="nav-item"><a href="where-we-are.html" class="nav-link">Dove siamo</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Contattaci</a></li>
-                    <li class="nav-item active"><a href="signin.html" class="nav-link">Registrati</a></li>
-                    <li class="nav-item"><a href="login.html" class="nav-link">Accedi</a></li>
+                    <li class="nav-item"><a href="profilo.html" class="nav-link">Profilo</a></li>
+                    <li class="nav-item"><a href="logout.html" class="nav-link">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -62,82 +74,29 @@
             <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
                 <div class="col-md-9 ftco-animate pb-5">
                     <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
-                                    class="ion-ios-arrow-forward"></i></a></span> <span>Registrazione <i
+                                    class="ion-ios-arrow-forward"></i></a></span> <span>Profilo<i
                                 class="ion-ios-arrow-forward"></i></span></p>
-                    <h1 class="mb-3 bread">Registrazione</h1>
+                    <h1 class="mb-3 bread">Le tue prenotazioni</h1>
                 </div>
             </div>
         </div>
     </section>
     <!-- FINE intestazione -->
 
-    <!-- INIZIO form -->
-    <section class="ftco-section contact-section">
-        <div class="container">
+    <!-- INIZIO success -->
+    <section class="ftco-section contact-section" id="noleggioavvenuto">
 
-            <div class="row block-9 justify-content-center mb-5">
-                <div class="col-md-8 mb-md-5">
-                    <h2 class="text-center">Benvenuto</h2>
-                    <form action="/Nolejava/registrazioneServlet" method="POST" class="bg-light p-5 contact-form">
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Nome</span>
-                                </div>
-                                <input type="text" class="form-control" name="nome" aria-label="nome"
-                                    aria-describedby="basic-addon1" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Cognome</span>
-                                </div>
-                                <input type="text" class="form-control" name="cognome" aria-label="cognome"
-                                    aria-describedby="basic-addon1" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Data di nascita</span>
-                                </div>
-                                <input type="date" class="form-control" name="datanascita" aria-label="datanascita"
-                                    aria-describedby="basic-addon1" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">@</span>
-                                </div>
-                                <input type="email" class="form-control" name="email" aria-label="email"
-                                    placeholder="Inserisci email" aria-describedby="basic-addon1" required>
-                            </div>
-                        </div>
+        <div class="row block-9 justify-content-center mb-5">
+            <div class="col-md-8 mb-md-5">
+                <div class="bg-light p-5 contact-form justify-content-center text-center">
+                        <span><i class="fa fa-check-circle-o fa-5x text-success"></i></span>
+                        <h2 class="mt-3">Noleggio avvenuto con successo</h2>
+                </div>    
 
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" name="password" aria-label="password"
-                                    placeholder="Inserisci una password di almeno 8 caratteri" id="input-pwd"
-                                    pattern=".{8,12}" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text toggle-password">
-                                        <i class="fa fa-fw fa-eye"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="hidden" name="staff" value="">
-                        <div class="form-group">
-                            <input type="submit" value="Registrazione" class="form-control btn btn-primary">
-                        </div>
-                    </form>
-                </div>
             </div>
-        </div>
+        </div>    
     </section>
-    <!-- FINE form -->
+    <!-- FINE success -->
 
 
     <!-- INIZIO footer-->
@@ -234,6 +193,7 @@
     <script src="/Nolejava/js/google-map.js"></script>
     <script src="/Nolejava/js/main.js"></script>
     <script src="/Nolejava/js/script.js"></script>
+    <script src="/Nolejava/js/prova.js"></script>
     <script src="https://use.fontawesome.com/b9bdbd120a.js"></script>
     <script src="/Nolejava/js/bootstrap-datetimepicker.min.js"></script>
 

@@ -55,15 +55,13 @@ public class CartaDiCreditoServlet extends HttpServlet {
 		System.out.println("anno: " + mese);
 
 		Date dataScad = DataUtils.getDataCompletaFromMeseEdAnno(mese,anno);
-		System.out.println("data: " + dataScad);
 		if (cvvString!=null && !cvvString.isEmpty()) cvv = Integer.parseInt(cvvString);
 		if (idCartaString!=null && !idCartaString.isEmpty()) idCarta = Integer.parseInt(idCartaString);
 
 		try {
 			businessLogicCarta.operazioniCarta(idCarta, dataScad, numeroCarta, cvv, utente);
 			String html = "";
-			Boolean isProfiloCliente = (Boolean)request.getSession().getAttribute(Costanti.PROFILO_CLIENTE);
-			System.out.println("isProfiloCliente: " + isProfiloCliente);
+			Boolean isProfiloCliente = (Boolean)request.getAttribute(Costanti.PROFILO_CLIENTE);
 			if (isProfiloCliente!=null && isProfiloCliente) {
 				request.getSession().removeAttribute(Costanti.PROFILO_CLIENTE);
 				html = "/jsp/profilocliente.jsp";

@@ -48,7 +48,7 @@ public class ConcludiNoleggioServlet extends HttpServlet {
 		
 		businessLogicNoleggio.setNoleggioByCliente(noleggio);
 		
-		request.getRequestDispatcher("/jsp/noleggioEffettuato.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/noleggioeffettuato.jsp").forward(request, response);
 	
 	}
 

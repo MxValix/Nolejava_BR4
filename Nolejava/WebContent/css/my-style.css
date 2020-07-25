@@ -73,3 +73,7 @@ header .overlay {
     position: absolute;
 }
 /* FINE GOOGLE MAPS */
+
+#cancellanoleggio:focus {
+	outline:none
+}

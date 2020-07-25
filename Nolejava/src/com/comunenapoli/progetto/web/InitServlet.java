@@ -66,12 +66,38 @@ public class InitServlet extends HttpServlet {
 
 		BusinessLogicRuoloUtils.generaRuoli(entityManager);
 	    BusinessLogicUtenteUtils.creaAdmin(entityManager);
-	    Auto auto = new Auto("berlina","bmw","M3","A",12.00, "nero", 3, "DV854RT", "metano", 3.100, "ewff.img");
-	    Auto auto2 = new Auto("asadw","dwff","efewe","A",32.00, "nero", 2, "BP854RT", "benzina", 2.100, "dewdf.png");
-	    businessLogicAuto.create(auto);
-	    businessLogicAuto.create(auto2);
-	    List<Auto> autoList = businessLogicAuto.getListaCompletaAuto();
-	    getServletContext().setAttribute(Costanti.LISTA_COMPLETA_AUTO, autoList);
+	  
+	    // creazione auto
+		Auto auto = new Auto ("Berlina", "Audi", "A3 - Sportback", "Manuale", 1498.0, "Grigio", 5, "AA000BB", "Benzina", 200.0, "gijrog");
+		Auto auto2 = new Auto ("Berlina", "Alfa Romeo", "Giulietta", "Automatico", 1956.0, "Nero", 4, "CC111DD", "Gasolio", 130.0, "gijrog");
+		Auto auto3 = new Auto ("SUV", "BMW", "X3", "Automatico", 2993.0, "Nero", 5, "EE222FF", "Benzina", 200.0, "gijrog");
+		
+		Auto auto4 = new Auto ("Utilitaria", "Citroen", "C1", "Manuale", 998.0, "Nero", 4, "GG333HH", "Benzina", 70.0, "gijrog");
+		Auto auto5 = new Auto ("Berlina", "Citroen", "C3-Aircross", "Manuale", 1499.0, "Nero", 5, "II444LL", "Gasolio", 1300.0, "gijrog");
+		
+		Auto auto6 = new Auto ("Utilitaria", "Fiat", "500", "Manuale", 1242.0, "Grigio", 4, "MM555NN", "Benzina", 140.0, "gijrog");
+		Auto auto7 = new Auto ("SUV", "Pegeout", "Pegeaout-3008", "Automatico", 1997.0, "Grigio", 5, "OO666PPP", "Gasolio", 200.0, "gijrog");
+		
+		Auto auto8 = new Auto ("Utilitaria", "Ford", "Fiesta", "Manuale", 1124.0, "Bianco", 4, "FF333HH", "Benzina", 110.0, "gijrog");
+		Auto auto9 = new Auto ("SUV", "Ford", "Kuga", "Automatico", 1500.0, "Nero", 5, "UU999VV", "Benzina", 1500.0, "gijrog");
+		
+		Auto auto10 = new Auto ("Utilitaria", "Fiat", "Panda", "Manuale", 1242.0, "Bianca", 4, "QQ777RR","Benzina", 80.0, "gijrog");
+		Auto auto11= new Auto ("SUV", "Kia", "Kia-Sportage", "Automatico", 1598.0, "Grigio", 5, "ZZ661ZZ", "Gasolio", 200.0, "gijrog");
+		
+		
+		
+		businessLogicAuto.create(auto);
+		businessLogicAuto.create(auto2);
+		businessLogicAuto.create(auto3);
+		businessLogicAuto.create(auto4);
+		businessLogicAuto.create(auto5);
+		businessLogicAuto.create(auto6);
+		businessLogicAuto.create(auto7);
+		businessLogicAuto.create(auto9);
+		businessLogicAuto.create(auto10);
+		businessLogicAuto.create(auto11);
+	    
+	   
 	}
 	
 	

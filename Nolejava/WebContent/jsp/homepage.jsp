@@ -27,10 +27,9 @@
   }
   if (marcaAuto==null) marcaAuto = "";
   if (modelloAuto == null) modelloAuto = "";
-  String bottoneNoleggio = "Noleggio";
+  String bottoneNoleggio = "Cerca auto";
   Utente utente = (Utente)request.getSession().getAttribute(Costanti.USER_IN_SESSION);
   if(utente == null) {
-      bottoneNoleggio = "Cerca auto";
       voce1 = "Registrati";
       link1 += "registrazione.jsp";
       voce2 = "Accedi";
@@ -299,7 +298,7 @@
 								style="background-image: url(/Nolejava/images/car-1.jpg);">
 
 								<div class="price-wrap d-flex">
-									<span class="rate">€ <%=prezzoPerGiornoCorrente%></span>
+									<span class="rate">&#8364; <%=prezzoPerGiornoCorrente%></span>
 									<p class="from-day">
 										<span>Al</span> <span>/Giorno</span>
 									</p>
