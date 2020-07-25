@@ -125,10 +125,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 mt-5">
-					<div class="search-wrap-1 ftco-animate mb-5">
+					<div class="search-wrap-1 ftco-animate">
 						<form action="/Nolejava/homepageServlet" method="post"
 							class="search-property-1">
-							<input type="hidden" value="formcompliato" name="hidden">
+							<input type="hidden" value="formcompliato" name="formcompilato">
 							<div class="row" id="prima-riga-filtri">
 								<div class="col-lg align-items-end">
 									<div class="form-group">
@@ -271,12 +271,12 @@
 	</section>
 	<!-- FINE filtro-->
 	<!-- INIZIO le nostre auto-->
-	<section class="ftco-section ftco-no-pb ftco-no-pt">
+	<section id="lista-auto" class="ftco-section ftco-no-pb ftco-no-pt">
 		<div class="container-fluid px-4">
-			<div class="row justify-content-center">
-				<div class="col-md-12 heading-section text-center ftco-animate mb-5">
+			<div class="row justify-content-center mt-5">
+				<div class="col-md-12 heading-section text-center ftco-animate mb-5 mt-5">
 					<span class="subheading">Cosa offriamo</span>
-					<h2 class="mb-2" id="lista-auto">Scegli la tua auto</h2>
+					<h2 class="mb-2">Scegli la tua auto</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -553,6 +553,9 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
          </svg>
 	</div>
+	<div style="display:none">
+		<a href="/Nolejava/jsp/homepage.jsp#lista-auto" id="listaref"></a>
+	</div>
 	<script src="/Nolejava/js/jquery.min.js"></script>
 	<script src="/Nolejava/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/Nolejava/js/popper.min.js"></script>
@@ -568,6 +571,15 @@
 	<script src="/Nolejava/js/jquery.timepicker.min.js"></script>
 	<script src="/Nolejava/js/scrollax.min.js"></script>
 	<script type="text/javascript" src="/Nolejava/js/datanoleggio.js"></script>
+<% 
+	String formCompilato = request.getParameter("formcompilato");
+	boolean checkForm = formCompilato!=null && !formCompilato.isEmpty();
+	if (checkForm){
+%>
+    <script type="text/javascript" src="/Nolejava/js/specificdiv.js"></script>
+<%
+	}
+%>    
 	
 	<script	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="/Nolejava/js/google-map.js"></script>
