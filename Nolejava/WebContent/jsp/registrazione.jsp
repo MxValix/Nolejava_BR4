@@ -1,5 +1,31 @@
+<%@page import="com.comunenapoli.progetto.utils.Costanti"%>
+<%@page import="com.comunenapoli.progetto.model.Utente"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	Utente utente = (Utente)request.getSession().getAttribute(Costanti.USER_IN_SESSION);
+	String voce1 = "";
+	String voce2 = "";
+	String link = "/Nolejava/jsp/";
+	String link1 = link;
+	String link2 = link;
+	if(utente == null) {
+	    voce1 = "Registrati";
+	    link1 += "registrazione.jsp";
+	    voce2 = "Accedi";
+	    link2 += "login.jsp";
+	 }
+	 else{
+	    voce1 = "Profilo";
+	    voce2 = "Logout";
+	    link2 = "/Nolejava/logoutServlet";
+	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+	       link1 += "profilocliente.jsp";   	
+	    } else {
+	       link1 += "dashboard.jsp";
+	    }
+	 }
+%> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,27 +60,33 @@
 <body>
 
 
-    <!-- INIZIO nav-->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Nole<span>java</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">Chi siamo</a></li>
-                    <li class="nav-item"><a href="where-we-are.html" class="nav-link">Dove siamo</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contattaci</a></li>
-                    <li class="nav-item active"><a href="signin.html" class="nav-link">Registrati</a></li>
-                    <li class="nav-item"><a href="login.html" class="nav-link">Accedi</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- FINE nav -->
+	<!-- INIZIO nav-->
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="/Nolejava/">Nole<span>java</span></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a href="/Nolejava/"
+						class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="<%=link%>about.jsp" class="nav-link">Chi
+							siamo</a></li>
+					<li class="nav-item"><a href="<%=link%>dovesiamo.jsp"
+						class="nav-link">Dove siamo</a></li>
+					<li class="nav-item"><a href="<%=link%>contact.jsp" class="nav-link">Contattaci</a></li>
+					<li class="nav-item active"><a href="<%=link1%>" class="nav-link"><%=voce1%></a></li>
+					<li class="nav-item"><a href="<%=link2%>" class="nav-link"><%=voce2%></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- FINE nav -->
 
     <!-- INIZIO intestazione -->
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/Nolejava/images/bg_2.jpg');"

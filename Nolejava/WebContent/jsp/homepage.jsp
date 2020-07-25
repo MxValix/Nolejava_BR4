@@ -17,8 +17,9 @@
   String numeroPosti = (String) request.getAttribute(Costanti.NUMERO_POSTI_AUTO_SCELTA);
   String voce1 = "";
   String voce2 = "";
-  String link1 = "/Nolejava/jsp/";
-  String link2 = link1;
+  String link = "/Nolejava/jsp/";
+  String link1 = link;
+  String link2 = link;
   
   String operazione = "Dettagli";
   
@@ -78,7 +79,7 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">Nole<span>java</span></a>
+			<a class="navbar-brand" href="/Nolejava/">Nole<span>java</span></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -86,13 +87,13 @@
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html"
+					<li class="nav-item active"><a href="/Nolejava/"
 						class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">Chi
+					<li class="nav-item"><a href="<%=link%>about.jsp" class="nav-link">Chi
 							siamo</a></li>
-					<li class="nav-item"><a href="where-we-are.html"
+					<li class="nav-item"><a href="<%=link%>dovesiamo.jsp"
 						class="nav-link">Dove siamo</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contattaci</a></li>
+					<li class="nav-item"><a href="<%=link%>contact.jsp" class="nav-link">Contattaci</a></li>
 					<li class="nav-item"><a href="<%=link1%>" class="nav-link"><%=voce1%></a></li>
 					<li class="nav-item"><a href="<%=link2%>" class="nav-link"><%=voce2%></a></li>
 				</ul>
@@ -123,7 +124,7 @@
 	<section id="filtro" class="ftco-section ftco-no-pb ftco-no-pt">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-12 mt-5">
 					<div class="search-wrap-1 ftco-animate mb-5">
 						<form action="/Nolejava/homepageServlet" method="post"
 							class="search-property-1">

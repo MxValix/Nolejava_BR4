@@ -27,6 +27,27 @@
 	DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 	String dataInizio = df.format(dataInizioNoleggio);
 	String dataFine = df.format(dataFineNoleggio);
+	String voce1 = "";
+	String voce2 = "";
+	String link = "/Nolejava/jsp/";
+	String link1 = link;
+	String link2 = link;
+	if(utente == null) {
+	    voce1 = "Registrati";
+	    link1 += "registrazione.jsp";
+	    voce2 = "Accedi";
+	    link2 += "login.jsp";
+	 }
+	 else{
+	    voce1 = "Profilo";
+	    voce2 = "Logout";
+	    link2 = "/Nolejava/logoutServlet";
+	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+	       link1 += "profilocliente.jsp";   	
+	    } else {
+	       link1 += "dashboard.jsp";
+	    }
+	 }	
 	
 %>   
 <!DOCTYPE html>
