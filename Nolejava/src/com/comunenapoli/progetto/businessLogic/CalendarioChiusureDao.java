@@ -73,6 +73,10 @@ public class CalendarioChiusureDao implements DaoInterface<CalendarioChiusure> {
 		return isAperto;
 	}
 	
-	
+	public CalendarioChiusure findChiusuraByIdCalendario(Integer idCalendario) {
+		CalendarioChiusure calendarioChiusure = manager.createQuery("select c from CalendarioChiusure c where c.idCalendario = :x",CalendarioChiusure.class).
+				setParameter("x",idCalendario).getResultList().stream().findFirst().orElse(null);
+		return calendarioChiusure;
+	}
 	
 }

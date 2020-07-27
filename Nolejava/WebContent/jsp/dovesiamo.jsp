@@ -22,7 +22,7 @@
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-	       link1 += "dashboard.jsp";
+	       link1 += "private/dashboard.jsp";
 	    }
 	 }
 %>
@@ -33,7 +33,8 @@
     <title>NoleJava - Dove Siamo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+ 	<link rel="icon" type="image/png" href="/Nolejava/images/favicon.png"/>
+ 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
         rel="stylesheet">
 
@@ -141,7 +142,7 @@
                     <form class="text-center input-group mb-3" action="http://maps.google.com/maps" method="GET" target="blank">
                         <input type="text" class="form-control" placeholder="Inserisci il tuo indirizzo di partenza..." name='saddr' aria-describedby="button-addon2"/>
                         <input type="hidden" name='daddr' value="Viale F. Ruffo di Calabria, 19, 80144 Napoli NA">
-                        <div class="input-group-append">
+                        <div class="input-group-append col-12 col-md-4 justify-content-center">
                         <input id="button-addon2" type="submit" value="Ottieni indicazioni" class="btn btn-primary mt-4 mt-md-0">
                         </div>
                     </form>
@@ -176,7 +177,7 @@
                             del P5, con frequenza ogni 5 minuti.</p>
                         <p class="text-justify">Per maggiori informazioni sul servizio, non esitare a contattarci
                             premendo il bottone qui sotto.</p>
-                        <p><a href="contact.html" class="btn btn-primary">Contattaci</a></p>
+                        <p class="text-center"><a href="contact.html" class="btn btn-primary">Contattaci</a></p>
                     </div>
                 </div>
             </div>
@@ -184,71 +185,8 @@
     </section>
     <!-- FINE navetta -->
 
-    <!-- INIZIO footer-->
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">About NoleJava</h2>
-                        <p>NoleJava è il nuovo servizio di noleggio auto offerto dal Comune di Napoli.</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Informazioni</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="about.html" class="py-2 d-block">Chi siamo</a></li>
-                            <li><a href="where-we-are.html" class="py-2 d-block">Dove siamo</a></li>
-                            <li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
-                            <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Recapiti</h2>
-                        <div class="block-23 mb-3">
-                            <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">Viale F. Ruffo di
-                                        Calabria 19, 80144
-                                        Napoli NA</span></li>
-                                <li><a href="/Nolejava/html/contact.html"><span class="icon icon-phone"></span><span
-                                            class="text">081 060
-                                            8349</span></a></li>
-                                <li><a href="/Nolejava/html/contact.html"><span class="icon icon-envelope"></span><span
-                                            class="text">info@nolejava.com</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Servizio clienti</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="contact.html" class="py-2 d-block">Contattaci</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | NoleJava
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- FINE footer-->
+    	<jsp:include page="footer.jsp"></jsp:include>
+
 
 
 

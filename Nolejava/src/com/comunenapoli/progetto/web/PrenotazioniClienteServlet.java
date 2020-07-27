@@ -48,7 +48,7 @@ public class PrenotazioniClienteServlet extends HttpServlet {
 		if (isCancellato) {
 			request.setAttribute(Costanti.CANCELLAZIONE_AVVENUTA, isCancellato);
 			String html = "/emailSendingServlet";
-			request.getRequestDispatcher(html).include(request,response);
+			request.getRequestDispatcher(html).forward(request,response);
 		}
 		
 	}

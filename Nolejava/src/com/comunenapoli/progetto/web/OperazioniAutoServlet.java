@@ -60,7 +60,7 @@ public class OperazioniAutoServlet extends HttpServlet {
 			Auto auto = new Auto(tipologiaAuto,marca, modello, cambio, cilindrata,colore, numeroPosti, 
 					targa, tipoCarburante, prezzoPerGiorno, urlImg);
 			businessLogicAuto.create(auto);			
-			html = "/jsp/gestisciauto.jsp";
+			html = "/jsp/private/gestisciauto.jsp";
 		}
 		else if (action.contains("modifica") && idAutoString!=null && !idAutoString.isEmpty()) {
 			Integer idAuto = Integer.parseInt(idAutoString);
@@ -68,7 +68,7 @@ public class OperazioniAutoServlet extends HttpServlet {
 			Auto autoCorrente = new Auto(tipologiaAuto,marca, modello, cambio, cilindrata,colore, numeroPosti, 
 					targa, tipoCarburante, prezzoPerGiorno, urlImg);
 			businessLogicAuto.updateAuto(auto,autoCorrente);
-			html = "/jsp/gestisciauto.jsp";
+			html = "/jsp/private/gestisciauto.jsp";
 		}
 
 		RequestDispatcher requestDispatcher; 

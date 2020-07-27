@@ -16,13 +16,14 @@
 	    link2 += "login.jsp";
 	 }
 	 else{
-	    voce1 = "Profilo";
 	    voce2 = "Logout";
 	    link2 = "/Nolejava/logoutServlet";
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+		   voce1 = "Profilo";
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-	       link1 += "dashboard.jsp";
+		   voce1 = "Dashboard";
+	       link1 += "private/dashboard.jsp";
 	    }
 	 }
 %>  
@@ -33,6 +34,7 @@
     <title>NoleJava - Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" type="image/png" href="/Nolejava/images/favicon.png"/>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
         rel="stylesheet">

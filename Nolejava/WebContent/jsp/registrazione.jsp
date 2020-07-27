@@ -16,16 +16,17 @@
 	    link2 += "login.jsp";
 	 }
 	 else{
-	    voce1 = "Profilo";
 	    voce2 = "Logout";
 	    link2 = "/Nolejava/logoutServlet";
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+		   voce1 = "Profilo";
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-	       link1 += "dashboard.jsp";
+		   voce1 = "Dashboard";
+	       link1 += "private/dashboard.jsp";
 	    }
 	 }
-%> 
+%>  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,6 +34,7 @@
     <title>NoleJava - Registrazione</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" type="image/png" href="/Nolejava/images/favicon.png"/>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
         rel="stylesheet">
@@ -134,8 +136,10 @@
                         <div class="form-group">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">Data di nascita</span>
-                                </div>
+	                                    <span class="input-group-text">
+	                                        <i class="fa fa-fw fa-birthday-cake"></i>
+	                                    </span>
+                                </div>        
                                 <input type="date" class="form-control" name="datanascita" aria-label="datanascita"
                                     aria-describedby="basic-addon1" required>
                             </div>
@@ -162,7 +166,7 @@
                                 </div>
                             </div>
                         </div>
-  						<label><input type="checkbox" value="" name="staff" class="ml-3">Sono un membro dello staff</label>
+  						<input type="checkbox" value="" name="staff" id="staff" class="ml-3" style="display:none">
                         <div class="form-group">
                             <input type="submit" value="Registrazione" class="form-control btn btn-primary">
                         </div>
@@ -174,73 +178,7 @@
     <!-- FINE form -->
 
 
-    <!-- INIZIO footer-->
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">About NoleJava</h2>
-                        <p>NoleJava è il nuovo servizio di noleggio auto offerto dal Comune di Napoli.</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Informazioni</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="about.html" class="py-2 d-block">Chi siamo</a></li>
-                            <li><a href="where-we-are.html" class="py-2 d-block">Dove siamo</a></li>
-                            <li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
-                            <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Recapiti</h2>
-                        <div class="block-23 mb-3">
-                            <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">Viale F. Ruffo di
-                                        Calabria 19, 80144 Napoli NA</span></li>
-                                <li><a href="/Nolejava/html/contact.html"><span class="icon icon-phone"></span><span
-                                            class="text">081 060
-                                            8349</span></a></li>
-                                <li><a href="/Nolejava/html/contact.html"><span class="icon icon-envelope"></span><span
-                                            class="text">info@nolejava.com</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Servizio clienti</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="contact.html" class="py-2 d-block">Contattaci</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | NoleJava
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- FINE footer-->
-
+	<jsp:include page="footer.jsp"></jsp:include>
 
 
     <!-- loader -->
@@ -270,7 +208,14 @@
     <script src="/Nolejava/js/script.js"></script>
     <script src="https://use.fontawesome.com/b9bdbd120a.js"></script>
     <script src="/Nolejava/js/bootstrap-datetimepicker.min.js"></script>
-
+<script type="text/javascript">
+  $(document).ready(function() {
+    if (window.location.href.indexOf("staff") > -1) {
+      //TODO fai il check allo staff
+    	$('#staff').prop('checked', true);
+    }
+  });
+</script>
 </body>
 
 </html>

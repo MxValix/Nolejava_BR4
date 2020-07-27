@@ -1,5 +1,4 @@
 pageSize = 4;
-
 showPage = function(page) {
     $(".col-md-3").hide();
     $(".col-md-3").each(function(n) {

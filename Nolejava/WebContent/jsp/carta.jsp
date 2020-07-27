@@ -1,14 +1,17 @@
+<%@page import="com.comunenapoli.progetto.model.Utente"%>
 <%@page import="com.comunenapoli.progetto.model.CartaDiCredito"%>
 <%@page import="com.comunenapoli.progetto.utils.Costanti"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 	
+	String link = "/Nolejava/jsp/";
 	CartaDiCredito carta = (CartaDiCredito) request.getAttribute(Costanti.CARTA_IN_SESSION);
 	String numeroCarta = "";
 	String cvv =  "";
 	String idCarta = "";
-
-
+	Utente utente = (Utente) request.getSession().getAttribute(Costanti.USER_IN_SESSION);
+	String nomeUtente = utente.getNome();
+	String cognomeUtente = utente.getCognome();
 	String operazioneCarta = "Crea carta";
 	if (carta!=null){
 		operazioneCarta = "Aggiorna carta";
@@ -16,6 +19,27 @@
 		idCarta = carta.getIdCartaDiCredito().toString();
 		cvv = carta.getCvv().toString();
 	}
+	String voce1 = "";
+	String voce2 = "";
+	String link1 = link;
+	String link2 = link;
+	if(utente == null) {
+	    voce1 = "Registrati";
+	    link1 += "registrazione.jsp";
+	    voce2 = "Accedi";
+	    link2 += "login.jsp";
+	 }
+	 else{
+	    voce2 = "Logout";
+	    link2 = "/Nolejava/logoutServlet";
+	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+		   voce1 = "Profilo";
+	       link1 += "profilocliente.jsp";   	
+	    } else {
+		   voce1 = "Dashboard";
+	       link1 += "private/dashboard.jsp";
+	    }
+	 }
 	
  %>    
 <!doctype html>
@@ -24,6 +48,7 @@
 	<title>Nolejava - Carta di credito</title>
 
 	<meta charset="utf-8">
+	<link rel="icon" type="image/png" href="/Nolejava/images/favicon.png"/>
 
 	<!-- bootstrap stylesheet -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -56,26 +81,33 @@
 
 <body>
 
-    <!-- INIZIO nav-->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Nole<span>java</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">Chi siamo</a></li>
-                    <li class="nav-item"><a href="where-we-are.html" class="nav-link">Dove siamo</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contattaci</a></li>
-                    <li class="nav-item"><a href="profilo.html" class="nav-link">Profilo</a></li>
-                    <li class="nav-item"><a href="logout.html" class="nav-link">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- FINE nav -->
+	<!-- INIZIO nav-->
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="/Nolejava/">Nole<span>java</span></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a href="/Nolejava/"
+						class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="<%=link%>about.jsp" class="nav-link">Chi
+							siamo</a></li>
+					<li class="nav-item"><a href="<%=link%>dovesiamo.jsp"
+						class="nav-link">Dove siamo</a></li>
+					<li class="nav-item"><a href="<%=link%>contact.jsp" class="nav-link">Contattaci</a></li>
+					<li class="nav-item"><a href="<%=link1%>" class="nav-link"><%=voce1%></a></li>
+					<li class="nav-item"><a href="<%=link2%>" class="nav-link"><%=voce2%></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- FINE nav -->
 
     <!-- INIZIO intestazione -->
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/Nolejava/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
@@ -101,10 +133,6 @@
 				<div class="panel-block my-3">
 					<div class="col-md-12">
                         <form action="/Nolejava/cartaServlet" method="POST">
-						<div class="form-group">
-							<label>Nome e cognome</label>
-							<input type="text" class="form-control" id="name" value="">
-						</div>
 						<div class="form-group">
 							<label>Numero di carta</label>
 							<div class="input-group">
@@ -260,11 +288,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
-<!-- easycard plugin -->
+<script type="text/javascript">
+	var nomeCognomeUtente = "<%=nomeUtente%> <%=cognomeUtente%>";
+</script>
 <script type="text/javascript" src="/Nolejava/js/easycard.min.js"></script>
 
 <script type="text/javascript">
-$('.cc-wrapper').easycard();
+	$('.cc-wrapper').easycard();
 </script>
+
 </body>
 </html>

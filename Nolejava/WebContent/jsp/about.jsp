@@ -16,16 +16,17 @@
 	    link2 += "login.jsp";
 	 }
 	 else{
-	    voce1 = "Profilo";
 	    voce2 = "Logout";
 	    link2 = "/Nolejava/logoutServlet";
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+		   voce1 = "Profilo";
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-	       link1 += "dashboard.jsp";
+		   voce1 = "Dashboard";
+	       link1 += "private/dashboard.jsp";
 	    }
 	 }
-%>
+%>  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,6 +35,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" type="image/png" href="/Nolejava/images/favicon.png"/>
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
@@ -117,28 +119,31 @@
 	<!-- INIZIO about us -->
 	<section class="ftco-section">
 		<div class="container">
+					<div class="row justify-content-center mt-2">
+				<div class="col-md-12 heading-section text-center ftco-animate mb-5">
+					<span class="subheading">About us</span>
+					<h2 class="mb-2">NoleJava</h2>
+				</div>
+			</div>
 			<div class="row no-gutters">
 				<div
 					class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center"
 					style="background-image: url(/Nolejava/images/about.jpg);"></div>
-				<div class="col-md-6 wrap-about py-md-5 ftco-animate">
-					<div class="heading-section mb-5 pl-md-5">
-						<span class="subheading">About us</span>
-						<h2 class="mb-4">NoleJava</h2>
-						<p class="text-justify">NoleJava è il nuovo servizio di
-							noleggio auto offerto dal Comune di Napoli.</p>
-						<p class="text-justify">Accessibile da smartphone, tablet e
+				<div class="col-md-6 wrap-about ftco-animate">
+					<div class="heading-section pl-md-5">
+						<p class="text-justify mb-1">NoleJava &egrave; il nuovo servizio di
+							noleggio auto offerto dal Comune di Napoli.</br>Accessibile da smartphone, tablet e
 							computer, con il suo sistema di prenotazioni facile e sicuro, che
 							tua sia un residente o un turista appena arrivato in città ,
 							NoleJava, è pronta per ogni tua esigenza. Con oltre 40 modelli
-							di oltre 10 marchi con un'età  media di soli tre mesi,
-							l'offerta di NoleJava non è solo la flotta di autoveicoli più
+							di oltre 10 marchi con un&#39;età media di soli tre mesi,
+							l&#39;offerta di Nolejava non è solo la flotta di autoveicoli più
 							variegata, bensì anche la più giovane e attrattiva della città.
-							Il nostro staff, disponibile h24, è sempre pronto ad assistere i
+							Il nostro staff, disponibile h24, &egrave; sempre pronto ad assistere i
 							propri clienti, prima, durante e dopo il noleggio. Per noi il
-							cliente è al primo posto.</p>
+							cliente &egrave; al primo posto.</p>
 						<p>
-							<a href="index.html" class="btn btn-primary">Ricerca veicoli</a>
+							<a href="/Nolejava/jsp/homepage.jsp#lista-auto" class="btn btn-primary col-8 offset-2 col-lg-4 offset-lg-4">Ricerca veicoli</a>
 						</p>
 					</div>
 				</div>
@@ -148,7 +153,7 @@
 	<!-- FINE about us -->
 
 	<!-- INIZIO i nostri servizi-->
-	<section class="ftco-section services-section">
+	<section class="ftco-section services-section pt-0">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-12 heading-section text-center ftco-animate mb-5">
@@ -167,7 +172,7 @@
 								<h3 class="heading mb-0 pl-3">Supporto 24/7</h3>
 							</div>
 							<p>
-								Lo staff di NoleJava Ã¨ sempre disponibile <a
+								Lo staff di NoleJava è sempre disponibile <a
 									href="/Nolejava/html/contact.html">Contattaci qui</a>
 							</p>
 						</div>
@@ -197,7 +202,7 @@
 								<h3 class="heading mb-0 pl-3">Prenotazione</h3>
 							</div>
 							<p>
-								Prenotazione online facile, rapida e sicura <a href="#filtro">Cerca
+								Prenotazione online facile, rapida e sicura <a href="/Nolejava/jsp/homepage.jsp#lista-auto">Cerca
 									qui la tua auto</a>
 							</p>
 						</div>
@@ -208,79 +213,7 @@
 	</section>
 	<!-- FINE i nostri servizi-->
 
-	<!-- INIZIO footer-->
-	<footer class="ftco-footer ftco-bg-dark ftco-section">
-		<div class="container">
-			<div class="row mb-5">
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">About NoleJava</h2>
-						<p>NoleJava Ã¨ il nuovo servizio di noleggio auto offerto dal
-							Comune di Napoli.</p>
-						<ul
-							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
-									class="icon-instagram"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4 ml-md-5">
-						<h2 class="ftco-heading-2">Informazioni</h2>
-						<ul class="list-unstyled">
-							<li><a href="about.html" class="py-2 d-block">Chi siamo</a></li>
-							<li><a href="where-we-are.html" class="py-2 d-block">Dove
-									siamo</a></li>
-							<li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
-							<li><a href="#" class="py-2 d-block">Privacy &amp;
-									Cookies Policy</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Recapiti</h2>
-						<div class="block-23 mb-3">
-							<ul>
-								<li><span class="icon icon-map-marker"></span><span
-									class="text">Viale F. Ruffo di Calabria 19, 80144 Napoli
-										NA</span></li>
-								<li><a href="/Nolejava/html/contact.html"><span
-										class="icon icon-phone"></span><span class="text">081
-											060 8349</span></a></li>
-								<li><a href="/Nolejava/html/contact.html"><span
-										class="icon icon-envelope"></span><span class="text">info@nolejava.com</span></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Servizio clienti</h2>
-						<ul class="list-unstyled">
-							<li><a href="contact.html" class="py-2 d-block">Contattaci</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<p>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script>
-						All rights reserved | NoleJava
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- FINE footer-->
+	<jsp:include page="footer.jsp"></jsp:include>
 
 
 

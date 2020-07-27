@@ -19,14 +19,22 @@
 	String carburanteAuto = auto.getTipoCarburante();
 	Integer numeroPosti = auto.getNumeroPosti();
 	String tipoCarburante = auto.getTipoCarburante();
+	String urlAuto = auto.getUrlImg();
+	String imgUrl = "/Nolejava/images/auto/";
+	imgUrl += urlAuto;
 	Double prezzoPerGiorno = auto.getPrezzoPerGiorno();
-	Integer totGiorni = DataUtils.getDifferenzaGiorni(dataInizioNoleggio, dataFineNoleggio);
+	Integer totGiorni = 0;
+	String dataInizio = "";
+	String dataFine = "";
+	if (dataInizioNoleggio!=null && dataFineNoleggio!=null){
+		totGiorni = DataUtils.getDifferenzaGiorni(dataInizioNoleggio, dataFineNoleggio);
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		dataInizio = df.format(dataInizioNoleggio);
+		dataFine = df.format(dataFineNoleggio);
+	}
 	Double prezzo = prezzoPerGiorno * totGiorni;
 	String coloreAuto = auto.getColore();
 	Double cilindrataAuto = auto.getCilindrata();
-	DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-	String dataInizio = df.format(dataInizioNoleggio);
-	String dataFine = df.format(dataFineNoleggio);
 	String voce1 = "";
 	String voce2 = "";
 	String link = "/Nolejava/jsp/";
@@ -39,18 +47,21 @@
 	    link2 += "login.jsp";
 	 }
 	 else{
-	    voce1 = "Profilo";
 	    voce2 = "Logout";
 	    link2 = "/Nolejava/logoutServlet";
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+		   voce1 = "Profilo";
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-	       link1 += "dashboard.jsp";
+		   voce1 = "Dashboard";		    	
+	       link1 += "private/dashboard.jsp";
 	    }
 	 }	
 	
 %>   
 <!DOCTYPE html>
+	<link rel="icon" type="image/png" href="/Nolejava/images/favicon.png"/>
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 	<symbol id="sym-motor" viewBox="0 0 64 64">
 		<title>sym-motor</title>
@@ -197,21 +208,27 @@
 <body>
 
 	<!-- INIZIO nav-->
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">Nole<span>java</span></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<a class="navbar-brand" href="/Nolejava/">Nole<span>java</span></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">Chi siamo</a></li>
-					<li class="nav-item"><a href="where-we-are.html" class="nav-link">Dove siamo</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contattaci</a></li>
-					<li class="nav-item"><a href="signin.html" class="nav-link">Registrati</a></li>
-					<li class="nav-item"><a href="login.html" class="nav-link">Accedi</a></li>
+					<li class="nav-item"><a href="/Nolejava/"
+						class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="<%=link%>about.jsp" class="nav-link">Chi
+							siamo</a></li>
+					<li class="nav-item"><a href="<%=link%>dovesiamo.jsp"
+						class="nav-link">Dove siamo</a></li>
+					<li class="nav-item"><a href="<%=link%>contact.jsp" class="nav-link">Contattaci</a></li>
+					<li class="nav-item"><a href="<%=link1%>" class="nav-link"><%=voce1%></a></li>
+					<li class="nav-item"><a href="<%=link2%>" class="nav-link"><%=voce2%></a></li>
 				</ul>
 			</div>
 		</div>
@@ -241,7 +258,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-12">
 					<div class="car-details">
-						<img class="img-fluid mx-auto d-block foto-auto" src="/Nolejava/images/polo.jpg" style="width: 50%; height:50% ;">
+						<img class="img-fluid mx-auto d-block foto-auto" src="<%=imgUrl%>" style="width: 50%; height:50% ;">
 						<div class="text text-center">
 							<span class="subheading"><%=marcaAuto%></span>
 							<h2><%=modelloAuto%></h2>
@@ -385,7 +402,7 @@
 			</div>
 	<!-- FiNE dettagli-auto -->
 <%
-	if (utente!=null) {
+	if (utente!=null && dataInizioNoleggio!=null && dataFineNoleggio!=null) {
 %>	
 	<form action="/Nolejava/noleggioServlet" method="POST" class="p-5 contact-form" style="text-align: center;">
 		<div class="form-group">
@@ -394,10 +411,16 @@
 	</form>
 <% 
 	}
+	else if (utente!=null){
+%>		
+		<div class="text-center justify-content-center">
+		  <a href="/Nolejava/jsp/homepage.jsp#filtri" class="btn btn-primary py-3 px-5">Inserisci periodo noleggio</a>
+		</div>
+<%	}
 	else {
 %>
 		<div class="text-center justify-content-center">
-		  <a href="/Nolejava/jsp/login.jsp" class="btn btn-primary py-3 px-5">Accedi per prenotarti</a>
+		  <a href="/Nolejava/jsp/login.jsp" class="btn btn-primary py-3 px-5">Accedi per noleggiare</a>
 		</div>
 
 <%

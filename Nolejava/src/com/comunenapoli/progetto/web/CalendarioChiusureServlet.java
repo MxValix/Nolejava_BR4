@@ -57,7 +57,7 @@ public class CalendarioChiusureServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String html = "/jsp/calendario.jsp";
+		String html = "/jsp/private/calendario.jsp";
 		request.getRequestDispatcher(html).forward(request,response);
 	}
 		

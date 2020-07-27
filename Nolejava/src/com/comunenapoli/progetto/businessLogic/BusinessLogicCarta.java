@@ -130,4 +130,9 @@ public class BusinessLogicCarta {
 
 	}
 
+	public void deleteByUtente(Utente utente) {
+		CartaDiCredito carta = cartaDao.findCartaByIdUtente(utente);
+		cartaDao.delete(carta);
+	}
+
 }

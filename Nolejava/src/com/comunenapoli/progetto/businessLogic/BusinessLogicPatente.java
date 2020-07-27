@@ -132,4 +132,10 @@ public class BusinessLogicPatente {
 	}
 
 
+	public void deleteByUtente(Utente utente) {
+		Patente patente = patenteDao.findPatenteByUtente(utente);
+		patenteDao.delete(patente);	
+	}
+
+
 }

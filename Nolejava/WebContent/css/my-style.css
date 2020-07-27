@@ -77,3 +77,8 @@ header .overlay {
 #cancellanoleggio:focus {
 	outline:none
 }
+
+.current {
+	background-color: #fc983c !important;
+	color: white !important;
+}

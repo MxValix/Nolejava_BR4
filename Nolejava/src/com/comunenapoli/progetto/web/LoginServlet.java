@@ -50,11 +50,11 @@ public class LoginServlet extends HttpServlet {
 					request.getSession().setAttribute(Costanti.USER_IN_SESSION, utente);
 					if (ruolo == Costanti.ID_RUOLO_ADMIN) {
 						//TODO reindirizza ad admin
-						html = "/jsp/dashboard.jsp";
+						html = "notificheDashboard";
 					}
 					else if (ruolo == Costanti.ID_RUOLO_STAFF) {
 						//TODO reindirizza a staff
-						html = "/jsp/dashboard.jsp";
+						html = "notificheDashboard";
 
 					} else if (ruolo == Costanti.ID_RUOLO_CLIENTE) {
 						html = "/jsp/homepage.jsp";

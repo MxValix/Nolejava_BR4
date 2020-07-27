@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.comunenapoli.progetto.businessLogic.BusinessLogicCarta;
+import com.comunenapoli.progetto.businessLogic.BusinessLogicPatente;
 import com.comunenapoli.progetto.businessLogic.BusinessLogicUtente;
 import com.comunenapoli.progetto.model.Utente;
 import com.comunenapoli.progetto.utils.Costanti;
@@ -34,6 +36,8 @@ public class GestisciUtentiServlet extends HttpServlet {
 		response.setHeader("Last-modified", LocalDateTime.now().toString());
 		response.setHeader("Cache-control", "no-store");
 		BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
+		BusinessLogicCarta businessLogicCarta = (BusinessLogicCarta) getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_CARTA);
+		BusinessLogicPatente businessLogicPatente = (BusinessLogicPatente) getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_PATENTE);
 		String idUtenteString = request.getParameter("idutente");
 		String action = request.getParameter("action").toLowerCase();
         String recipient = request.getParameter("recipient");
@@ -64,6 +68,15 @@ public class GestisciUtentiServlet extends HttpServlet {
 			isPromosso = businessLogicUtente.updateRuolo(utente, Costanti.ID_RUOLO_STAFF);
 		}
 		else if (checkEliminaUtente) {
+			if (businessLogicPatente.getPatenteByUtente(utente) != null) {
+				businessLogicPatente.deleteByUtente(utente);
+			}
+			
+			if (businessLogicCarta.getCartaByUtente(utente) != null) {
+			businessLogicCarta.deleteByUtente(utente);
+				
+			}
+			
 			businessLogicUtente.delete(idUtente);
 			isRimosso = true;
 		}
@@ -76,19 +89,19 @@ public class GestisciUtentiServlet extends HttpServlet {
 			//TODO hai promosso l'utente a staff
 			request.setAttribute(Costanti.UTENTE_PROMOSSO, isPromosso);
 			String html = "/emailSendingServlet";
-			request.getRequestDispatcher(html).include(request,response);
+			request.getRequestDispatcher(html).forward(request,response);
 		}
 		else if (isRimosso) {
 			//TODO hai rimosso l'utente
 			request.setAttribute(Costanti.UTENTE_RIMOSSO, isRimosso);
 			String html = "/emailSendingServlet";
-			request.getRequestDispatcher(html).include(request,response);
+			request.getRequestDispatcher(html).forward(request,response);
 		}
 		else if (isVerificato) {
 			//TODO hai verificato l'utente
-			request.setAttribute(Costanti.UTENTE_VERIFICATO, isRimosso);
+			request.setAttribute(Costanti.UTENTE_VERIFICATO, isVerificato);
 			String html = "/emailSendingServlet";
-			request.getRequestDispatcher(html).include(request,response);
+			request.getRequestDispatcher(html).forward(request,response);
 		}
 		else {
 			//TODO operazione non avvenuta, ritenta

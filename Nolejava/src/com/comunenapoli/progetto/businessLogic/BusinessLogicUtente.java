@@ -78,6 +78,7 @@ public class BusinessLogicUtente {
 		try {
 			Utente utente = utenteDao.findUtenteByIdUtente(idUtente);
 			if (utente!=null) {
+
 				utenteDao.delete(utente);
 				em.getTransaction().commit();
 			}
@@ -246,7 +247,7 @@ public class BusinessLogicUtente {
 
 	public Utente getUtenteByEmail(String username) {
 		Utente utente = utenteDao.findUtenteByUsername(username);
-		return null;
+		return utente;
 	}
 
 

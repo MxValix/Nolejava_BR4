@@ -1,6 +1,7 @@
 (function () {
 $.fn.easycard = function (options) {
-	var defaults = {
+
+	var defaults = {		
 		wrapper: $(this),
 		nameInput: '#name',
 		numberInput: '#number',
@@ -10,7 +11,7 @@ $.fn.easycard = function (options) {
 		cardWidth: '100%',
 		backgroundCode: '#333',
 		numberMask: true,
-		defaultName: 'nome cognome',
+		defaultName: nomeCognomeUtente,
 		defaultNumber: '**** **** **** ****',
 		defaultDate: 'MM / YY',
 		defaultCvc: '***'
@@ -42,7 +43,7 @@ $.fn.easycard = function (options) {
 	                  '<div class="sign"></div>' +
 	                  '<div class="cvc">' + options.defaultCvc + '</div>' +
 	                  '<div class="chip"><div class="mc"></div></div>' +
-	                  '<div class="copyright">jQuery easycard is implementable for all html forms easy to use made by onur altinsoy http://onuraltinsoy.com</div>' +
+	                  '<div class="copyright">Made with <3 by BreakOut Room 4</div>' +
 	               '</div>'
 
 	ccWrapper.html(card);
@@ -148,7 +149,7 @@ $.fn.easycard = function (options) {
 
 	$(document).on('keyup change', options.dateMonthInput + ',' + options.dateYearInput, function() {
 	    var m = $(options.dateMonthInput).val();
-	    var y = $(options.dateYearInput).val();
+	    var y = $(options.dateYearInput).val().slice(2);
 	  
 	    cc.find('.date .right span').text(m + ' / ' + y);
 	});

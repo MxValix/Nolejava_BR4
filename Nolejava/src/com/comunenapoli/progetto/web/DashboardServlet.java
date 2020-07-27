@@ -47,7 +47,7 @@ public class DashboardServlet extends HttpServlet {
 		List<Utente> listaUtenti = businessLogicUtente.getListaUtenti();
 		request.setAttribute(Costanti.LISTA_UTENTI, listaUtenti);
 	
-		String html = "/jsp/";
+		String html = "/jsp/private/";
 		String action = request.getParameter("action").toLowerCase();
 		if (action.contains("utenti")) {
 			html += "gestisciutenti.jsp";

@@ -53,10 +53,10 @@ public class GestisciAutoServlet extends HttpServlet {
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, listaAuto);
 		} else {
 			if (action.contains("ricerca")) {
-				
+				System.out.println("sono dentro ricerca");
 				listaAuto = effettuaRicerca(request, businessLogicAuto,businessLogicNoleggio);
 				request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, listaAuto);				
-				html = "/jsp/gestisciauto.jsp";
+				html = "/jsp/private/gestisciauto.jsp";
 			}
 			else if (action.contains("modifica")) {
 				String idAutoString = request.getParameter("idauto");
@@ -67,7 +67,7 @@ public class GestisciAutoServlet extends HttpServlet {
 				Auto auto = businessLogicAuto.getAutoByIdAuto(idAuto);
 				System.out.println("auto: " + auto);
 				request.getSession().setAttribute(Costanti.AUTO_IN_SESSION, auto);								
-				html = "/jsp/modificaauto.jsp";
+				html = "/jsp/private/modificaauto.jsp";
 			}
 			else if (action.contains("cancella")) {
 				String idAutoString = request.getParameter("idauto");
@@ -75,7 +75,7 @@ public class GestisciAutoServlet extends HttpServlet {
 				businessLogicAuto.delete(idAuto);
 				listaAuto = businessLogicAuto.getListaCompletaAuto();
 				request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, listaAuto);
-				html = "/jsp/gestisciauto.jsp";
+				html = "/jsp/private/gestisciauto.jsp";
 			}
 		}
 			RequestDispatcher requestDispatcher; 
@@ -88,7 +88,7 @@ public class GestisciAutoServlet extends HttpServlet {
 		
 			String dataInizioNoleggioString = request.getParameter("datainizio");
 			String dataFineNoleggioString = request.getParameter("datafine");
-			String numeroPostiString = request.getParameter("numeroposti");
+			String numeroPostiString = request.getParameter("numeroPosti");
 			String prezzoAutoPerGiornoString = request.getParameter("prezzopergiorno");
 			
 			Date dataInizio = DataUtils.convertiDataFromString(dataInizioNoleggioString);
@@ -104,21 +104,29 @@ public class GestisciAutoServlet extends HttpServlet {
 			String cambioAuto = request.getParameter("cambio");			
 			String tipologiaCarburante = request.getParameter("carburante");
 			Integer numeroPosti = null;
+			
+
+
 
 			if (numeroPostiString!=null && numeroPostiString.isEmpty()) {
 				request.getSession().setAttribute(Costanti.NUMERO_POSTI_AUTO_SCELTA,cambioAuto);
 				numeroPosti = Integer.parseInt(numeroPostiString);
 			}
-				
+			
 			request.getSession().setAttribute(Costanti.TIPOLOGIA_AUTO_SCELTA, tipologiaAuto);
 			request.getSession().setAttribute(Costanti.MARCA_AUTO_SCELTA, marcaAuto);
 			request.getSession().setAttribute(Costanti.MODELLO_AUTO_SCELTA,modelloAuto);
+			request.getSession().setAttribute(Costanti.CAMBIO_AUTO_SCELTA,cambioAuto);
+			request.getSession().setAttribute(Costanti.CARBURANTE_AUTO_SCELTA,tipologiaCarburante);
+			request.getSession().setAttribute(Costanti.NUMERO_POSTI_AUTO_SCELTA, numeroPosti);
+
 			
 			//List<Auto> risultati = BusinessLogicAutoNoleggioUtils.filtroRicerca(dataInizio, dataFine, tipologiaAuto, businessLogicAuto, businessLogicNoleggio);
 			List<Auto> risultati = BusinessLogicAutoNoleggioUtils.filtroRicerca(dataInizio, dataFine, marcaAuto, modelloAuto, cambioAuto, numeroPosti, tipologiaCarburante, tipologiaAuto, businessLogicAuto, businessLogicNoleggio);
 
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, risultati);
 			//TODO reindirizza alla jsp passandogli la request e response
+			return risultati;
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

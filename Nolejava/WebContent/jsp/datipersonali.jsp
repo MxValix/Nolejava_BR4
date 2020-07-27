@@ -11,6 +11,27 @@
 	Date dataNascita = utente.getDataNascita();
 	String email = utente.getUsername();
 	String password = utente.getPassword();	
+	String voce1 = "";
+	String voce2 = "";
+	String link = "/Nolejava/jsp/";
+	String link1 = link;
+	String link2 = link;
+	if(utente == null) {
+	    voce1 = "Registrati";
+	    link1 += "registrazione.jsp";
+	    voce2 = "Accedi";
+	    link2 += "login.jsp";
+	 }
+	 else{
+	    voce1 = "Profilo";
+	    voce2 = "Logout";
+	    link2 = "/Nolejava/logoutServlet";
+	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+	       link1 += "profilocliente.jsp";   	
+	    } else {
+	       link1 += "private/dashboard.jsp";
+	    }
+	 }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +40,7 @@
     <title>NoleJava - Dati personali</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" type="image/png" href="/Nolejava/images/favicon.png"/>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 
@@ -45,26 +67,33 @@
 <body>
 
 
-    <!-- INIZIO nav-->
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Nole<span>java</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">Chi siamo</a></li>
-                    <li class="nav-item"><a href="where-we-are.html" class="nav-link">Dove siamo</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contattaci</a></li>
-                    <li class="nav-item"><a href="signin.html" class="nav-link">Registrati</a></li>
-                    <li class="nav-item"><a href="login.html" class="nav-link">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- FINE nav -->
+	<!-- INIZIO nav-->
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="/Nolejava/">Nole<span>java</span></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a href="/Nolejava/"
+						class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="<%=link%>about.jsp" class="nav-link">Chi
+							siamo</a></li>
+					<li class="nav-item"><a href="<%=link%>dovesiamo.jsp"
+						class="nav-link">Dove siamo</a></li>
+					<li class="nav-item"><a href="<%=link%>contact.jsp" class="nav-link">Contattaci</a></li>
+					<li class="nav-item"><a href="<%=link1%>" class="nav-link"><%=voce1%></a></li>
+					<li class="nav-item"><a href="<%=link2%>" class="nav-link"><%=voce2%></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- FINE nav -->
 
     <!-- INIZIO intestazione -->
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/Nolejava/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
@@ -109,9 +138,11 @@
                             </div>              
                             <div class="form-group">
                                 <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Data di nascita</span>
-                                    </div>
+                                <div class="input-group-prepend">
+	                                    <span class="input-group-text">
+	                                        <i class="fa fa-fw fa-birthday-cake"></i>
+	                                    </span>
+                                </div>     
                                     <input type="date" class="form-control" name="datanascita" value="<%=dataNascita%>" aria-label="datanascita" aria-describedby="basic-addon1" required>
                                 </div>
                             </div>                        
@@ -145,71 +176,8 @@
     <!-- FINE form -->
 
 
-    <!-- INIZIO footer-->
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">About NoleJava</h2>
-                        <p>NoleJava è il nuovo servizio di noleggio auto offerto dal Comune di Napoli.</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Informazioni</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="about.html" class="py-2 d-block">Chi siamo</a></li>
-                            <li><a href="where-we-are.html" class="py-2 d-block">Dove siamo</a></li>
-                            <li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
-                            <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Recapiti</h2>
-                        <div class="block-23 mb-3">
-                            <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">Viale F. Ruffo di
-                    Calabria 19, 80144 Napoli NA</span></li>
-                                <li><a href="/Nolejava/html/contact.html"><span class="icon icon-phone"></span><span class="text">081 060
-                      8349</span></a></li>
-                                <li><a href="/Nolejava/html/contact.html"><span class="icon icon-envelope"></span><span
-                      class="text">info@nolejava.com</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Servizio clienti</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="contact.html" class="py-2 d-block">Contattaci</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | NoleJava
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- FINE footer-->
+    	<jsp:include page="footer.jsp"></jsp:include>
+
 
 
 

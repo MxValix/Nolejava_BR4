@@ -102,5 +102,10 @@ public class NoleggioDao implements DaoInterface<Noleggio> {
 		return noleggi;
 	}
 	
+	public List <Noleggio> findNoleggiByDataInizioDataFineByAdmin(Date dataInizio, Date dataFine) {
+	    TypedQuery <Noleggio> query = manager.createQuery("select n from Noleggio n where n.dataInizio BETWEEN :x AND :y or :x BETWEEN n.dataInizio and n.dataFine or :y BETWEEN n.dataInizio and n.dataFine", Noleggio.class);
+	    List <Noleggio> noleggi = query.setParameter("x", dataInizio).setParameter("y", dataFine).getResultList();
+	    return noleggi;
+	}
 	
 }

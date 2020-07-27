@@ -55,7 +55,9 @@ public class GestisciNoleggiServlet extends HttpServlet {
 			if (ricerca.contains("utente")) {
 				BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
 				Utente utente = businessLogicUtente.getUtenteByEmail(filtro);
+				System.out.println(utente);
 				List<Noleggio> noleggiUtente = businessLogicNoleggio.getNoleggiByUtente(utente);
+				System.out.println(noleggiUtente.size());
 				request.getSession().setAttribute(Costanti.LISTA_COMPLETA_NOLEGGI, noleggiUtente);
 
 			}
@@ -70,11 +72,15 @@ public class GestisciNoleggiServlet extends HttpServlet {
 		}
 		else if (action.contains("date")) {
 			try {
+				System.out.println("Sono qui 1");
 				String dataInizioString = request.getParameter("datainizio");
 				String dataFineString = request.getParameter("datafine");
+				System.out.println("Sono qui 2");
 				Date dataInizio = DataUtils.convertiDataFromString(dataInizioString);
 				Date dataFine = DataUtils.convertiDataFromString(dataFineString);
-				List<Noleggio> noleggiDate = businessLogicNoleggio.getNoleggiByDataInizioDataFine(dataInizio, dataFine);
+				System.out.println("Sono qui 3");
+				List<Noleggio> noleggiDate = businessLogicNoleggio.getNoleggiByDataInizioDataFineByAdmin(dataInizio, dataFine);
+				System.out.println(noleggiDate);
 				request.getSession().setAttribute(Costanti.LISTA_COMPLETA_NOLEGGI, noleggiDate);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -88,7 +94,7 @@ public class GestisciNoleggiServlet extends HttpServlet {
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_NOLEGGI, listaNoleggi);
 		}
 		
-		String html = "/jsp/gestiscinoleggi.jsp";
+		String html = "/jsp/private/gestiscinoleggi.jsp";
 		request.getRequestDispatcher(html).forward(request,response);
 	}
 		

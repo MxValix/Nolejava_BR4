@@ -106,6 +106,7 @@ public class HomepageServlet extends HttpServlet {
 
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, risultati);
 			//TODO reindirizza alla jsp passandogli la request e response
+			return risultati;
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

@@ -71,8 +71,9 @@ public interface Costanti {
 	public static final String NOLEGGI_UTENTE = "noleggiUtente";
 	public static final String CANCELLAZIONE_AVVENUTA = "cancellazioneAvvenuta";
 	
-	
-
-
+	public static final String NUMERO_UTENTI_NON_VERIFICATI = "numeroUtentiNonVerificati";
+	public static final String NUMERO_NOLEGGI = "numeroNoleggi";
+	public static final String NUMERO_UTENTI = "numeroUtenti";
+	public static final String NUMERO_AUTO = "numeroTotaleAuto";
 
 }
