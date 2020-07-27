@@ -27,8 +27,8 @@
 		   voce1 = "Profilo";
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-		   voce1 = "Dashboard";
-	       link1 += "private/dashboard.jsp";
+	    	 voce1 = "Dashboard";
+	         link1 = "/Nolejava/notificheDashboard";
 	    }
 	 }
      List<Noleggio> listaPrenotazioni = (List<Noleggio>) request.getSession().getAttribute(Costanti.NOLEGGI_UTENTE);
@@ -167,7 +167,7 @@
 %>
 
 								<tr>
-									<td><%=idNoleggio%></td>
+									<td><%=i+1%></td>
 									<td><%=dataPrenotazione%></td>
 									<td><%=dataInizio%></td>
 									<td><%=dataFine%></td>

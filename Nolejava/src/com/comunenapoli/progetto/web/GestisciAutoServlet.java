@@ -60,12 +60,9 @@ public class GestisciAutoServlet extends HttpServlet {
 			}
 			else if (action.contains("modifica")) {
 				String idAutoString = request.getParameter("idauto");
-				System.out.println("idAutoString" + idAutoString);
 
 				Integer idAuto = Integer.parseInt(idAutoString);
-				System.out.println("idAuto" + idAuto);
 				Auto auto = businessLogicAuto.getAutoByIdAuto(idAuto);
-				System.out.println("auto: " + auto);
 				request.getSession().setAttribute(Costanti.AUTO_IN_SESSION, auto);								
 				html = "/jsp/private/modificaauto.jsp";
 			}

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.comunenapoli.progetto.businessLogic.BusinessLogicCarta;
+import com.comunenapoli.progetto.model.CartaDiCredito;
 import com.comunenapoli.progetto.model.Utente;
 import com.comunenapoli.progetto.utils.Costanti;
 import com.comunenapoli.progetto.utils.DataUtils;
@@ -53,15 +54,16 @@ public class CartaDiCreditoServlet extends HttpServlet {
 		Integer anno = Integer.parseInt(annoString);
 		System.out.println("mese: " + mese);
 		System.out.println("anno: " + mese);
-
 		Date dataScad = DataUtils.getDataCompletaFromMeseEdAnno(mese,anno);
 		if (cvvString!=null && !cvvString.isEmpty()) cvv = Integer.parseInt(cvvString);
 		if (idCartaString!=null && !idCartaString.isEmpty()) idCarta = Integer.parseInt(idCartaString);
 
 		try {
-			businessLogicCarta.operazioniCarta(idCarta, dataScad, numeroCarta, cvv, utente);
+			CartaDiCredito carta = businessLogicCarta.operazioniCarta(idCarta, dataScad, numeroCarta, cvv, utente);
+			request.setAttribute(Costanti.CARTA_IN_SESSION,carta);
+
 			String html = "";
-			Boolean isProfiloCliente = (Boolean)request.getAttribute(Costanti.PROFILO_CLIENTE);
+			Boolean isProfiloCliente = (Boolean)request.getSession().getAttribute(Costanti.PROFILO_CLIENTE);
 			if (isProfiloCliente!=null && isProfiloCliente) {
 				request.getSession().removeAttribute(Costanti.PROFILO_CLIENTE);
 				html = "/jsp/profilocliente.jsp";

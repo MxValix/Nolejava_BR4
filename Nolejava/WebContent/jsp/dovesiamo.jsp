@@ -22,7 +22,8 @@
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-	       link1 += "private/dashboard.jsp";
+	    	 voce1 = "Dashboard";
+	         link1 = "/Nolejava/notificheDashboard";
 	    }
 	 }
 %>

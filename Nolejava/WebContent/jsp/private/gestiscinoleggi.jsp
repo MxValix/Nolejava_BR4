@@ -19,9 +19,8 @@ if (utente.getRuolo().getId() == 1){
 <head>
 <meta charset="UTF-8">
 <title>Gestisci noleggi</title>
-</head>
-
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" type="image/png" href="/Nolejava/images/favicon.png"/>
 
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
@@ -31,6 +30,7 @@ if (utente.getRuolo().getId() == 1){
 
   <link rel="stylesheet" href="/Nolejava/css/my-style-dashboard.css">
 
+</head>
 
 
 <body>

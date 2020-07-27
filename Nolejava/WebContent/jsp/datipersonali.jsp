@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="com.comunenapoli.progetto.model.Utente"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.comunenapoli.progetto.utils.Costanti"%>
@@ -8,7 +10,9 @@
 	Integer idUtente = utente.getIdUtente();
 	String nome = utente.getNome();
 	String cognome = utente.getCognome();
-	Date dataNascita = utente.getDataNascita();
+	Date dataNascitaUtente = utente.getDataNascita();
+    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    String dataNascita = df.format(dataNascitaUtente);
 	String email = utente.getUsername();
 	String password = utente.getPassword();	
 	String voce1 = "";
@@ -23,13 +27,14 @@
 	    link2 += "login.jsp";
 	 }
 	 else{
-	    voce1 = "Profilo";
 	    voce2 = "Logout";
 	    link2 = "/Nolejava/logoutServlet";
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+		   voce1 = "Profilo";
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-	       link1 += "private/dashboard.jsp";
+	    	 voce1 = "Dashboard";
+	         link1 = "/Nolejava/notificheDashboard";
 	    }
 	 }
 %>

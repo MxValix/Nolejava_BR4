@@ -68,6 +68,11 @@ public class ProfiloClienteServlet extends HttpServlet {
 			}
 			html += "carta.jsp";
 		}
+		else {
+			request.removeAttribute(Costanti.CARTA_IN_SESSION);
+			html += "carta.jsp";
+			
+		}
 		RequestDispatcher requestDispatcher; 
 		requestDispatcher = request.getRequestDispatcher(html);
 		requestDispatcher.forward(request, response);

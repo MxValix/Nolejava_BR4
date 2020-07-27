@@ -53,8 +53,8 @@
 		   voce1 = "Profilo";
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-		   voce1 = "Dashboard";		    	
-	       link1 += "private/dashboard.jsp";
+	    	 voce1 = "Dashboard";
+	         link1 = "/Nolejava/notificheDashboard";
 	    }
 	 }	
 	

@@ -115,7 +115,7 @@ public class BusinessLogicCarta {
 		}
 	}
 
-	public void operazioniCarta (Integer idCarta, Date dataDiScadenza, String numeroCarta, Integer cvv, Utente utente) throws ParseException {
+	public CartaDiCredito operazioniCarta (Integer idCarta, Date dataDiScadenza, String numeroCarta, Integer cvv, Utente utente) throws ParseException {
 		CartaDiCredito cartaDiCredito = getCartaByUtente(utente);
 		boolean isNuovaCarta = cartaDiCredito == null;
 		if (isNuovaCarta) {
@@ -127,7 +127,7 @@ public class BusinessLogicCarta {
 			cartaDiCredito.setNumeroCarta(numeroCarta);
 			update(cartaDiCredito);
 		}
-
+		return cartaDiCredito;
 	}
 
 	public void deleteByUtente(Utente utente) {

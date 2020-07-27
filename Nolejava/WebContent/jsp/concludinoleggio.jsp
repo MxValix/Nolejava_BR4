@@ -27,6 +27,9 @@
     DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     String dataInizio = df.format(dataInizioNoleggio);
     String dataFine = df.format(dataFineNoleggio);
+	String urlAutoCorrente = auto.getUrlImg();
+	String imgUrl = "/Nolejava/images/auto/";
+	imgUrl += urlAutoCorrente;
 	String voce1 = "";
 	String voce2 = "";
 	String link = "/Nolejava/jsp/";
@@ -45,8 +48,8 @@
 		   voce1 = "Profilo";
 	       link1 += "profilocliente.jsp";   	
 	    } else {
-		   voce1 = "Dashboard";		    	
-	       link1 += "private/dashboard.jsp";
+	    	 voce1 = "Dashboard";
+	         link1 = "/Nolejava/notificheDashboard";
 	    }
 	 }    
 %>   
@@ -141,7 +144,7 @@
                     <form action="/Nolejava/concludiNoleggioServlet" method="POST" class="bg-light p-5 contact-form">
                         <div class="form-group">
                             <div class="text-center mb-4">
-                                <img src="/Nolejava/images/kia.jpg" class="w-75 p-3">
+                                <img src="<%=imgUrl%>" class="w-75 p-3">
                             </div>
                             <div class="form-group ">
                                 <div class="input-group mb-3 ">

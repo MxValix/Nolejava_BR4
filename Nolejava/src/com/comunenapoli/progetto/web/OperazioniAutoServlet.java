@@ -51,9 +51,10 @@ public class OperazioniAutoServlet extends HttpServlet {
 		Double cilindrata = Double.parseDouble(cilindrataString);
 		Integer numeroPosti = Integer.parseInt(numeroPostiString);
 		Double prezzoPerGiorno = Double.parseDouble(prezzoPerGiornoString);
-		marca = marca.toLowerCase();
-		modello = modello.toLowerCase();
-		tipologiaAuto = tipologiaAuto.toLowerCase();
+
+		marca = marca.substring(0,1).toUpperCase() + marca.substring(1).toLowerCase();
+		modello = modello.substring(0,1).toUpperCase() + modello.substring(1).toLowerCase();
+		tipologiaAuto = tipologiaAuto.substring(0,1).toUpperCase() + tipologiaAuto.substring(1).toLowerCase();
 
 		boolean isHiddenEmpty = action==null || action.isEmpty() || action.equals("");
 		if (action.contains("aggiungi")) {

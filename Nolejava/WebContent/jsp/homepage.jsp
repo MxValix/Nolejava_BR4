@@ -21,7 +21,10 @@
   String link = "/Nolejava/jsp/";
   String link1 = link;
   String link2 = link;
-  
+  String voceListaAuto = "Scegli la tua auto";
+  if (automobili==null || automobili.size()==0){
+	  voceListaAuto = "Spiacenti, non ci sono auto corrispondenti alla tua ricerca";
+  }
   String operazione = "Dettagli";
   
   if (tipologiaAuto==null || tipologiaAuto.isEmpty()) {
@@ -38,15 +41,16 @@
       link2 += "login.jsp";
    }
    else{
-      voce1 = "Profilo";
       voce2 = "Logout";
       link2 = "/Nolejava/logoutServlet";
       if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
+         voce1 = "Profilo";
          link1 += "profilocliente.jsp";   
          operazione = "Noleggia";
 
       } else {
-         link1 += "private/dashboard.jsp";
+    	 voce1 = "Dashboard";
+         link1 = "/Nolejava/notificheDashboard";
       }
    }
 %>
@@ -278,7 +282,7 @@
 			<div class="row justify-content-center mt-5">
 				<div class="col-md-12 heading-section text-center ftco-animate mb-5 mt-5">
 					<span class="subheading">Cosa offriamo</span>
-					<h2 class="mb-2">Scegli la tua auto</h2>
+					<h2 class="mb-2"><%=voceListaAuto%></h2>
 				</div>
 			</div>
 			<div class="row">
@@ -337,7 +341,7 @@
 <% 
 
 									int autoPerPagina = (int) Math.ceil(automobili.size()/4);
-									for (int i=2; i<=autoPerPagina+1;i++) { 
+									for (int i=2; i<=autoPerPagina;i++) { 
 %>
 										<li><a href="#lista-auto"><%=i%></a></li>
 <%
