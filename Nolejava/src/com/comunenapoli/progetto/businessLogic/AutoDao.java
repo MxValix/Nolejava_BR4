@@ -194,4 +194,9 @@ public class AutoDao implements DaoInterface<Auto> {
 		return automobili;
 	}
 
+	public List<Auto> findByTarga(String targa){
+		return manager.createQuery("select u from Auto u where u.targa = :x ",Auto.class).
+				setParameter("x",targa).getResultList();
+	}
+
 }

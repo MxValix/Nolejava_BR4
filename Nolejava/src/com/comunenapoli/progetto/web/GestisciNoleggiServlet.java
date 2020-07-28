@@ -68,7 +68,13 @@ public class GestisciNoleggiServlet extends HttpServlet {
 				request.getSession().setAttribute(Costanti.LISTA_COMPLETA_NOLEGGI, noleggiAuto);
 
 			}
+			else if (ricerca.contains("targa")) {
+				BusinessLogicAuto businessLogicAuto = (BusinessLogicAuto)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_AUTO);
+				List<Auto> autoByMarca = businessLogicAuto.getAutoByTarga(filtro);
+				List<Noleggio> noleggiAuto = businessLogicNoleggio.getNoleggiByListaAuto(autoByMarca);
+				request.getSession().setAttribute(Costanti.LISTA_COMPLETA_NOLEGGI, noleggiAuto);
 
+			}
 		}
 		else if (action.contains("date")) {
 			try {

@@ -291,5 +291,10 @@ public class BusinessLogicAuto {
 		List<Auto> autoByMarca = autoDao.findByMarca(marca);
 		return autoByMarca;
 	}
+	
+	public List<Auto> getAutoByTarga(String targa){
+		List<Auto> autoByTarga = autoDao.findByTarga(targa);
+		return autoByTarga;
+	}
 
 }

@@ -120,6 +120,8 @@
                 <div class="bg-light p-5 contact-form justify-content-center text-center">
                         <span><i class="fa fa-check-circle-o fa-5x text-success"></i></span>
                         <h2 class="mt-3">Noleggio avvenuto con successo</h2>
+                        <p>Controlla la tua casella email, ti abbiamo inviato la ricevuta della prenotazione e le istruzioni per il ritiro.</p>
+                        <p>Grazie per averci scelto.</p>
                 </div>    
 
             </div>

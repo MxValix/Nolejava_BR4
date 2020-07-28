@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="java.sql.Date"%>
 <%@page import="com.comunenapoli.progetto.model.Noleggio"%>
 <%@page import="java.util.List"%>
@@ -161,6 +163,7 @@ if (utente.getRuolo().getId() == 1){
             <datalist id="ricerca" name="ricerca">
               <option value="Username utente"></option>
               <option value="Marca auto"></option>
+              <option value="Targa auto"></option>
             </datalist>
           </div>
           <div class="col-md-3 col-lg-3 col-xl-3 mt-2">
@@ -202,10 +205,11 @@ if (utente.getRuolo().getId() == 1){
         <table class="tabella table table-striped table-dark mr-5">
           <thead>
 			<tr>
-				<th>id Noleggio</th>
+				<th>Prenotazione</th>
 				<th>Data prenotazione</th>		
 				<th>Data inizio noleggio</th>
 				<th>Data fine noleggio</th>	
+				<th>Targa</th>
 				<th>Marca auto</th>	
 				<th>Modello auto</th>	
 				<th>Cliente</th>
@@ -223,19 +227,27 @@ if (utente.getRuolo().getId() == 1){
 	for (int i=0; i<listaNoleggio.size();i++){
 		Noleggio noleggioCorrente = listaNoleggio.get(i);
 		Integer idNoleggio = noleggioCorrente.getIdNoleggio();
-		Date dataPrenotazione = noleggioCorrente.getDataPrenotazione();
-		Date dataInizio = noleggioCorrente.getDataInizio();
-		Date dataFine = noleggioCorrente.getDataFine();
+		Date dataPrenotazioneNoleggio = noleggioCorrente.getDataPrenotazione();
+		Date dataInizioNoleggio = noleggioCorrente.getDataInizio();
+		Date dataFineNoleggio = noleggioCorrente.getDataFine();
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		String dataPrenotazione = df.format(dataPrenotazioneNoleggio);
+	    String dataInizio = df.format(dataInizioNoleggio);
+	    String dataFine = df.format(dataFineNoleggio);
 		String marca = noleggioCorrente.getAuto().getMarca();
 		String modello = noleggioCorrente.getAuto().getModello();
 		String username = noleggioCorrente.getUtente().getUsername();
+		String targa = noleggioCorrente.getAuto().getTarga();
+        String prenotazione = targa + dataPrenotazione.replaceAll("/", "");
+
 		String operazione = "Cancella noleggio";
 %>
 	<tr>
-				<td><%=idNoleggio%></td>
+				<td><%=prenotazione%></td>
 				<td><%=dataPrenotazione%></td>
 				<td><%=dataInizio%></td>
 				<td><%=dataFine%></td>
+				<td><%=targa%></td>
 				<td><%=marca%></td>
 				<td><%=modello%></td>	
 				<td><%=username%></td>

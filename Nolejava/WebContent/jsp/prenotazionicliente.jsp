@@ -137,9 +137,9 @@
 
 						<table id="mytable" class="table table-bordred table-striped">
 
-							<thead>
+							<thead class="text-center">
 
-								<th>#</th>
+								<th>Prenotazione</th>
 								<th>Data prenotazione</th>
 								<th>Data inizio noleggio</th>
 								<th>Data fine noleggio</th>
@@ -163,11 +163,14 @@
         String dataFine = df.format(dataFineNoleggio);
         String marca = noleggioCorrente.getAuto().getMarca();
         String modello = noleggioCorrente.getAuto().getModello();
+        String targa = noleggioCorrente.getAuto().getTarga();
+        String prenotazione = targa + dataPrenotazione.replaceAll("/", "");
+        System.out.println("prenotazione: " + prenotazione);
         String operazione = "Cancella noleggio";
 %>
 
 								<tr>
-									<td><%=i+1%></td>
+									<td><%=prenotazione%></td>
 									<td><%=dataPrenotazione%></td>
 									<td><%=dataInizio%></td>
 									<td><%=dataFine%></td>

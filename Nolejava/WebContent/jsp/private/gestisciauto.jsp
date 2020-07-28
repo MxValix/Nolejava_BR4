@@ -257,12 +257,13 @@
 		for (int i=0; i<listaAuto.size();i++){
 			Auto autoCorrente = listaAuto.get(i);
 			Integer idAuto = autoCorrente.getIdAuto();
+			String targaAuto = autoCorrente.getTarga();
 			String marca = autoCorrente.getMarca();
 			String modello = autoCorrente.getModello();
 			Double cilindrata = autoCorrente.getCilindrata();
 %>		
 			<tr>
-				<td><%=idAuto%></td>
+				<td><%=targaAuto%></td>
 				<td><%=marca%></td>
 				<td><%=modello%></td>
 				<td><%=cilindrata%></td>
