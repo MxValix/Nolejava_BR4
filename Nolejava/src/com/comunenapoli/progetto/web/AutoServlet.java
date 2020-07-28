@@ -36,10 +36,6 @@ public class AutoServlet extends HttpServlet {
 		String idAutoString = request.getParameter("idautobtn");
 		Integer idAuto = Integer.valueOf(idAutoString);
 		Auto auto = businessLogicAuto.getAutoByIdAuto(idAuto);
-		//request.getSession().setAttribute(Costanti.AUTO_IN_SESSION,auto);
-		//String marca = "bmw";
-		//List<Auto> automobili = businessLogicAuto.getListaAutoConFiltri(marca,null,null);
-		//System.out.println("automobili: " + automobili);
 		request.getSession().setAttribute(Costanti.AUTO_IN_SESSION, auto);
 		RequestDispatcher requestDispatcher; 
 		requestDispatcher = request.getRequestDispatcher("/jsp/auto.jsp");

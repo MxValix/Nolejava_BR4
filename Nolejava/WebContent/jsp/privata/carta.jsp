@@ -178,7 +178,7 @@
 											<option value="12">02</option>
 										</select>
 										<select class="form-control" id="date-y" name="annoscadenza" required>
-											<option>YY</option>
+											<option disabled="disabled">YY</option>
 											<option value="2020">20</option>
 											<option value="2021">21</option>
 											<option value="2022">22</option>

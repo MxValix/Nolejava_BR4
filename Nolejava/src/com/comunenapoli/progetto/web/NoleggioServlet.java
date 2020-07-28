@@ -42,7 +42,7 @@ public class NoleggioServlet extends HttpServlet {
 		try {
 			Integer responsoPatente = businessLogicPatente.responsoPatente(utente);
 			Integer responsoCarta = businessLogicCarta.responsoCarta(utente);
-			String html = "";
+			String html = "/jsp/privata/";
 			String numeroCarta = "";
 			String numeroPatente = "";
 			String cvv = "";
@@ -50,7 +50,7 @@ public class NoleggioServlet extends HttpServlet {
 				//TODO patente valida, vai form carta
 				if (responsoCarta == 1) {
 					//TODO manda al form finale di noleggio
-					html = "/jsp/concludinoleggio.jsp";
+					html += "concludinoleggio.jsp";
 					RequestDispatcher requestDispatcher; 
 					requestDispatcher = request.getRequestDispatcher(html);
 					requestDispatcher.forward(request, response);
@@ -60,7 +60,7 @@ public class NoleggioServlet extends HttpServlet {
 					CartaDiCredito carta = businessLogicCarta.getCartaByUtente(utente);
 						numeroCarta = carta.getNumeroCarta();
 						cvv = carta.getCvv().toString();
-					html = "/jsp/carta.jsp";
+						html += "carta.jsp";
 //					request.setAttribute(Costanti.NUMERO_CARTA,numeroCarta);
 //					request.setAttribute(Costanti.CVV_CARTA,cvv);
 					request.setAttribute(Costanti.CARTA_IN_SESSION, carta);
@@ -71,7 +71,7 @@ public class NoleggioServlet extends HttpServlet {
 				}
 				else if (responsoCarta == -1) {
 					//TODO carta mai inserita, vai al form di inserimento dati carta
-					html = "/jsp/carta.jsp";
+					html += "carta.jsp";
 					CartaDiCredito carta = businessLogicCarta.getCartaByUtente(utente);
 					request.setAttribute(Costanti.CARTA_IN_SESSION, carta);
 //					request.setAttribute(Costanti.NUMERO_CARTA,numeroCarta);
@@ -86,7 +86,7 @@ public class NoleggioServlet extends HttpServlet {
 				Patente patente = businessLogicPatente.getPatenteByUtente(utente);
 				numeroPatente = patente.getNumeroPatente();
 				request.setAttribute(Costanti.NUMERO_PATENTE,numeroPatente);
-				html = "/jsp/patente.jsp";
+				html += "patente.jsp";
 				RequestDispatcher requestDispatcher; 
 				requestDispatcher = request.getRequestDispatcher(html);
 				requestDispatcher.forward(request, response);
@@ -95,7 +95,7 @@ public class NoleggioServlet extends HttpServlet {
 			else if (responsoPatente == -1) {
 				//TODO patente mai inserita, vai al form di inserimento dati patente
 				request.setAttribute(Costanti.NUMERO_PATENTE,numeroPatente);
-				html = "/jsp/patente.jsp";
+				html += "patente.jsp";
 				RequestDispatcher requestDispatcher; 
 				requestDispatcher = request.getRequestDispatcher(html);
 				requestDispatcher.forward(request, response);

@@ -101,7 +101,7 @@ public class GestisciAutoServlet extends HttpServlet {
 			String cambioAuto = request.getParameter("cambio");			
 			String tipologiaCarburante = request.getParameter("carburante");
 			Integer numeroPosti = null;
-			
+			String targaAuto = request.getParameter("targa");
 
 
 
@@ -116,11 +116,10 @@ public class GestisciAutoServlet extends HttpServlet {
 			request.getSession().setAttribute(Costanti.CAMBIO_AUTO_SCELTA,cambioAuto);
 			request.getSession().setAttribute(Costanti.CARBURANTE_AUTO_SCELTA,tipologiaCarburante);
 			request.getSession().setAttribute(Costanti.NUMERO_POSTI_AUTO_SCELTA, numeroPosti);
-
-			
-			//List<Auto> risultati = BusinessLogicAutoNoleggioUtils.filtroRicerca(dataInizio, dataFine, tipologiaAuto, businessLogicAuto, businessLogicNoleggio);
 			List<Auto> risultati = BusinessLogicAutoNoleggioUtils.filtroRicerca(dataInizio, dataFine, marcaAuto, modelloAuto, cambioAuto, numeroPosti, tipologiaCarburante, tipologiaAuto, businessLogicAuto, businessLogicNoleggio);
-
+			if (targaAuto!=null && !targaAuto.isEmpty()) {
+				risultati = businessLogicAuto.getAutoByTarga(targaAuto);
+			}
 			request.getSession().setAttribute(Costanti.LISTA_COMPLETA_AUTO, risultati);
 			//TODO reindirizza alla jsp passandogli la request e response
 			return risultati;

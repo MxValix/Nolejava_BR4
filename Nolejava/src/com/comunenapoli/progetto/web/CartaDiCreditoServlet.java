@@ -47,13 +47,9 @@ public class CartaDiCreditoServlet extends HttpServlet {
 		Integer idCarta = 0;
 		String meseString = request.getParameter("mesescadenza");
 		String annoString = request.getParameter("annoscadenza");
-		System.out.println("mese: " + meseString);
-		System.out.println("anno: " + annoString);
 
 		Integer mese = Integer.parseInt(meseString);
 		Integer anno = Integer.parseInt(annoString);
-		System.out.println("mese: " + mese);
-		System.out.println("anno: " + mese);
 		Date dataScad = DataUtils.getDataCompletaFromMeseEdAnno(mese,anno);
 		if (cvvString!=null && !cvvString.isEmpty()) cvv = Integer.parseInt(cvvString);
 		if (idCartaString!=null && !idCartaString.isEmpty()) idCarta = Integer.parseInt(idCartaString);
@@ -66,7 +62,7 @@ public class CartaDiCreditoServlet extends HttpServlet {
 			Boolean isProfiloCliente = (Boolean)request.getSession().getAttribute(Costanti.PROFILO_CLIENTE);
 			if (isProfiloCliente!=null && isProfiloCliente) {
 				request.getSession().removeAttribute(Costanti.PROFILO_CLIENTE);
-				html = "/jsp/profilocliente.jsp";
+				html = "/jsp/privata/profilocliente.jsp";
 			}
 			else {
 				request.getSession().removeAttribute(Costanti.PROFILO_CLIENTE);

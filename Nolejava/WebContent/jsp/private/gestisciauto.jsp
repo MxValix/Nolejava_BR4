@@ -221,6 +221,9 @@
             <input class="form-control" type="text" name="modello" placeholder="Modello">
           </div>
           <div class="col-md-4 col-lg-3 col-xl-3 mt-3">
+            <input class="form-control" type="text" name="targa" placeholder="Targa">
+          </div>          
+          <div class="col-md-4 col-lg-3 col-xl-3 mt-3">
             <input class=" form-control btn btn-primary" name="action" type="submit" value="Ricerca auto disponibili">
           </div>
         </div>
@@ -238,7 +241,7 @@
         <table class="tabella table table-striped table-dark mr-5">
           <thead>
             <tr>
-              <th>idAuto</th>
+              <th>Targa</th>
               <th>Marca</th>
               <th>Modello</th>
               <th>Cilindrata</th>

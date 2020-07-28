@@ -48,7 +48,7 @@ public class ProfiloClienteServlet extends HttpServlet {
 		request.setAttribute(Costanti.LISTA_UTENTI_NON_VERIFICATI, utentiNonVerificati);
 		request.setAttribute(Costanti.LISTA_UTENTI, listaUtenti);
 	
-		String html = "/jsp/";
+		String html = "/jsp/privata/";
 		String action = request.getParameter("action").toLowerCase();
 		if (action.contains("dati personali")) {
 			html += "datipersonali.jsp";

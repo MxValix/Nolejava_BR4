@@ -255,7 +255,7 @@
 	<!-- FINE form -->
 
 
-	<jsp:include page="footer.jsp"></jsp:include>
+    	<jsp:include page="/jsp/footer.jsp"></jsp:include>
 
 
 
