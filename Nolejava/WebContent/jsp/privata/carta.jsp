@@ -126,9 +126,9 @@
     <!-- FINE intestazione -->
 
     <!-- INIZIO success -->
-    <section class="ftco-section contact-section" id="noleggioavvenuto">
+    <section class="ftco-section contact-section pb-0" id="noleggioavvenuto">
 
-        <div class="row block-9 justify-content-center mb-5">
+        <div class="row block-9 justify-content-center mb-0 pb-0">
             <div class="col-md-8 mb-md-5">
                 <div class="bg-light p-5 contact-form justify-content-center text-center">
                         <h2 class="mt-3">Non ti verrà addebitato nulla al momento della prenotazione.</h2>
@@ -149,7 +149,7 @@
 				<div class="card-header bg-primary text-center text-white">Dati della Carta di Credito</div>
 				<div class="panel-block my-3">
 					<div class="col-md-12">
-                        <form action="/Nolejava/cartaServlet" method="POST">
+                        <form action="/Nolejava/cartaServlet" id="formCarta" method="POST">
 						<div class="form-group">
 							<label>Numero di carta</label>
 							<div class="input-group">
@@ -163,7 +163,7 @@
 									<label>Data di scadenza</label>
 									<div class="input-group">
 										<select class="form-control" id="date-m" name="mesescadenza" required>
-											<option>MM</option>
+   											<option style="display:none">MM</option>
 											<option value="01">01</option>
 											<option value="02">02</option>
 											<option value="03">03</option>
@@ -178,7 +178,7 @@
 											<option value="12">02</option>
 										</select>
 										<select class="form-control" id="date-y" name="annoscadenza" required>
-											<option disabled="disabled">YY</option>
+   											<option style="display:none">YY</option>
 											<option value="2020">20</option>
 											<option value="2021">21</option>
 											<option value="2022">22</option>
@@ -189,12 +189,12 @@
 								</div>
 								<div class="col-md-4">
 									<label>CVV</label>
-									<input type="text" class="form-control" id="cvc" name="cvv">
+									<input type="text" class="form-control" id="cvc" name="cvv" required>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-						<input type="submit" class="form-control btn btn-primary" value="CONFERMA CARTA">
+						<input type="submit" id="conferma" class="form-control btn btn-primary" value="CONFERMA CARTA">
                         </div>
                     </form>    
 					</div>
@@ -304,7 +304,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
 <script type="text/javascript">
 	var nomeCognomeUtente = "<%=nomeUtente%> <%=cognomeUtente%>";
 </script>
