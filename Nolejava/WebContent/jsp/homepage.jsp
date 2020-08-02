@@ -45,7 +45,7 @@
       link2 = "/Nolejava/logoutServlet";
       if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
          voce1 = "Profilo";
-         link1 += "profilocliente.jsp";   
+         link1 += "privata/profilocliente.jsp";   
          operazione = "Noleggia";
 
       } else {
@@ -339,8 +339,15 @@
 								<ul id="pagin">
 									<li><a class="current" href="#lista-auto">1</a></li>
 <% 
-
-									int autoPerPagina = (int) Math.ceil(automobili.size()/4);
+									int autoPerPagina = 0;
+									if (automobili.size()%4==0){
+										autoPerPagina = (int) Math.abs(automobili.size()/4);
+									}
+									else {
+										autoPerPagina = (int) Math.abs(automobili.size()/4);
+										autoPerPagina = autoPerPagina+1;
+									}
+									
 									for (int i=2; i<=autoPerPagina;i++) { 
 %>
 										<li><a href="#lista-auto"><%=i%></a></li>
@@ -447,7 +454,7 @@
 							</div>
 							<p>
 								Lo staff di NoleJava è sempre disponibile <a
-									href="/Nolejava/html/contact.html">Contattaci qui</a>
+									href="/Nolejava/jsp/contact.jsp">Contattaci qui</a>
 							</p>
 						</div>
 					</div>
@@ -525,7 +532,7 @@
 %>    
 	<script>
 		var numeroAuto = <%=automobili.size()%>;
-		var numeroPagine = Math.round(numeroAuto/4);
+		var numeroPagine = Math.ceil(numeroAuto/4);
 	</script>
 	<script	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="/Nolejava/js/google-map.js"></script>

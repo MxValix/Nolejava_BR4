@@ -43,7 +43,10 @@ public class EmailUtility {
         msg.setRecipients(Message.RecipientType.TO, toAddresses);
         msg.setSubject(subject);
         msg.setSentDate(new Date());
+        msg.setHeader("Content-Type","text/html");
         msg.setText(message);
+        msg.setContent( message, "text/html" );
+        msg.setHeader("Content-Transfer-Encoding", "quoted-printable");
  
         // sends the e-mail
         Transport.send(msg);

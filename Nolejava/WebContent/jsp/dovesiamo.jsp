@@ -20,7 +20,7 @@
 	    voce2 = "Logout";
 	    link2 = "/Nolejava/logoutServlet";
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
-	       link1 += "profilocliente.jsp";   	
+	       link1 += "privata/profilocliente.jsp";   	
 	    } else {
 	    	 voce1 = "Dashboard";
 	         link1 = "/Nolejava/notificheDashboard";
@@ -81,8 +81,7 @@
 						class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="<%=link%>about.jsp" class="nav-link">Chi
 							siamo</a></li>
-					<li class="nav-item"><a href="<%=link%>dovesiamo.jsp"
-						class="nav-link active">Dove siamo</a></li>
+					<li class="nav-item active"><a href="<%=link%>dovesiamo.jsp" class="nav-link">Dove siamo</a></li>
 					<li class="nav-item"><a href="<%=link%>contact.jsp" class="nav-link">Contattaci</a></li>
 					<li class="nav-item"><a href="<%=link1%>" class="nav-link"><%=voce1%></a></li>
 					<li class="nav-item"><a href="<%=link2%>" class="nav-link"><%=voce2%></a></li>
@@ -99,7 +98,7 @@
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
                 <div class="col-md-9 ftco-animate pb-5">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/Nolejava/">Home <i
                                     class="ion-ios-arrow-forward"></i></a></span> <span>Dove siamo <i
                                 class="ion-ios-arrow-forward"></i></span></p>
                     <h1 class="mb-3 bread">Dove siamo</h1>
@@ -178,7 +177,7 @@
                             del P5, con frequenza ogni 5 minuti.</p>
                         <p class="text-justify">Per maggiori informazioni sul servizio, non esitare a contattarci
                             premendo il bottone qui sotto.</p>
-                        <p class="text-center"><a href="contact.html" class="btn btn-primary">Contattaci</a></p>
+                        <p class="text-center"><a href="contact.jsp" class="btn btn-primary">Contattaci</a></p>
                     </div>
                 </div>
             </div>

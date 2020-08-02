@@ -20,7 +20,7 @@
 	    link2 = "/Nolejava/logoutServlet";
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
 		   voce1 = "Profilo";
-	       link1 += "profilocliente.jsp";   	
+	       link1 += "privata/profilocliente.jsp";   	
 	    } else {
 	    	 voce1 = "Dashboard";
 	         link1 = "/Nolejava/notificheDashboard";
@@ -97,7 +97,7 @@
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
                 <div class="col-md-9 ftco-animate pb-5">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/Nolejava/">Home <i
                                     class="ion-ios-arrow-forward"></i></a></span> <span>Login <i
                                 class="ion-ios-arrow-forward"></i></span></p>
                     <h1 class="mb-3 bread">Login</h1>
@@ -141,7 +141,7 @@
                         <div class="form-group">
                             <input type="submit" value="Effettua Login" class="form-control btn btn-primary">
                         </div>
-                        <p class="text-center">Non sei ancora registrato? <a href="registrazione.html">Registrati
+                        <p class="text-center">Non sei ancora registrato? <a href="registrazione.jsp">Registrati
                                 ora</a></p>
                     </form>
                 </div>

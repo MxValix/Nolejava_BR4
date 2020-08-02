@@ -35,21 +35,37 @@ public class RegistrazioneServlet extends HttpServlet {
 		response.setHeader("Last-modified", LocalDateTime.now().toString());
 		response.setHeader("Cache-control", "no-store");
 		Integer effettuaRegistrazione = effettuaRegistrazione(request);
-		String html = "";
+		String dispatch = "";
+		String resultMessage = "";
 		if (effettuaRegistrazione == Costanti.REGISTRAZIONE_VALIDA) {
 			//TODO registrazione avvenuta con successo, attendi conferma
 			
-			response.getWriter().println("<h1>Registrazione effettuata. Attendi la conferma.</h1>");
+			//response.getWriter().println("<h1>Registrazione effettuata. Attendi la conferma.</h1>");
+			Boolean registrazioneAvvenuta = true;
+			
+			request.setAttribute(Costanti.REGISTRAZIONE_AVVENUTA_EMAIL, registrazioneAvvenuta);
+			dispatch = "/emailSendingServletCliente";
 			//TODO pagina che rimanda
 		}
 		else if (effettuaRegistrazione == Costanti.REGISTRAZIONE_FALLITA_ETA) {
 			//TODO registrazione non avvenuta, sei minorenne, rimanda in homepage
 			response.getWriter().println("<h1>Registrazione fallita, sei minorenne.</h1>");
+			
+			resultMessage = "Registrazione fallita, solo gli utienti maggiorenni possono registrarsi a NoleJava";
+            request.setAttribute("Message", resultMessage);
+			dispatch = "/jsp/result.jsp";
+			
 
 		}
 		else if (effettuaRegistrazione == Costanti.REGISTRAZIONE_FALLITA_UTENTE_ESISTENTE) {
 			//TODO registrazione non avvenuta, utente esistente, rimanda al login
-			response.getWriter().println("<h1>Utente già registrato nel database.</h1>");
+			//response.getWriter().println("<h1>Utente già registrato nel database.</h1>");
+		
+			
+			resultMessage = "Registrazione fallita, utente già registrato nel database";
+            request.setAttribute("Message", resultMessage);
+			dispatch = "/jsp/result.jsp";
+
 
 		}
 		else {
@@ -58,7 +74,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		}
 		RequestDispatcher requestDispatcher; 
-		requestDispatcher = request.getRequestDispatcher(html);
+		requestDispatcher = request.getRequestDispatcher(dispatch);
 		requestDispatcher.forward(request, response);
 	
 	}

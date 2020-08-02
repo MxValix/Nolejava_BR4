@@ -17,11 +17,11 @@
 							Comune di Napoli.</p>
 						<ul
 							class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-							<li class="ftco-animate"><a href="#"><span
+							<li class="ftco-animate"><a href="https://twitter.com/Rosa_d_"><span
 									class="icon-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
+							<li class="ftco-animate"><a href="https://www.facebook.com/NoleJava-101818208296438/"><span
 									class="icon-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span
+							<li class="ftco-animate"><a href="https://www.instagram.com/nolejava/"><span
 									class="icon-instagram"></span></a></li>
 						</ul>
 					</div>
@@ -33,8 +33,8 @@
 							<li><a href="/Nolejava/jsp/about.jsp" class="pb-1 d-block">Chi siamo</a></li>
 							<li><a href="/Nolejava/jsp/dovesiamo.jsp" class="py-1 d-block">Dove
 									siamo</a></li>
-							<li><a href="#" class="py-1 d-block">Term and Conditions</a></li>
-							<li><a href="#" class="py-1 d-block">Privacy &amp;
+							<li><a href="/Nolejava/jsp/termini.jsp" class="py-1 d-block">Term and Conditions</a></li>
+							<li><a href="/Nolejava/jsp/privacy.jsp" class="py-1 d-block">Privacy &amp;
 									Cookies Policy</a></li>
 						</ul>
 					</div>
@@ -47,7 +47,7 @@
 								<li class="mt-2 mb-3"><span class="icon icon-map-marker"></span><span
 									class="text">Viale F. Ruffo di Calabria 19, 80144 Napoli
 										NA</span></li>
-								<li class="mb-1"><a href="contact.jsp"><span
+								<li class="mb-1"><a href="/Nolejava/jsp/contact.jsp"><span
 										class="icon icon-phone"></span><span class="text">081
 											060 8349</span></a></li>
 								<li><a href="/Nolejava/jsp/contact.jsp"><span

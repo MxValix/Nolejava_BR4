@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 			BusinessLogicUtente businessLogicUtente = (BusinessLogicUtente)getServletContext().getAttribute(Costanti.BUSINESS_LOGIC_UTENTE);
 			Utente utente = businessLogicUtente.login(username, password);
 			String html = "";
+			String resultMessage = "";
 			if (utente!=null) {
 				Integer ruolo = businessLogicUtente.checkRuolo(utente.getIdUtente());
 				System.out.println("Ok, ho fatto il login");
@@ -57,15 +58,24 @@ public class LoginServlet extends HttpServlet {
 						html = "notificheDashboard";
 
 					} else if (ruolo == Costanti.ID_RUOLO_CLIENTE) {
-						html = "/jsp/homepage.jsp";
+						html = "";
 					}				
 				} else {
-					response.getWriter().println("<h1>Login non verificato</h1>");
+					//response.getWriter().println("<h1>Login non verificato</h1>");
+					resultMessage = "Il tuo account non è verificato. Attendi la verifica da parte dello staff.";
+					request.setAttribute("Message", resultMessage);
+					html = "/jsp/result.jsp";
 				}
 
 
 			} else {
-				response.getWriter().println("<h1>Username o password non validi</h1>");
+				//response.getWriter().println("<h1>Username o password non validi</h1>");
+				
+				resultMessage = "Username o password errati. Ritenta.";
+				request.setAttribute("Message", resultMessage);
+				html = "/jsp/result.jsp";
+				
+				
 			}
 			RequestDispatcher requestDispatcher; 
 			requestDispatcher = request.getRequestDispatcher(html);

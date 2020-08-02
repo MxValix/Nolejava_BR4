@@ -3,12 +3,15 @@ package com.comunenapoli.progetto.utils;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
  
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.Part;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -78,9 +81,12 @@ public class EmailWithPdfUtility {
                          
             //construct the mime multi part
             MimeMultipart mimeMultipart = new MimeMultipart();
+            textBodyPart.setHeader("Content-Type","text/html");
+            textBodyPart.setContent( content, "text/html" );
+            textBodyPart.setHeader("Content-Transfer-Encoding", "quoted-printable");
             mimeMultipart.addBodyPart(textBodyPart);
             mimeMultipart.addBodyPart(pdfBodyPart);
-             
+            
             //create the sender/recipient addresses
             InternetAddress iaSender = new InternetAddress(sender);
             InternetAddress iaRecipient = new InternetAddress(recipient);
@@ -90,6 +96,9 @@ public class EmailWithPdfUtility {
             mimeMessage.setSender(iaSender);
             mimeMessage.setSubject(subject);
             mimeMessage.setRecipient(Message.RecipientType.TO, iaRecipient);
+            mimeMessage.setHeader("Content-Type","text/html");
+            mimeMessage.setContent( content, "text/html" );
+            mimeMessage.setHeader("Content-Transfer-Encoding", "quoted-printable");
             mimeMessage.setContent(mimeMultipart);
              
             //send off the email
@@ -136,18 +145,23 @@ public class EmailWithPdfUtility {
 //        document.close();
     	           
          /////////////////
+    	
+    		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    		String dataInizio = df.format(dataInizioNoleggio);
+    		String dataFine = df.format(dataFineNoleggio);
+
          
 			Document document = new Document();
 			PdfWriter.getInstance(document, outputStream);
 
 			//Inserting Image in PDF
-			Image image = Image.getInstance ("/Users/vlipari/git/Nolejava_BR4/Nolejava/WebContent/images/logo-pdf.jpg");//Header Image
-			image.scaleAbsolute(540f, 72f);//image width,height 
+			Image image = Image.getInstance ("/Users/vlipari/git/Nolejava_BR4/Nolejava/WebContent/images/logo-pdf.png");//Header Image
+			image.scaleAbsolute(540f, 102f);//image width,height 
 
 			PdfPTable irdTable = new PdfPTable(2);
 			irdTable.addCell(getIRDCell("Ricevuta No"));
 			irdTable.addCell(getIRDCell("Data Ricevuta"));
-			irdTable.addCell(getIRDCell("XE1234")); // pass invoice number
+			irdTable.addCell(getIRDCell(auto.getTarga() + dataRicevuta.replaceAll("-", ""))); // pass invoice number
 			irdTable.addCell(getIRDCell(dataRicevuta)); // pass invoice date				
 
 			PdfPTable irhTable = new PdfPTable(3);
@@ -303,13 +317,13 @@ public class EmailWithPdfUtility {
 			PdfPTable accounts = new PdfPTable(2);
 			accounts.setWidthPercentage(100);
 			accounts.addCell(getAccountsCell("Totale da pagare"));
-			accounts.addCell(getAccountsCellR(calcolaCostoNoleggio(auto, dataInizioNoleggio, dataFineNoleggio)));
+			accounts.addCell(getAccountsCellR("€" + calcolaCostoNoleggio(auto, dataInizioNoleggio, dataFineNoleggio)));
 			accounts.addCell(getAccountsCell(""));
 			accounts.addCell(getAccountsCellR(""));
 			accounts.addCell(getAccountsCell("Data ritiro"));
-			accounts.addCell(getAccountsCellR(dataInizioNoleggio.toString()));
+			accounts.addCell(getAccountsCellR(dataInizio));
 			accounts.addCell(getAccountsCell("Data riconsegna"));
-			accounts.addCell(getAccountsCellR(dataFineNoleggio.toString()));			
+			accounts.addCell(getAccountsCellR(dataFine));			
 			PdfPCell summaryR = new PdfPCell (accounts);
 			summaryR.setColspan (3);         
 			billTable.addCell(summaryR);  

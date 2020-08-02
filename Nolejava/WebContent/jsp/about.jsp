@@ -20,7 +20,7 @@
 	    link2 = "/Nolejava/logoutServlet";
 	    if (utente.getRuolo().getId()==Costanti.ID_RUOLO_CLIENTE){
 		   voce1 = "Profilo";
-	       link1 += "profilocliente.jsp";   	
+	       link1 += "privata/profilocliente.jsp";   	
 	    } else {
 	    	 voce1 = "Dashboard";
 	         link1 = "/Nolejava/notificheDashboard";
@@ -104,7 +104,7 @@
 				class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
 				<div class="col-md-9 ftco-animate pb-5">
 					<p class="breadcrumbs">
-						<span class="mr-2"><a href="index.html">Home <i
+						<span class="mr-2"><a href="/Nolejava/">Home <i
 								class="ion-ios-arrow-forward"></i></a></span> <span>Chi siamo <i
 							class="ion-ios-arrow-forward"></i></span>
 					</p>
@@ -173,7 +173,7 @@
 							</div>
 							<p>
 								Lo staff di NoleJava è sempre disponibile <a
-									href="/Nolejava/html/contact.html">Contattaci qui</a>
+									href="/Nolejava/jsp/contact.jsp">Contattaci qui</a>
 							</p>
 						</div>
 					</div>

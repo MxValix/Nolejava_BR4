@@ -194,7 +194,7 @@ if (utente.getRuolo().getId() == Costanti.ID_RUOLO_ADMIN){
 			     	<input type="submit" name="action" value="Promuovi utente">
 <% 
 				}
-				else if (idRuoloUtente!=Costanti.ID_RUOLO_ADMIN && !isVerificato) {
+				else if (idRuoloUtente!=Costanti.ID_RUOLO_ADMIN && !isVerificato && ruoloUtente==Costanti.ID_RUOLO_ADMIN) {
 %>
 				    <input type="submit" name="action" value="Verifica utente">
 	
